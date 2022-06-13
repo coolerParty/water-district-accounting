@@ -1,287 +1,270 @@
-<nav role="navigation" class="bg-white shadow xl:block hidden">
-    <div class="mx-auto container px-6 py-2 xl:py-0">
-        <div class="flex items-center justify-between">
-            <div class="inset-y-0 left-0 flex items-center xl:hidden">
-                <div class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                    <div class="visible xl:hidden">
-                        <ul class="p-2 border-r bg-white absolute rounded left-0 right-0 shadow mt-8 md:mt-8 hidden">
-                            <li class="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <a href="{{ route('dashboard') }}">
-                                    <div class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-grid" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z"></path>
-                                            <rect x="4" y="4" width="6" height="6" rx="1"></rect>
-                                            <rect x="14" y="4" width="6" height="6" rx="1"></rect>
-                                            <rect x="4" y="14" width="6" height="6" rx="1"></rect>
-                                            <rect x="14" y="14" width="6" height="6" rx="1"></rect>
-                                        </svg>
-                                        <span class="ml-2 font-bold">Dashboard</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="flex xl:hidden flex-col cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex justify-center" onclick="dropdownHandler(this)">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-puzzle" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z"></path>
-                                        <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"></path>
-                                    </svg>
-                                    <span class="ml-2 font-bold">Products</span>
-                                </div>
-                            </li>
-                            <li class="flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-compass" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
-                                    <circle cx="12" cy="12" r="9"></circle>
-                                </svg>
-                                <span class="ml-2 font-bold">Performance</span>
-                            </li>
-                            <li class="border-b border-gray-300 flex xl:hidden cursor-pointer text-gray-600 text-sm leading-3 tracking-normal pt-2 pb-4 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                                    <polyline points="7 8 3 12 7 16"></polyline>
-                                    <polyline points="17 8 21 12 17 16"></polyline>
-                                    <line x1="14" y1="4" x2="10" y2="20"></line>
-                                </svg>
-                                <span class="ml-2 font-bold">Deliverables</span>
-                            </li>
-                            <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                <div class="flex items-center">
-                                    <div class="w-12 cursor-pointer flex text-sm border-2 border-transparent rounded focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                        <img class="rounded h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_1.png" alt="logo" />
-                                    </div>
-                                    <p class="text-sm ml-2 cursor-pointer">Jane Doe</p>
-                                    <div class="sm:ml-2 text-white relative">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down cursor-pointer" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z"></path>
-                                            <polyline points="6 9 12 15 18 9"></polyline>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                <div class="flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <circle cx="12" cy="7" r="4" />
-                                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                    </svg>
-                                    <span class="ml-2">Profile</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <img class="show-m-menu icon icon-tabler icon-tabler-menu" onclick="MenuHandler(this,true)" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg2.svg" alt="icon" />
-                    </div>
-                    <div class="hidden close-m-menu text-gray-700" onclick="MenuHandler(this,false)">
-                        <img  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg1.svg" alt="icon-2" />
-                    </div>
-                </div>
-            </div>
-            <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 rounded-md flex w-full sm:w-auto items-center sm:items-stretch justify-end sm:justify-start">
-                <div  class="flex items-center">
-                    <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg3.svg" alt="logo" />
-                    <h2 class="hidden sm:block text-base text-gray-700 font-bold leading-normal px-3">The North</h2>
-                </div>
+<header class="flex-shrink-0 border-b">
+    <div class="flex items-center justify-between p-2">
+      <!-- Navbar left -->
+      <div class="flex items-center space-x-3">
+        <span class="p-2 text-xl font-semibold tracking-wider uppercase lg:hidden">K-WD</span>
+        <!-- Toggle sidebar button -->
+        <button @click="toggleSidbarMenu()" class="p-2 rounded-md focus:outline-none focus:ring">
+          <svg class="w-4 h-4 text-gray-600" :class="{'transform transition-transform -rotate-180': isSidebarOpen}"
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile search box -->
+      <div x-show.transition="isSearchBoxOpen" class="fixed inset-0 z-10 bg-black bg-opacity-20"
+        style="backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px)">
+        <div @click.away="isSearchBoxOpen = false"
+          class="absolute inset-x-0 flex items-center justify-between p-2 bg-white shadow-md">
+          <div class="flex items-center flex-1 px-2 space-x-2">
+            <!-- search icon -->
+            <span><svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </span>
+            <input type="text" placeholder="Search"
+              class="w-full px-4 py-3 text-gray-600 rounded-md focus:bg-gray-100 focus:outline-none" />
+          </div>
+          <!-- close button -->
+          <button @click="isSearchBoxOpen = false" class="flex-shrink-0 p-4 rounded-md">
+            <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Desktop search box -->
+      <div class="items-center hidden px-2 space-x-2 md:flex-1 md:flex md:mr-auto md:ml-5">
+        <!-- search icon --><svg class="w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+          viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+
+        <input type="text" placeholder="Search" class="
+              px-4
+              py-3
+              rounded-md
+              hover:bg-gray-100
+              lg:max-w-sm
+              md:py-2 md:flex-1
+              focus:outline-none
+              md:focus:bg-gray-100 md:focus:shadow md:focus:border
+            " />
+      </div>
+
+      <!-- Navbar right -->
+      <div class="relative flex items-center space-x-3">
+        <!-- Search button -->
+        <button @click="isSearchBoxOpen = true"
+          class="p-2 bg-gray-100 rounded-full md:hidden focus:outline-none focus:ring hover:bg-gray-200">
+          <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+
+        <div class="items-center hidden space-x-3 md:flex">
+          <!-- Notification Menu -->
+          <div class="relative" x-data="{ isOpen: false }">
+            <!-- red dot -->
+            <div class="absolute right-0 p-1 bg-red-400 rounded-full animate-ping"></div>
+            <div class="absolute right-0 p-1 bg-red-400 border rounded-full"></div>
+            <button @click="isOpen = !isOpen"
+              class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-none focus:ring">
+              <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+              </svg>
             </button>
-            <div class="flex">
-                <div class="hidden xl:flex md:mr-6 xl:mr-16">
-                    <a href="{{ route('dashboard') }}" class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                        <span class="mr-2">
-                            <img class="icon icon-tabler icon-tabler-grid" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg4.svg" alt="dashboard" />
-                        </span>
-                        Dashboard
-                    </a>
-                    <a href="javascript: void(0)" class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                        <span class="mr-2">
-                            <img class="icon icon-tabler icon-tabler-puzzle" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg5.svg" alt="products" />
-                        </span>
-                        Products
-                    </a>
-                    <a href="javascript: void(0)" class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                        <span class="mr-2">
-                            <img class="icon icon-tabler icon-tabler-compass" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg6.svg" alt="performance" />
-                        </span>
-                        Performance
-                    </a>
-                    <a href="javascript: void(0)" class="focus:text-indigo-700 border-b-2 border-transparent focus:border-indigo-700 flex px-5 items-center py-6 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none transition duration-150 ease-in-out">
-                        <span class="mr-2">
-                           <img class="icon icon-tabler icon-tabler-code" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg7.svg" alt="deliverables" />
-                        </span>
-                        Deliverables
-                    </a>
-                </div>
-                <div class="hidden xl:flex items-center">
-                    <div class="relative md:mr-6 my-2">
-                        <button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:text-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Manage</button>
-                    </div>
-                    <div class="ml-6 relative">
-                        <button aria-label="dropdown" class="focus:outline-none border-b-2 border-transparent focus:border-indigo-700 py-3  focus:text-indigo-700 text-gray-600 hover:text-indigo-700 flex items-center relative" onclick="dropdownHandler(this)">
-                            <ul class="p-2 w-40 border-r bg-white absolute rounded right-0 shadow top-0 mt-16 hidden">
-                                <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none">
-                                    <a href="" class="focus:underline focus:text-indigo-700 focus:outline-none flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" />
-                                            <circle cx="12" cy="7" r="4" />
-                                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                                        </svg>
-                                        <span class="ml-2">My Profile</span>
-                                    </a>
-                                </li>
-                                <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center">
-                                    <a href="javascript:void(0)" class="focus:underline focus:text-indigo-700 focus:outline-none flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <circle cx="12" cy="12" r="9" />
-                                        <line x1="12" y1="17" x2="12" y2="17.01" />
-                                        <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-                                    </svg>
-                                    <span class="ml-2">Help Center</span>
-                                </a>
-                                </li>
-                                <li class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 flex items-center focus:text-indigo-700 focus:outline-none">
-                                    <a href="javascript:void(0)" class="focus:underline focus:text-indigo-700 focus:outline-none flex items-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" />
-                                        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <circle cx="12" cy="12" r="3" />
-                                    </svg>
-                                    <span class="ml-2">Account Settings</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div class="cursor-pointer flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-white transition duration-150 ease-in-out">
-                                <img class="rounded-full h-10 w-10 object-cover" src="https://tuk-cdn.s3.amazonaws.com/assets/components/horizontal_navigation/hn_2.png" alt="logo" />
-                            </div>
-                            <div class="ml-2 ">
-                                <img class="icon icon-tabler icon-tabler-chevron-down cursor-pointer" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg8.svg" alt="chevron down" />
-                            </div>
-                        </button>
-                    </div>
-                </div>
+
+            <div @click.away="isOpen = false" x-show.transition.opacity="isOpen" class="
+                  absolute
+                  z-50
+                  w-48
+                  max-w-md
+                  mt-3
+                  transform
+                  bg-white
+                  rounded-md
+                  shadow-lg
+                  -translate-x-3/4
+                  min-w-max
+                ">
+              <div class="p-4 font-medium border-b">
+                <span class="text-gray-800">Notification</span>
+              </div>
+              <ul class="flex flex-col p-2 my-2 space-y-1">
+                <li>
+                  <a href="#" class="block px-2 py-1 transition rounded-md hover:bg-gray-100">Link</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-2 py-1 transition rounded-md hover:bg-gray-100">Another Link</a>
+                </li>
+              </ul>
+              <div class="flex items-center justify-center p-4 text-blue-700 underline border-t">
+                <a href="#">See All</a>
+              </div>
             </div>
-        </div>
-    </div>
-</nav>
-<nav>
-    <div class="py-4 px-6 w-full flex xl:hidden justify-between items-center bg-white fixed top-0 z-40">
-        <div aria-label="logo" role="img" tabindex="0" class="focus:outline-none w-24">
-            <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg9.svg" alt="logo" />
-        </div>
-        <div class="flex items-center">
-            <div class="relative mr-6">
-                <button class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none bg-gray-100 border-gray-300 border transition duration-150 ease-in-out hover:bg-gray-300 rounded text-gray-600 px-5 py-2 text-xs">Manage</button>
-            </div>
-            <button id="menu" aria-label="open menu" class="focus:outline-none focus:ring-2 focus:ring-gray-600 rounded-md text-gray-800" onclick="sidebarHandler(true)">
-                <img class="icon icon-tabler icon-tabler-menu-2" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg10.svg" alt="menu" />
+          </div>
+
+          <!-- Services Menu -->
+          <div class="relative" x-data="{ isOpen: false }">
+            <button @click="isOpen = !isOpen"
+              class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-none focus:ring">
+              <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
             </button>
-        </div>
-    </div>
-    <!--Mobile responsive sidebar-->
-    <div class="absolute w-full h-full transform -translate-x-full z-40 xl:hidden" id="mobile-nav">
-        <div class="bg-gray-800 opacity-50 w-full h-full" onclick="sidebarHandler(false)"></div>
-        <div class="w-64 z-40 fixed overflow-y-auto z-40 top-0 bg-white shadow h-full flex-col justify-between xl:hidden pb-4 transition duration-150 ease-in-out">
-            <div class="px-6 h-full">
-                <div class="flex flex-col justify-between h-full w-full">
-                    <div>
-                        <div class="mt-6 flex w-full items-center justify-between">
-                            <div class="flex items-center justify-between w-full">
-                                <div class="flex items-center">
-                                    <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg9.svg" alt="logo" />
-                                    <p tabindex="0" class="focus:outline-none text-base md:text-2xl text-gray-800 ml-3">The North</p>
-                                </div>
-                                <button id="cross" aria-label="close menu" class="focus:outline-none focus:ring-2 rounded-md text-gray-800" onclick="sidebarHandler(false)">
-                                    <img class="icon icon-tabler icon-tabler-x" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg11.svg" alt="cross" />
-                                </button>
-                            </div>
-                        </div>
-                        <ul class="f-m-m">
-                            <li>
-                                <a href="{{ route('dashboard') }}" class="cursor-pointer">
-                                    <div class="text-gray-800 pt-10">
-                                        <div class="flex items-center">
-                                            <div class="w-6 h-6 md:w-8 md:h-8 text-indigo-700">
-                                               <img class="icon icon-tabler icon-tabler-grid" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg12.svg" alt="dashboard" />
-                                            </div>
-                                            <p tabindex="0" class="focus:outline-none focus:text-indigo-600 text-indigo-700 xl:text-base text-base ml-3">Dashboard</p>
 
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="cursor-pointer">
-                                    <div class="text-gray-800 pt-8">
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center">
-                                                <div class="w-6 h-6 md:w-8 md:h-8 text-gray-800">
-                                                   <img class="icon icon-tabler icon-tabler-puzzle" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg13.svg" alt="products" />
-                                                </div>
-                                                <p tabindex="0" class="focus:outline-none focus:text-indigo-600 text-gray-800 xl:text-base md:text-2xl text-base ml-3">Products</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="cursor-pointer">
-                                    <div class="text-gray-800 pt-8">
-                                        <div class="flex items-center">
-                                            <div class="w-6 h-6 md:w-8 md:h-8 text-gray-800">
-                                                <img class="icon icon-tabler icon-tabler-compass" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg14.svg" alt="performance" />
-                                            </div>
-                                            <p tabindex="0" class="focus:outline-none focus:text-indigo-600 text-gray-800 xl:text-base md:text-2xl text-base ml-3">Performance</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="text-gray-800 pt-8 cursor-pointer">
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <div class="w-6 h-6 md:w-8 md:h-8 text-gray-800">
-                                            <img class="icon icon-tabler icon-tabler-code" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg15.svg" alt="deliverables" />
-                                        </div>
-                                        <p tabindex="0" class="focus:outline-none focus:text-indigo-600 text-gray-800 xl:text-base md:text-2xl text-base ml-3">Deliverables</p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-full pt-4">
-                        <div class="flex justify-center mb-4 w-full">
-                            <div class="relative w-full">
-                                <div class="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4">
-                                    <img class="icon icon-tabler icon-tabler-search" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg16.svg" alt="search" />
-                                </div>
-                                <input class="focus:ring-2 focus:ring-gray-600 bg-gray-100 focus:outline-none rounded w-full text-sm text-gray-500 pl-10 py-2" type="text" placeholder="Search" />
-                            </div>
-                        </div>
-                        <div class="border-t border-gray-300">
-                            <div class="w-full flex items-center justify-between pt-1">
-                                <div class="flex items-center">
-                                    <img alt="profile-pic" src="https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png" tabindex="0" class="focus:outline-none  w-8 h-8 rounded-md" />
-                                    <p tabindex="0" class="focus:outline-none text-gray-800 text-base leading-4 ml-2">Jane Doe</p>
-                                </div>
-                                <ul class="flex">
-                                    <li class="cursor-pointer text-gray-800 pt-5 pb-3">
-                                        <div tabindex="0" class="focus:outline-none focus:text-indigo-600 w-6 h-6 md:w-8 md:h-8">
-                                           <img class="icon icon-tabler icon-tabler-messages" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg17.svg" alt="chat" />
-                                        </div>
-                                    </li>
-                                    <li class="cursor-pointer text-gray-800 pt-5 pb-3 pl-3">
-                                        <div tabindex="0" class="focus:outline-none focus:text-indigo-600 w-6 h-6 md:w-8 md:h-8">
-                                            <img class="icon icon-tabler icon-tabler-bell" src="https://tuk-cdn.s3.amazonaws.com/can-uploader/light-with-button-svg18.svg" alt="bell" />
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div @click.away="isOpen = false" x-show.transition.opacity="isOpen" class="
+                  absolute
+                  z-50
+                  w-48
+                  max-w-md
+                  mt-3
+                  transform
+                  bg-white
+                  rounded-md
+                  shadow-lg
+                  -translate-x-3/4
+                  min-w-max
+                ">
+              <div class="p-4 text-lg font-medium border-b">Web apps & services</div>
+              <ul class="flex flex-col p-2 my-3 space-y-3">
+                <li>
+                  <a href="#" class="flex items-start px-2 py-1 space-x-2 rounded-md hover:bg-gray-100">
+                    <span class="block mt-1">
+                      <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path fill="#fff" d="M12 14l9-5-9-5-9 5 9 5z" />
+                        <path fill="#fff"
+                          d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                      </svg>
+                    </span>
+                    <span class="flex flex-col">
+                      <span class="text-lg">Atlassian</span>
+                      <span class="text-sm text-gray-400">Lorem ipsum dolor sit.</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#" class="flex items-start px-2 py-1 space-x-2 rounded-md hover:bg-gray-100">
+                    <span class="block mt-1">
+                      <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                      </svg>
+                    </span>
+                    <span class="flex flex-col">
+                      <span class="text-lg">Slack</span>
+                      <span class="text-sm text-gray-400">Lorem ipsum, dolor sit amet consectetur adipisicing
+                        elit.</span>
+                    </span>
+                  </a>
+                </li>
+              </ul>
+              <div class="flex items-center justify-center p-4 text-blue-700 underline border-t">
+                <a href="#">Show all apps</a>
+              </div>
             </div>
+          </div>
+
+          <!-- Options Menu -->
+          <div class="relative" x-data="{ isOpen: false }">
+            <button @click="isOpen = !isOpen"
+              class="p-2 bg-gray-100 rounded-full hover:bg-gray-200 focus:outline-none focus:ring">
+              <svg class="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+              </svg>
+            </button>
+
+            <div @click.away="isOpen = false" x-show.transition.opacity="isOpen" class="
+                  absolute
+                  z-50
+                  w-48
+                  max-w-md
+                  mt-3
+                  transform
+                  bg-white
+                  rounded-md
+                  shadow-lg
+                  -translate-x-3/4
+                  min-w-max
+                ">
+              <div class="p-4 font-medium border-b">
+                <span class="text-gray-800">Options</span>
+              </div>
+              <ul class="flex flex-col p-2 my-2 space-y-1">
+                <li>
+                  <a href="#" class="block px-2 py-1 transition rounded-md hover:bg-gray-100">Link</a>
+                </li>
+                <li>
+                  <a href="#" class="block px-2 py-1 transition rounded-md hover:bg-gray-100">Another Link</a>
+                </li>
+              </ul>
+              <div class="flex items-center justify-center p-4 text-blue-700 underline border-t">
+                <a href="#">See All</a>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- User Menu -->
+        <div class="relative" x-data="{ isOpen: false }">
+          <button @click="isOpen = !isOpen" class="p-1 bg-gray-200 rounded-full focus:outline-none focus:ring">
+            <img class="object-cover w-8 h-8 rounded-full"
+              src="https://avatars0.githubusercontent.com/u/57622665?s=460&u=8f581f4c4acd4c18c33a87b3e6476112325e8b38&v=4"
+              alt="Ahmed Kamel" />
+          </button>
+          <!-- green dot -->
+          <div class="absolute right-0 p-1 bg-green-400 rounded-full bottom-3 animate-ping"></div>
+          <div class="absolute right-0 p-1 bg-green-400 border border-white rounded-full bottom-3"></div>
+
+          <div @click.away="isOpen = false" x-show.transition.opacity="isOpen" class="
+                absolute
+                z-50
+                w-48
+                max-w-md
+                mt-3
+                transform
+                bg-white
+                rounded-md
+                shadow-lg
+                -translate-x-3/4
+                min-w-max
+              ">
+            <div class="flex flex-col p-4 space-y-1 font-medium border-b">
+              <span class="text-gray-800">Ahmed Kamel</span>
+              <span class="text-sm text-gray-400">ahmed.kamel@example.com</span>
+            </div>
+            <ul class="flex flex-col p-2 my-2 space-y-1">
+              <li>
+                <a href="#" class="block px-2 py-1 transition rounded-md hover:bg-gray-100">Link</a>
+              </li>
+              <li>
+                <a href="#" class="block px-2 py-1 transition rounded-md hover:bg-gray-100">Another Link</a>
+              </li>
+            </ul>
+            <div class="flex items-center justify-center p-4 text-blue-700 underline border-t">
+              <a href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</nav>
-
-
-
-<!-- Code block ends -->
+  </header>
