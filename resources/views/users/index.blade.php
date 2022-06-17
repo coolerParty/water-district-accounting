@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
-@section('title', 'Permissions')
+@section('title', 'Users')
 <!-- Main content header -->
 <div class="
     flex flex-col
@@ -12,10 +12,10 @@
     border-b
     lg:items-center lg:space-y-0 lg:flex-row
     ">
-    <h1 class="text-2xl font-semibold whitespace-nowrap">Permissions</h1>
+    <h1 class="text-2xl font-semibold whitespace-nowrap">Users</h1>
     <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
-    @can('permission-create')
-    <a href="{{ route('permissions.create') }}" class="
+    @can('user-create')
+    <a href="{{ route('users.create') }}" class="
             inline-flex
             items-center
             justify-center
@@ -48,6 +48,10 @@
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Title
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Roles
                             </th>
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Edit</span>
@@ -141,19 +145,24 @@
                         <!-- flash message End -->
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($ps as $p)
+                        @forelse($users as $user)
                         <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $p->name }}</div>
+                                <div class="text-sm font-medium text-gray-900">{{ $user->name }}</div>
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                @foreach($user->roles as $role)
+                                <span class="px-3 py-1 rounded space-x-1 bg-indigo-500 text-white">{{ $role->name
+                                    }}</span>
+                                @endforeach
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                @can('permission-edit')
-                                <x-link-success href="{{ route('permissions.edit', $p) }}" class="">Edit
+                                @can('user-edit')
+                                <x-link-success href="{{ route('users.edit', $user) }}" class="">Edit
                                 </x-link-success>
                                 @endcan
-                                @can('permission-delete')
-                                <form method="POST" action="{{ route('permissions.destroy', $p) }}"
-                                    class="inline-block">
+                                @can('user-delete')
+                                <form method="POST" action="{{ route('users.destroy', $user) }}" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <x-jet-danger-button type="submit" onclick="return confirm('Are you sure?')">
@@ -165,17 +174,15 @@
                         @empty
                         <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">No Permission Found</div>
+                                <div class="text-sm font-medium text-gray-900">No Role Found</div>
                             </td>
+                            <td></td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                             </td>
                         </tr>
                         @endforelse
                     </tbody>
                 </table>
-                <div class="p-4 bg-gray-50">
-                    {{ $ps->links() }}
-                </div>
             </div>
         </div>
     </div>

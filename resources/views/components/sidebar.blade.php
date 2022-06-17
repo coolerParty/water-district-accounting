@@ -50,6 +50,17 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('users.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                    :class="{'justify-center': !isSidebarOpen}">
+                    <span>
+                        <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
+                            <path d="M2 22a8 8 0 1 1 16 0H2zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm7.363 2.233A7.505 7.505 0 0 1 22.983 22H20c0-2.61-1-4.986-2.637-6.767zm-2.023-2.276A7.98 7.98 0 0 0 18 7a7.964 7.964 0 0 0-1.015-3.903A5 5 0 0 1 21 8a4.999 4.999 0 0 1-5.66 4.957z"/>
+                        </svg>
+                    </span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('roles.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
@@ -57,7 +68,7 @@
                             <path d="M12 14v8H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm9 4h1v5h-8v-5h1v-1a3 3 0 0 1 6 0v1zm-2 0v-1a1 1 0 0 0-2 0v1h2z"/>
                         </svg>
                     </span>
-                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Role</span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Roles</span>
                 </a>
             </li>
             <li>
@@ -68,7 +79,7 @@
                             <path d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm9 6h1v5h-8v-5h1v-1a3 3 0 0 1 6 0v1zm-2 0v-1a1 1 0 0 0-2 0v1h2z"/>
                         </svg>
                     </span>
-                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Permission</span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Permissions</span>
                 </a>
             </li>
             <!-- Sidebar Links... -->

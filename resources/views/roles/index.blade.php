@@ -14,6 +14,7 @@
     ">
     <h1 class="text-2xl font-semibold whitespace-nowrap">Roles</h1>
     <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
+    @can('role-create')
     <a href="{{ route('roles.create') }}" class="
             inline-flex
             items-center
@@ -35,6 +36,7 @@
         </span>
         <span>Add New</span>
     </a>
+    @endcan
 </div>
 <div class="flex flex-col mt-6">
     <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -164,8 +166,7 @@
                                 </x-link-success>
                                 @endcan
                                 @can('role-delete')
-                                <form method="POST" action="{{ route('roles.destroy', $r) }}"
-                                    class="inline-block">
+                                <form method="POST" action="{{ route('roles.destroy', $r) }}" class="inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <x-jet-danger-button type="submit" onclick="return confirm('Are you sure?')">

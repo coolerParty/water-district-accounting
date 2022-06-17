@@ -27,6 +27,10 @@ class PermissionSeeder extends Seeder
 				'permission-edit',
 				'permission-show',
 				'permission-delete',
+                'user-create',
+				'user-edit',
+				'user-show',
+				'user-delete',
 
 			];
 
@@ -50,6 +54,10 @@ class PermissionSeeder extends Seeder
 				'role-show',
 				'role-delete',
 				'permission-show',
+                'user-create',
+				'user-edit',
+				'user-show',
+				'user-delete',
 			];
 
 			foreach($adminPermissions as $permission){
