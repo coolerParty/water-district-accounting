@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
-@section('title', 'Permissions')
+@section('title', 'Roles')
 <!-- Main content header -->
 <div class="
     flex flex-col
@@ -12,9 +12,9 @@
     border-b
     lg:items-center lg:space-y-0 lg:flex-row
     ">
-    <h1 class="text-2xl font-semibold whitespace-nowrap">Permissions</h1>
+    <h1 class="text-2xl font-semibold whitespace-nowrap">Roles</h1>
     <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
-    <a href="{{ route('permissions.create') }}" class="
+    <a href="{{ route('roles.create') }}" class="
             inline-flex
             items-center
             justify-center
@@ -46,6 +46,10 @@
                             <th scope="col"
                                 class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                 Title
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                Permissions
                             </th>
                             <th scope="col" class="relative px-6 py-3">
                                 <span class="sr-only">Edit</span>
@@ -139,18 +143,28 @@
                         <!-- flash message End -->
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse($ps as $p)
+                        @forelse($rs as $r)
                         <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">{{ $p->name }}</div>
+                                <div class="text-sm font-medium text-gray-900">{{ $r->name }}</div>
+                            </td>
+                            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                <div class="flex flex-wrap gap-1">
+                                    @foreach($rolePermissions as $permission)
+                                    @if($r->id == $permission->rid)
+                                    <div class="px-3 py-1 rounded space-x-1 bg-indigo-500 text-white"> {{
+                                        $permission->pname }}</div>
+                                    @endif
+                                    @endforeach
+                                </div>
                             </td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                @can('permission-edit')
-                                <x-link-success href="{{ route('permissions.edit', $p) }}" class="">Edit
+                                @can('role-edit')
+                                <x-link-success href="{{ route('roles.edit', $r) }}" class="">Edit
                                 </x-link-success>
                                 @endcan
-                                @can('permission-delete')
-                                <form method="POST" action="{{ route('permissions.destroy', $p) }}"
+                                @can('role-delete')
+                                <form method="POST" action="{{ route('roles.destroy', $r) }}"
                                     class="inline-block">
                                     @csrf
                                     @method('DELETE')
@@ -163,8 +177,9 @@
                         @empty
                         <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-medium text-gray-900">No Permission Found</div>
+                                <div class="text-sm font-medium text-gray-900">No Role Found</div>
                             </td>
+                            <td></td>
                             <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                             </td>
                         </tr>
@@ -172,7 +187,7 @@
                     </tbody>
                 </table>
                 <div class="p-4 bg-gray-50">
-                    {{ $ps->links() }}
+                    {{ $rs->links() }}
                 </div>
             </div>
         </div>
