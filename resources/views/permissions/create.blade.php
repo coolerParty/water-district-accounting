@@ -1,8 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
-@section('title', 'Dashboard')
-
+@section('title', 'Permissions Create')
 <!-- Main content header -->
 <div class="
     flex flex-col
@@ -12,9 +11,10 @@
     space-y-4
     border-b
     lg:items-center lg:space-y-0 lg:flex-row
+    mb-4
     ">
-    <h1 class="text-2xl font-semibold whitespace-nowrap">Dashboard</h1>
-    <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class="
+    <h1 class="text-2xl font-semibold whitespace-nowrap">Permission Create</h1>
+    <a href="{{ route('permissions.index') }}" class="
             inline-flex
             items-center
             justify-center
@@ -33,9 +33,28 @@
                 </path>
             </svg>
         </span>
-        <span>View on Github</span>
+        <span>Back</span>
     </a>
 </div>
 
-<!-- Start Content -->
+
+<section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+    <form method="POST" action="{{ route('permissions.store') }}">
+        @csrf
+        <div class="mt-4">
+            <div>
+                <label class="text-gray-700 dark:text-gray-200" for="title">name</label>
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
+                    autocomplete="name"
+                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-6">
+            <button type="submit"
+                class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+        </div>
+    </form>
+</section>
+
 @endsection
