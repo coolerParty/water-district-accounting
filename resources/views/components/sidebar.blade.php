@@ -49,6 +49,7 @@
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
                 </a>
             </li>
+            @can('user-show')
             <li>
                 <a href="{{ route('users.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
@@ -60,6 +61,8 @@
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
                 </a>
             </li>
+            @endcan
+            @can('role-show')
             <li>
                 <a href="{{ route('roles.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
@@ -71,6 +74,8 @@
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Roles</span>
                 </a>
             </li>
+            @endcan
+            @can('permission-show')
             <li>
                 <a href="{{ route('permissions.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
@@ -82,6 +87,7 @@
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Permissions</span>
                 </a>
             </li>
+            @endcan
             <!-- Sidebar Links... -->
         </ul>
     </nav>
