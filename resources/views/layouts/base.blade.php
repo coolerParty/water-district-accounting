@@ -34,14 +34,14 @@
             <x-navbar></x-navbar>
             <!-- Page Content -->
             <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
-                @yield('content')
+                {{ $slot }}
             </main>
             <!-- Main footer -->
             <x-footer></x-footer>
         </div>
         <!-- Setting panel button -->
         <div>
-            <button @click="isSettingsPanelOpen = true" class="fixed right-0 px-4 py-2 text-sm font-medium text-white uppercase transform rotate-90 translate-x-8 bg-gray-600  top-1/2 rounded-b-md">
+            <button @click="isSettingsPanelOpen = true" class="fixed right-0 px-4 py-2 text-sm font-medium text-white uppercase transform rotate-90 translate-x-8 bg-gray-600 top-1/2 rounded-b-md">
                 Settings
             </button>
         </div>

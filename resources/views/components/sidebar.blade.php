@@ -6,25 +6,11 @@
     x-transition:enter-start="-translate-x-full opacity-30  ease-in"
     x-transition:enter-end="translate-x-0 opacity-100 ease-out" x-transition:leave="transition transform duration-300"
     x-transition:leave-start="translate-x-0 opacity-100 ease-out"
-    x-transition:leave-end="-translate-x-full opacity-0 ease-in" class="
-          fixed
-          inset-y-0
-          z-10
-          flex flex-col flex-shrink-0
-          w-64
-          max-h-screen
-          overflow-hidden
-          transition-all
-          transform
-          bg-white
-          border-r
-          shadow-lg
-          lg:z-auto lg:static lg:shadow-none
-        " :class="{'-translate-x-full lg:translate-x-0 lg:w-20': !isSidebarOpen}">
+    x-transition:leave-end="-translate-x-full opacity-0 ease-in" class="fixed inset-y-0 z-10 flex flex-col flex-shrink-0 w-64 max-h-screen overflow-hidden transition-all transform bg-white border-r shadow-lg lg:z-auto lg:static lg:shadow-none" :class="{'-translate-x-full lg:translate-x-0 lg:w-20': !isSidebarOpen}">
     <!-- sidebar header -->
     <div class="flex items-center justify-between flex-shrink-0 p-2" :class="{'lg:justify-center': !isSidebarOpen}">
         <span class="p-2 text-xl font-semibold leading-8 tracking-wider uppercase whitespace-nowrap">
-            K<span :class="{'lg:hidden': !isSidebarOpen}">-WD</span>
+            C<span :class="{'lg:hidden': !isSidebarOpen}">-OOLER</span>
         </span>
         <button @click="toggleSidbarMenu()" class="p-2 rounded-md lg:hidden">
             <svg class="w-6 h-6 text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -54,9 +40,9 @@
                 <a href="{{ route('users.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
-                        <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
-                            <path d="M2 22a8 8 0 1 1 16 0H2zm8-9c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm7.363 2.233A7.505 7.505 0 0 1 22.983 22H20c0-2.61-1-4.986-2.637-6.767zm-2.023-2.276A7.98 7.98 0 0 0 18 7a7.964 7.964 0 0 0-1.015-3.903A5 5 0 0 1 21 8a4.999 4.999 0 0 1-5.66 4.957z"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
                     </span>
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Users</span>
                 </a>
@@ -67,9 +53,9 @@
                 <a href="{{ route('roles.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
-                        <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
-                            <path d="M12 14v8H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm9 4h1v5h-8v-5h1v-1a3 3 0 0 1 6 0v1zm-2 0v-1a1 1 0 0 0-2 0v1h2z"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                          </svg>
                     </span>
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Roles</span>
                 </a>
@@ -80,9 +66,9 @@
                 <a href="{{ route('permissions.index') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
-                        <svg class="w-6 h-6 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor">
-                            <path d="M12 14v2a6 6 0 0 0-6 6H4a8 8 0 0 1 8-8zm0-1c-3.315 0-6-2.685-6-6s2.685-6 6-6 6 2.685 6 6-2.685 6-6 6zm0-2c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm9 6h1v5h-8v-5h1v-1a3 3 0 0 1 6 0v1zm-2 0v-1a1 1 0 0 0-2 0v1h2z"/>
-                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.618 5.984A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016zM12 9v2m0 4h.01" />
+                          </svg>
                     </span>
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Permissions</span>
                 </a>
@@ -94,22 +80,7 @@
     <!-- Sidebar footer -->
     <div class="flex-shrink-0 p-2 border-t max-h-14">
         <a href="{{ route('logout') }}"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="
-              flex
-              items-center
-              justify-center
-              w-full
-              px-4
-              py-2
-              space-x-1
-              font-medium
-              tracking-wider
-              uppercase
-              bg-gray-100
-              border
-              rounded-md
-              focus:outline-none focus:ring
-            ">
+            onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="flex items-center justify-center w-full px-4 py-2 space-x-1 font-medium tracking-wider uppercase bg-gray-100 border rounded-md focus:outline-none focus:ring">
             <span>
                 <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">

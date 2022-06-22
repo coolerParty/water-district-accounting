@@ -3,29 +3,9 @@
 @section('content')
 @section('title', 'Users Create')
 <!-- Main content header -->
-<div class="
-    flex flex-col
-    items-start
-    justify-between
-    pb-6
-    space-y-4
-    border-b
-    lg:items-center lg:space-y-0 lg:flex-row
-    mb-4
-    ">
+<div class="flex flex-col items-start justify-between pb-6 mb-2 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
     <h1 class="text-2xl font-semibold whitespace-nowrap">Users Create</h1>
-    <a href="{{ route('users.index') }}" class="
-            inline-flex
-            items-center
-            justify-center
-            px-4
-            py-1
-            space-x-1
-            bg-gray-200
-            rounded-md
-            shadow
-            hover:bg-opacity-20
-        ">
+    <a href="{{ route('users.index') }}" class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
         <span>
             <svg class="w-4 h-4 text-gray-500" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd"
@@ -36,67 +16,69 @@
         <span>Back</span>
     </a>
 </div>
+<div class="max-w-full max-h-screen md:bg-gray-300 md:p-4">
 
-
-<section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
-    <x-jet-validation-errors class="mb-4" />
-    <form method="POST" action="{{ route('users.store') }}">
-        @csrf
-        <div class="mt-4">
-            <div>
-                <label class="text-gray-700 dark:text-gray-200" for="name">name</label>
-                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
-                    autocomplete="name"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+    <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
+        <x-jet-validation-errors class="mb-4" />
+        <form method="POST" action="{{ route('users.store') }}">
+            @csrf
+            <div class="mt-4">
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="name">name</label>
+                    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus
+                        autocomplete="name"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
             </div>
-        </div>
 
-        <div class="mt-4">
-            <div>
-                <label class="text-gray-700 dark:text-gray-200" for="title">email</label>
-                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
-                    autocomplete="email"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+            <div class="mt-4">
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="title">email</label>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                        autocomplete="email"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
             </div>
-        </div>
 
-        <div class="mt-4">
-            <div>
-                <label class="text-gray-700 dark:text-gray-200" for="password">password</label>
-                <input id="password" type="password" name="password" value="{{ old('new password') }}" required autofocus
-                    autocomplete="password"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                <x-jet-input-error for="password" class="mt-2" />
+            <div class="mt-4">
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="password">password</label>
+                    <input id="password" type="password" name="password" value="{{ old('new password') }}" required
+                        autofocus autocomplete="password"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                    <x-jet-input-error for="password" class="mt-2" />
+                </div>
             </div>
-        </div>
 
-        <div class="mt-4">
-            <div>
-                <label class="text-gray-700 dark:text-gray-200" for="password_confirmation">password</label>
-                <input id="password_confirmation" type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" required autofocus
-                    autocomplete="password_confirmation"
-                    class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                <x-jet-input-error for="password_confirmation" class="mt-2" />
+            <div class="mt-4">
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="password_confirmation">password</label>
+                    <input id="password_confirmation" type="password" name="password_confirmation"
+                        value="{{ old('password_confirmation') }}" required autofocus
+                        autocomplete="password_confirmation"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                    <x-jet-input-error for="password_confirmation" class="mt-2" />
+                </div>
             </div>
-        </div>
 
-        <div class="mt-4">
-            <div class="py-4"><strong>Roles:</strong></div>
+            <div class="mt-4">
+                <div class="py-4"><strong>Roles:</strong></div>
                 @foreach($roles as $value)
-                    <div class="m-1 p-2 border shadow-sm w-full"><label>
-                            <input type="checkbox" value="{{ $value->name }}" name="role[]"
-                                class="{{ $value->name }} rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-indigo-900">
-                            {{ $value->name }}
-                        </label>
-                    </div>
+                <div class="w-full p-2 m-1 border shadow-sm"><label>
+                        <input type="checkbox" value="{{ $value->name }}" name="role[]"
+                            class="{{ $value->name }} rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-indigo-900">
+                        {{ $value->name }}
+                    </label>
+                </div>
                 @endforeach
-        </div>
+            </div>
 
-        <div class="flex justify-end mt-6">
-            <button type="submit"
-                class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
-        </div>
-    </form>
-</section>
+            <div class="flex justify-end mt-6">
+                <button type="submit"
+                    class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
+            </div>
+        </form>
+    </section>
+</div>
 
 @endsection
