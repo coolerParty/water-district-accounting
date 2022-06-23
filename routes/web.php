@@ -2,11 +2,14 @@
 
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Livewire\AccountGroup\AccountGroupAddComponent;
+use App\Http\Livewire\AccountGroup\AccountGroupComponent;
+use App\Http\Livewire\AccountGroup\AccountGroupEditComponent;
 use App\Http\Livewire\ChangePasswordComponent;
 use App\Http\Livewire\ProfileComponent;
-use App\Http\Livewire\UserAddComponent;
-use App\Http\Livewire\UserComponent;
-use App\Http\Livewire\UserEditComponent;
+use App\Http\Livewire\Users\UserAddComponent;
+use App\Http\Livewire\Users\UserComponent;
+use App\Http\Livewire\Users\UserEditComponent;
 // use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +46,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
 
     Route::get('/profile', ProfileComponent::class)->name('profile');
     Route::get('/password', ChangePasswordComponent::class)->name('password');
+
+    Route::get('/account-group', AccountGroupComponent::class)->name('accountgroup.index');
+    Route::get('/account-group/create', AccountGroupAddComponent::class)->name('accountgroup.create');
+    Route::get('/account-group/{id}/edit', AccountGroupEditComponent::class)->name('accountgroup.edit');
+
 
 
 });

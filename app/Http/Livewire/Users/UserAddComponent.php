@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Users;
 
 use Livewire\Component;
 use App\Models\User;
@@ -101,6 +101,6 @@ class UserAddComponent extends Component
             $roles = Role::whereNotIn('name', ['super-admin'])->get();
         }
 
-        return view('livewire.user-add-component', ['roles' => $roles])->layout('layouts.base');
+        return view('livewire.users.user-add-component', ['roles' => $roles])->layout('layouts.base');
     }
 }

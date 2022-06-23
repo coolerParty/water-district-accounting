@@ -97,7 +97,7 @@
                     </li>
                     <li title="Account Group">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('dashboard') }}">
+                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('accountgroup.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -111,7 +111,7 @@
                     </li>
                     <li title="Major Account Group">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('dashboard') }}">
+                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('accountgroup.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
@@ -81,6 +81,6 @@ class UserEditComponent extends Component
             $roles = Role::whereNotIn('name', ['super-admin'])->get();
         }
 
-        return view('livewire.user-edit-component', ['roles' => $roles])->layout('layouts.base');
+        return view('livewire.users.user-edit-component', ['roles' => $roles])->layout('layouts.base');
     }
 }
