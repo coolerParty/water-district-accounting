@@ -20,7 +20,7 @@ class AccountGroupAddComponent extends Component
     public function updated($fields)
     {
         $this->validateOnly($fields, [
-            'seq_no' => ['required', 'numeric'],
+            'seq_no' => ['nullable', 'numeric'],
             'code'   => ['required', 'string'],
             'name'   => ['required', 'min:3','string','unique:account_groups'],
             'type'   => ['required', 'numeric'],
@@ -32,7 +32,7 @@ class AccountGroupAddComponent extends Component
         $this->confirmation();
 
         $this->validate([
-            'seq_no' => ['required', 'numeric'],
+            'seq_no' => ['nullable', 'numeric'],
             'code'   => ['required', 'string'],
             'name'   => ['required', 'min:3','string','unique:account_groups'],
             'type'   => ['required', 'numeric'], // 1: Account Group, 2: Major Account Group, 3: Sub Major Account Group,
@@ -42,7 +42,7 @@ class AccountGroupAddComponent extends Component
         $account->seq_no = $this->seq_no;
         $account->code   = $this->code;
         $account->name   = $this->name;
-        $account->type   = $this->seq_no;
+        $account->type   = $this->type;
         $account->save();
 
         return redirect()->route('accountgroup.index')

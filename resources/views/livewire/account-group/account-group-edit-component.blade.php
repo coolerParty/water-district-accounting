@@ -26,7 +26,7 @@
                 <div class="mt-4">
                     <div>
                         <label class="text-gray-700 dark:text-gray-200" for="seq_no">seq No.</label>
-                        <input id="seq_no" type="text" name="seq_no" value="{{ old('seq_no') }}" wire:model="seq_no"
+                        <input id="seq_no" type="numeric" name="seq_no" value="{{ old('seq_no') }}" wire:model="seq_no"
                             required autofocus autocomplete="seq_no"
                             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
                     </div>

@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('account_groups', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->string('name');
-            $table->string('seq_no');
+            $table->string('name')->unique();
+            $table->string('seq_no')->nullable();
             $table->string('type'); // 1: Account Group, 2: Major Account Group, 3: Sub Major Account Group,
             $table->timestamps();
         });
