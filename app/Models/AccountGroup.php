@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AccountGroup extends Model
 {
     use HasFactory;
+
+    protected $table = "account_groups";
 }

@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Livewire\AccountChart\AccountChartAddComponent;
+use App\Http\Livewire\AccountChart\AccountChartComponent;
+use App\Http\Livewire\AccountChart\AccountChartEditComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupAddComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupEditComponent;
@@ -51,6 +54,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/account-group/create', AccountGroupAddComponent::class)->name('accountgroup.create');
     Route::get('/account-group/{id}/edit', AccountGroupEditComponent::class)->name('accountgroup.edit');
 
-
+    Route::get('/account-chart', AccountChartComponent::class)->name('accountchart.index');
+    Route::get('/account-chart/create', AccountChartAddComponent::class)->name('accountchart.create');
+    Route::get('/account-chart/{id}/edit', AccountChartEditComponent::class)->name('accountchart.edit');
 
 });
