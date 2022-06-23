@@ -87,6 +87,7 @@ Create Database Name: laravel-admin-panel-starter
 Terminal
 
     php artisan key:generate
+    php artisan storage:link
     php artisan migrate:fresh --seed    
     npm install
     npm run dev
