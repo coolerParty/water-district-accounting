@@ -3,30 +3,11 @@
 @section('content')
 @section('title', 'Users')
 <!-- Main content header -->
-<div class="
-    flex flex-col
-    items-start
-    justify-between
-    pb-6
-    space-y-4
-    border-b
-    lg:items-center lg:space-y-0 lg:flex-row
-    ">
+<div class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
     <h1 class="text-2xl font-semibold whitespace-nowrap">Users</h1>
     <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
     @can('user-create')
-    <a href="{{ route('users.create') }}" class="
-            inline-flex
-            items-center
-            justify-center
-            px-4
-            py-1
-            space-x-1
-            bg-gray-200
-            rounded-md
-            shadow
-            hover:bg-opacity-20
-        ">
+    <a href="{{ route('users.create') }}" class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
         <span>
             <svg class="w-4 h-4 text-gray-500" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd"
@@ -152,7 +133,7 @@
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                 @foreach($user->roles as $role)
-                                <span class="px-3 py-1 rounded space-x-1 bg-indigo-500 text-white">{{ $role->name
+                                <span class="px-3 py-1 space-x-1 text-white bg-indigo-500 rounded">{{ $role->name
                                     }}</span>
                                 @endforeach
                             </td>
@@ -183,6 +164,9 @@
                         @endforelse
                     </tbody>
                 </table>
+                <div class="p-4">
+                    {!! $users->links() !!}
+                </div>
             </div>
         </div>
     </div>

@@ -25,7 +25,7 @@ class AccountGroupComponent extends Component
             abort(404);
         }
 
-        $accounts = AccountGroup::select('id', 'code', 'name', 'seq_no', 'type')->get();
+        $accounts = AccountGroup::select('id', 'code', 'name', 'seq_no', 'type')->paginate(10);
 
         return view('livewire.account-group.account-group-component', ['accounts' => $accounts])->layout('layouts.base');
     }

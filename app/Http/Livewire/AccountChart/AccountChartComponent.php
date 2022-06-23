@@ -25,7 +25,7 @@ class AccountChartComponent extends Component
             abort(404);
         }
 
-        $accounts = AccountChart::with('accountGroup','majorAccountGroup','SubMajorAccountGroup')->select('id', 'code', 'name', 'acctgrp_id', 'mjracctgrp_id', 'submjracctgrp_id')->get();
+        $accounts = AccountChart::with('accountGroup','majorAccountGroup','SubMajorAccountGroup')->select('id', 'code', 'name', 'acctgrp_id', 'mjracctgrp_id', 'submjracctgrp_id')->paginate(10);
 
         return view('livewire.account-chart.account-chart-component', ['accounts' => $accounts])->layout('layouts.base');
     }

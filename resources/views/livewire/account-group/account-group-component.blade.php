@@ -188,6 +188,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="p-4">
+                        {!! $accounts->links() !!}
+                    </div>
                 </div>
             </div>
         </div>
