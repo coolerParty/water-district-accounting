@@ -8,6 +8,7 @@ use App\Http\Livewire\AccountChart\AccountChartEditComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupAddComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupEditComponent;
+use App\Http\Livewire\BeginningBalance\BeginningBalanceComponent;
 use App\Http\Livewire\ChangePasswordComponent;
 use App\Http\Livewire\ProfileComponent;
 use App\Http\Livewire\Users\UserAddComponent;
@@ -57,5 +58,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/account-chart', AccountChartComponent::class)->name('accountchart.index');
     Route::get('/account-chart/create', AccountChartAddComponent::class)->name('accountchart.create');
     Route::get('/account-chart/{id}/edit', AccountChartEditComponent::class)->name('accountchart.edit');
+
+    Route::get('/beginning-balance', BeginningBalanceComponent::class)->name('beginningbalance.index');
+
 
 });
