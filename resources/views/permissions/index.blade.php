@@ -3,13 +3,13 @@
 @section('content')
 @section('title', 'Permissions')
 <!-- Main content header -->
-<div class="flex flex-col items-start justify-between pb-6 space-y-4 border-b  lg:items-center lg:space-y-0 lg:flex-row">
+<div class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
     <h1 class="text-2xl font-semibold whitespace-nowrap">Permissions</h1>
     <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
     @can('permission-create')
-    <a href="{{ route('permissions.create') }}" class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow  hover:bg-opacity-20">
+    <a href="{{ route('permissions.create') }}" class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
         <span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24"
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
                 stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
