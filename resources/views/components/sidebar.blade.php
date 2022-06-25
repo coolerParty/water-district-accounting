@@ -25,7 +25,7 @@
     <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
         <ul class="p-2 overflow-hidden">
             <li title="Dashboard">
-                <a href="{{ route('dashboard') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100
+                <a href="{{ route('dashboard') }}" class="flex items-center p-2 space-x-2 hover:bg-gray-100
                     {{ (route('dashboard') == url()->current()) ? 'bg-gray-100' : '' }}"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
@@ -170,7 +170,11 @@
             }" x-on:keydown.escape.prevent.stop="close($refs.button)"
                 x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
 
-                <a class="relative flex items-center w-full p-2 space-x-2 rounded-md cursor-pointer hover:bg-gray-100"
+                <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
+                    {{ (route('users.index') == substr(url()->current(), 0, strlen(route('users.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('roles.index') == substr(url()->current(), 0, strlen(route('roles.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('permissions.index') == substr(url()->current(), 0, strlen(route('permissions.index')) )) ? 'bg-gray-100' : '' }}
+                "
                     :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
@@ -196,7 +200,9 @@
                     :id="$id('dropdown-button')" style="display: none;">
                     @can('user-show')
                     <li title="Users">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100"
+                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                        {{ (route('users.index') == substr(url()->current(), 0, strlen(route('users.index')) )) ? 'bg-gray-100' : '' }}
+                        "
                             :class="{'justify-center': !isSidebarOpen}" href="{{ route('users.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
@@ -212,7 +218,9 @@
                     @endcan
                     @can('role-show')
                     <li title="Roles">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                            {{ (route('roles.index') == substr(url()->current(), 0, strlen(route('roles.index')) )) ? 'bg-gray-100' : '' }}
+                        "
                             :class="{'justify-center': !isSidebarOpen}" href="{{ route('roles.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
@@ -228,7 +236,9 @@
                     @endcan
                     @can('permission-show')
                     <li title="Permissions">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                            {{ (route('permissions.index') == substr(url()->current(), 0, strlen(route('permissions.index')) )) ? 'bg-gray-100' : '' }}
+                        "
                             :class="{'justify-center': !isSidebarOpen}" href="{{ route('permissions.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
