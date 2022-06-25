@@ -6,7 +6,7 @@
         <h1 class="text-2xl font-semibold whitespace-nowrap">Beginnning Balance</h1>
         <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
         @can('user-create')
-            <button href="#" wire:click="showAddForm"
+            <a href="{{ route('beginningbalance.create') }}"
                 class="inline-flex items-center justify-center px-4 py-1 space-x-1 bg-gray-200 rounded-md shadow hover:bg-opacity-20">
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
@@ -16,7 +16,7 @@
                     </svg>
                 </span>
                 <span>Add New</span>
-            </button>
+            </a>
         @endcan
     </div>
     <div class="flex flex-col mt-6">
@@ -24,57 +24,6 @@
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="overflow-hidden border-b border-gray-200 rounded-md shadow-md">
                     <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
-                        @if($enableAdd)
-                            <tr class="transition-all bg-gray-200 hover:shadow-lg">
-                                <div class="p-4">
-                                    <x-jet-validation-errors class="mb-4" />
-                                </div>
-                                <td class="px-3 py-4 whitespace-nowrap">New
-                                </td>
-                                <td colspan="2" class="px-1 py-4 whitespace-nowrap">
-                                    <div>
-                                        <select id="accountCode" name="accountCode" autocomplete="accountCode-name"
-                                            wire:model="accountCode"
-                                            class="block w-full px-4 py-2 mt-2 text-sm bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300">
-                                            <option value="">Select Account Code</option>
-                                            @foreach($accountChartCodes as $accountChartCode)
-                                            <option value="{{ $accountChartCode->id }}">{{ $accountChartCode->code . ' -
-                                                ' . $accountChartCode->name
-                                                }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </td>
-                                <td class="px-1 py-4 whitespace-nowrap">
-                                    <div>
-                                        <input id="start_date" type="date" name="start_date"
-                                            value="{{ old('start_date') }}" wire:model="start_date" required autofocus
-                                            autocomplete="code"
-                                            class="block w-full px-4 py-2 mt-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                                    </div>
-                                </td>
-                                <td class="px-1 py-4 whitespace-nowrap">
-                                    <div>
-                                        <input id="amount" type="number" name="amount" value="{{ old('amount') }}"
-                                            wire:model="amount" required autofocus autocomplete="code"
-                                            class="block w-full px-4 py-2 mt-2 text-sm text-gray-700 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                                    </div>
-                                </td>
-                                <td class="px-1 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <form wire:submit.prevent="store">
-                                        @can('user-edit')
-                                        <button type="submit"
-                                            class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Save</button>
-                                        @endcan
-                                        @can('user-delete')
-                                        <x-link-secondary href="#" wire:click="resetAddEdit">
-                                            Cancel
-                                        </x-link-secondary>
-                                        @endcan
-                                    </form>
-                                </td>
-                            </tr>
-                            @endif
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
@@ -193,13 +142,6 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($balances as $balance)
-                            @if (
-                            ($enableAdd == false && $enableEdit == false)
-                            ||
-                            ($enableAdd == true && $enableEdit == false)
-                            ||
-                            ($enableAdd == false && $enableEdit == true && $bal_id != $balance->id)
-                            )
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-3 py-1 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $loop->iteration}}</div>
@@ -221,7 +163,7 @@
                                 </td>
                                 <td class="px-3 py-1 text-sm font-medium text-right whitespace-nowrap">
                                     @can('user-edit')
-                                    <x-link-success href="#" wire:click.prevent="showEditForm('{{ $balance->id }}')">
+                                    <x-link-success href="{{ route('beginningbalance.edit',['id'=>$balance->id]) }}" >
                                         Edit
                                     </x-link-success>
                                     @can('user-delete')
@@ -234,51 +176,6 @@
                                     @endcan
                                 </td>
                             </tr>
-                            @elseif($enableAdd == false && $enableEdit == true && $bal_id == $balance->id)
-                            <div class="p-4">
-                                <x-jet-validation-errors class="mb-4" />
-                            </div>
-                            <tr class="transition-all bg-gray-100">
-                                <td class="px-3 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $loop->iteration }}</div>
-                                </td>
-                                <td colspan="2" class="px-1 py-4 whitespace-nowrap">
-                                    <select id="accountCode" name="accountCode" autocomplete="accountCode-name"
-                                        wire:model="accountCode"
-                                        class="block w-full px-4 py-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
-                                        <option value="">Select Account Code</option>
-                                        @foreach($accountChartCodes as $accountChartCode)
-                                        <option value="{{ $accountChartCode->id }}">{{ $accountChartCode->code . ' -
-                                            ' . $accountChartCode->name
-                                            }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td class="px-1 py-4 whitespace-nowrap">
-                                    <input id="start_date" type="date" name="start_date" wire:model="start_date"
-                                        required autofocus autocomplete="code"
-                                        class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md shadow-sm sm:text-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                                </td>
-                                <td class="px-1 py-4 whitespace-nowrap">
-                                    <input id="amount" type="number" name="amount" value="{{ old('amount') }}"
-                                        wire:model.defer="amount" required autofocus autocomplete="amount"
-                                        class="block w-full px-4 py-2 text-gray-700 bg-white border border-gray-200 rounded-md shadow-sm sm:text-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                                </td>
-                                <td class="px-1 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    <form wire:submit.prevent="update">
-                                        @can('user-edit')
-                                        <button type="submit"
-                                            class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Update</button>
-                                        @endcan
-                                        @can('user-delete')
-                                        <x-link-secondary href="#" wire:click="resetAddEdit">
-                                            Cancel
-                                        </x-link-secondary>
-                                        @endcan
-                                    </form>
-                                </td>
-                            </tr>
-                            @endif
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td></td>
@@ -292,9 +189,11 @@
                                 </td>
                             </tr>
                             @endforelse
-
                         </tbody>
                     </table>
+                    <div class="p-4 bg-gray-100">
+                        {!! $balances->links() !!}
+                    </div>
                 </div>
             </div>
         </div>

@@ -25,7 +25,8 @@
     <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
         <ul class="p-2 overflow-hidden">
             <li title="Dashboard">
-                <a href="{{ route('dashboard') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100"
+                <a href="{{ route('dashboard') }}" class="flex items-center p-2 space-x-2 rounded-md hover:bg-gray-100
+                    {{ (route('dashboard') == url()->current()) ? 'bg-gray-100' : '' }}"
                     :class="{'justify-center': !isSidebarOpen}">
                     <span>
                         <svg class="w-6 h-6 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -58,7 +59,12 @@
                 }" x-on:keydown.escape.prevent.stop="close($refs.button)"
                 x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
 
-                <a class="relative flex items-center w-full p-2 space-x-2 rounded-md cursor-pointer hover:bg-gray-100"
+                <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
+                        {{ (route('annual-budget.index') == substr(url()->current(), 0, strlen(route('annual-budget.index')) )) ? 'bg-gray-100' : '' }}
+                        {{ (route('beginningbalance.index') == substr(url()->current(), 0, strlen(route('beginningbalance.index')) )) ? 'bg-gray-100' : '' }}
+                        {{ (route('accountchart.index') == substr(url()->current(), 0, strlen(route('accountchart.index')) )) ? 'bg-gray-100' : '' }}
+                        {{ (route('accountgroup.index') == substr(url()->current(), 0, strlen(route('accountgroup.index')) )) ? 'bg-gray-100' : '' }}
+                "
                     :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
@@ -83,8 +89,9 @@
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
                     <li title="Annual Budget">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100"
-                            :class="{'justify-center': !isSidebarOpen}" href="#">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                            {{ (route('annual-budget.index') == substr(url()->current(), 0, strlen(route('annual-budget.index')) )) ? 'bg-gray-100' : '' }}"
+                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('annual-budget.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -97,7 +104,9 @@
                         </a>
                     </li>
                     <li title="Beginning Balance">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                        {{ (route('beginningbalance.index') == substr(url()->current(), 0, strlen(route('beginningbalance.index')) )) ? 'bg-gray-100' : '' }}"
+                        "
                             :class="{'justify-center': !isSidebarOpen}" href="{{ route('beginningbalance.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
@@ -110,7 +119,8 @@
                         </a>
                     </li>
                     <li title="Accounts Code">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                            {{ (route('accountchart.index') == substr(url()->current(), 0, strlen(route('accountchart.index')) )) ? 'bg-gray-100' : '' }}"
                             :class="{'justify-center': !isSidebarOpen}" href="{{ route('accountchart.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
@@ -119,11 +129,12 @@
                                         d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
                                 </svg>
                             </span>
-                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Accounts Code</span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Accounts Chart</span>
                         </a>
                     </li>
                     <li title="Account Group">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                            {{ (route('accountgroup.index') == substr(url()->current(), 0, strlen(route('accountgroup.index')) )) ? 'bg-gray-100' : '' }}"
                             :class="{'justify-center': !isSidebarOpen}" href="{{ route('accountgroup.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
