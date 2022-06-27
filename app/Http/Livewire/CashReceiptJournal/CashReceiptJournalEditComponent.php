@@ -14,11 +14,11 @@ class CashReceiptJournalEditComponent extends Component
     public $crj_id;
     public $official_receipt;
     public $a_receipt;
-    public $current = 0;
-    public $penalty = 0;
-    public $arrears_cy = 0;
-    public $arrears_py = 0;
-    public $cod_prev_day = 0;
+    public $current = 0.00;
+    public $penalty = 0.00;
+    public $arrears_cy = 0.00;
+    public $arrears_py = 0.00;
+    public $cod_prev_day = 0.00;
 
     public $jev_id;
     public $jev_date;

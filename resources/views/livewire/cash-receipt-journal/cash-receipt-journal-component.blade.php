@@ -210,7 +210,7 @@
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this account chart?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $cashreceipt->cid }})">
+                                        wire:click.prevent="destroy({{ $cashreceipt->cid }},{{ $cashreceipt->jid }})">
                                         Delete
                                     </x-link-danger>
                                     @endcan

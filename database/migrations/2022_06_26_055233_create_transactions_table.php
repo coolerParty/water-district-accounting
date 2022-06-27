@@ -21,7 +21,7 @@ return new class extends Migration
             $table->decimal('credit', 11, 2);
             $table->timestamps();
             $table->foreign('accountchart_id')->references('id')->on('account_charts');
-            $table->foreign('journal_entry_voucher_id')->references('id')->on('journal_entry_vouchers');
+            $table->foreign('journal_entry_voucher_id')->references('id')->on('journal_entry_vouchers')->onDelete('cascade');
         });
     }
 

@@ -106,23 +106,20 @@
             @endif
             <!-- flash message End -->
             <form class="w-full" wire:submit.prevent="update">
-                <div class="flex flex-wrap mb-6 -mx-3">
-                    <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
+                <div class="mb-6 -mx-3">
+                    <div class="w-full px-3 mb-6 ">
                         <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="jev_no">
                             Jev No
                         </label>
-                        <div class="flex flex-wrap space-x-0">
+                        <div class="flex flex-wrap space-x-1">
                             <input id="jev_no" type="text" value="{{ old('jev_no') }}" wire:model="jev_no"
-                            class="block w-2/3 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('jev_no') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
+                            class="block w-3.5/5 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('jev_no') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
 
-                              <x-link-success href="#" wire:click.prevent="getMaxJevNumber" class="w-1/3">
+                              <x-link-success href="#" wire:click.prevent="getMaxJevNumber" class="w-1.5/5">
                                 Jev Number
                             </x-link-success>
                         </div>
                         @error('jev_no')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
-                    </div>
-                    <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
-
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-6 -mx-3">
@@ -185,7 +182,7 @@
                         @error('penalty')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 mb-6 md:w-1/4 md:mb-0">
-                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-right text-gray-700 uppercase"
                             for="arrears_cy">
                             Arrears CY
                         </label>
@@ -194,7 +191,7 @@
                         @error('arrears_cy')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 mb-6 md:w-1/4 md:mb-0">
-                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-right text-gray-700 uppercase"
                             for="arrears_py">
                             Arrears PY
                         </label>
@@ -321,15 +318,15 @@
                                             account code
                                         </th>
                                         <th scope="col"
-                                            class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                            class="p-3 text-xs font-medium tracking-wider text-left text-center text-gray-500 uppercase">
                                             debit
                                         </th>
                                         <th scope="col"
-                                            class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                            class="p-3 text-xs font-medium tracking-wider text-left text-center text-gray-500 uppercase">
                                             credit
                                         </th>
                                         <th scope="col"
-                                            class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                            class="p-3 text-xs font-medium tracking-wider text-left text-center text-gray-500 uppercase">
                                             Action
                                         </th>
                                     </tr>
@@ -346,19 +343,19 @@
                                     )
                                     <tr class="transition-all hover:bg-gray-100">
 
-                                        <td class="px-3 py-1 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">{{
                                                 $transaction->accountchart->code }}</div>
                                         </td>
-                                        <td class="px-3 py-1 whitespace-nowrap">
+                                        <td class="p-2 text-right whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">{{ $transaction->debit }}
                                             </div>
                                         </td>
-                                        <td class="px-3 py-1 whitespace-nowrap">
+                                        <td class="p-2 text-right whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">{{ $transaction->credit
                                                 }}</div>
                                         </td>
-                                        <td class="px-3 py-1 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             @can('user-edit')
                                             <x-link-success href="#"
                                                 wire:click.prevent="showEditForm('{{ $transaction->id }}')">
@@ -378,9 +375,9 @@
                                     @else
                                     <tr class="transition-all hover:bg-gray-100">
 
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <select wire:model="accountCode"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
+                                                class="block w-full p-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
                                                 <option value="">Select Account</option>
                                                 @foreach($accounts as $account)
                                                 <option value="{{ $account->id }}">{{ $account->code . ' - ' .
@@ -390,21 +387,21 @@
                                             @error('accountCode')<p class="text-xs italic text-red-500">{{ $message
                                                 }}</p>@enderror
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <input type="number" step="any"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                                                 wire:model="debit" />
                                             @error('debit')<p class="text-xs italic text-red-500">{{ $message }}</p>
                                             @enderror
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <input type="number" step="any"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                                                 wire:model="credit" />
                                             @error('credit')<p class="text-xs italic text-red-500">{{ $message }}
                                             </p>@enderror
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <form wire:submit.prevent="updateTransaction">
                                                 @can('user-edit')
                                                 <button type="submit"
@@ -424,9 +421,9 @@
                                     @if($enableAdd == true)
                                     <tr class="transition-all hover:bg-gray-100">
 
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <select wire:model="accountCode"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
+                                                class="block w-full p-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
                                                 <option value="">Select Account</option>
                                                 @foreach($accounts as $account)
                                                 <option value="{{ $account->id }}">{{ $account->code . ' - ' .
@@ -436,21 +433,21 @@
                                             @error('accountCode')<p class="text-xs italic text-red-500">{{ $message
                                                 }}</p>@enderror
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <input type="number" step="any"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                                                 wire:model="debit" />
                                             @error('debit')<p class="text-xs italic text-red-500">{{ $message }}</p>
                                             @enderror
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <input type="number" step="any"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
                                                 wire:model="credit" />
                                             @error('credit')<p class="text-xs italic text-red-500">{{ $message }}
                                             </p>@enderror
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <form wire:submit.prevent="addTransaction">
                                                 @can('user-edit')
                                                 <button type="submit"
@@ -467,22 +464,22 @@
                                     </tr>
                                     @endif
                                     <tr class="transition-all bg-gray-400">
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             Total
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <input type="number" step="any"
                                                 value="{{ number_format($transactions->sum('debit'),2) }}"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
                                                 disabled />
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
                                             <input type="number" step="any"
                                                 value="{{ number_format($transactions->sum('credit'),2) }}"
-                                                class="block w-full px-4 py-1 pr-8 leading-tight text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
                                                 disabled />
                                         </td>
-                                        <td class="px-3 py-3 whitespace-nowrap">
+                                        <td class="p-2 whitespace-nowrap">
 
                                         </td>
                                     </tr>
