@@ -33,7 +33,7 @@
         <div class="flex flex-col flex-1 h-full overflow-hidden">
             <x-navbar></x-navbar>
             <!-- Page Content -->
-            <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
+            <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll bg-gray-100">
                 {{ $slot }}
             </main>
             <!-- Main footer -->

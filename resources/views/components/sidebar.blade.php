@@ -38,6 +38,135 @@
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
                 </a>
             </li>
+            <li title="Accounting Entries" x-data="{
+                open: false,
+                toggle() {
+                    if (this.open) {
+                        return this.close()
+                    }
+
+                    this.$refs.button.focus()
+
+                    this.open = true
+                },
+                close(focusAfter) {
+                    if (! this.open) return
+
+                    this.open = false
+
+                    focusAfter && focusAfter.focus()
+                }
+            }" x-on:keydown.escape.prevent.stop="close($refs.button)"
+                x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
+
+                <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
+                    {{ (route('cashreceiptjournal.index') == substr(url()->current(), 0, strlen(route('cashreceiptjournal.index')) )) ? 'bg-gray-100' : '' }}
+                "
+                    :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
+                    :aria-expanded="open" :aria-controls="$id('dropdown-button')">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                          </svg>
+                    </span>
+                    <span :class="{ 'lg:hidden': !isSidebarOpen }">Accounting Entries</span>
+                    <span class="absolute right-2" :class="{ 'lg:hidden': !isSidebarOpen }">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 ml-2 transition-all"
+                            :class="{'rotate-90': open}" fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                            stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </span>
+                </a>
+                <ul x-ref="panel" x-show="open" x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 scale-90" x-transition:enter-end="opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-300"
+                    x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
+                    :id="$id('dropdown-button')" style="display: none;">
+                    @can('user-show')
+                    <li title="Cash Receipt Journal">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                        {{ (route('cashreceiptjournal.index') == substr(url()->current(), 0, strlen(route('cashreceiptjournal.index')) )) ? 'bg-gray-100' : '' }}
+                        "
+                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('cashreceiptjournal.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Cash Receipt Journal</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('role-show')
+                    <li title="Billing Journal">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                            :class="{'justify-center': !isSidebarOpen}" href="#">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Billing Journal</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('permission-show')
+                    <li title="Materials Stock Issue Journal">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                            :class="{'justify-center': !isSidebarOpen}" href="#">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Materials Stock Issue Journal</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('permission-show')
+                    <li title="Check Disbursement Journal">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                            :class="{'justify-center': !isSidebarOpen}" href="#">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Check Disbursement Journal</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('permission-show')
+                    <li title="General Journal">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
+                            :class="{'justify-center': !isSidebarOpen}" href="#">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">General Journal</span>
+                        </a>
+                    </li>
+                    @endcan
+                </ul>
+            </li>
             <li title="Setup" x-data="{
                     open: false,
                     toggle() {

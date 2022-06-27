@@ -33,7 +33,7 @@
         <div class="flex flex-col flex-1 h-full overflow-hidden">
             <x-navbar></x-navbar>
             <!-- Page Content -->
-            <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll">
+            <main class="flex-1 max-h-full p-5 overflow-hidden overflow-y-scroll bg-gray-100">
                 @yield('content')
             </main>
             <!-- Main footer -->
@@ -41,7 +41,7 @@
         </div>
         <!-- Setting panel button -->
         <div>
-            <button @click="isSettingsPanelOpen = true" class="fixed right-0 px-4 py-2 text-sm font-medium text-white uppercase transform rotate-90 translate-x-8 bg-gray-600  top-1/2 rounded-b-md">
+            <button @click="isSettingsPanelOpen = true" class="fixed right-0 px-4 py-2 text-sm font-medium text-white uppercase transform rotate-90 translate-x-8 bg-gray-600 top-1/2 rounded-b-md">
                 Settings
             </button>
         </div>

@@ -12,6 +12,9 @@ use App\Http\Livewire\AccountGroup\AccountGroupEditComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceAddComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceEditComponent;
+use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalAddComponent;
+use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalComponent;
+use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalEditComponent;
 use App\Http\Livewire\ChangePasswordComponent;
 use App\Http\Livewire\ProfileComponent;
 use App\Http\Livewire\Users\UserAddComponent;
@@ -67,6 +70,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/beginning-balance', BeginningBalanceComponent::class)->name('beginningbalance.index');
     Route::get('/beginning-balance/create', BeginningBalanceAddComponent::class)->name('beginningbalance.create');
     Route::get('/beginning-balance/{id}/edit', BeginningBalanceEditComponent::class)->name('beginningbalance.edit');
+
+    Route::get('/cash-receipt-journal', CashReceiptJournalComponent::class)->name('cashreceiptjournal.index');
+    Route::get('/cash-receipt-journal/create', CashReceiptJournalAddComponent::class)->name('cashreceiptjournal.create');
+    Route::get('/cash-receipt-journal/{id}/edit', CashReceiptJournalEditComponent::class)->name('cashreceiptjournal.edit');
 
     // livewire End
 
