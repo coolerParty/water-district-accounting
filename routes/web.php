@@ -19,6 +19,9 @@ use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalAddComponent;
 use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalComponent;
 use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalEditComponent;
 use App\Http\Livewire\ChangePasswordComponent;
+use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalAddComponent;
+use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalComponent;
+use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalEditComponent;
 use App\Http\Livewire\ProfileComponent;
 use App\Http\Livewire\Users\UserAddComponent;
 use App\Http\Livewire\Users\UserComponent;
@@ -81,6 +84,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/billing-journal', BillingJournalComponent::class)->name('billingjournal.index');
     Route::get('/billing-journal/create', BillingJournalAddComponent::class)->name('billingjournal.create');
     Route::get('/billing-journal/{id}/edit', BillingJournalEditComponent::class)->name('billingjournal.edit');
+
+    Route::get('/material-issued-journal', MaterialIssuedJournalComponent::class)->name('materialissuedjournal.index');
+    Route::get('/material-issued-journal/create', MaterialIssuedJournalAddComponent::class)->name('materialissuedjournal.create');
+    Route::get('/material-issued-journal/{id}/edit', MaterialIssuedJournalEditComponent::class)->name('materialissuedjournal.edit');
 
     // livewire End
 

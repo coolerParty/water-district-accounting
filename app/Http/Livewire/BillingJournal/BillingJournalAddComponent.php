@@ -24,6 +24,8 @@ class BillingJournalAddComponent extends Component
     public $jev_no;
     public $particulars;
 
+    public $journals = [];
+
     public function mount()
     {
         $this->journals = [
