@@ -27,46 +27,34 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Date
                                 </th>
                                 <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Journal No
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    JEV No
                                 </th>
                                 <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Official Receipt
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    OR No.
                                 </th>
                                 <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Current
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Particulars
                                 </th>
                                 <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Penalty
-                                </th>
-                                <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Arrears Current Year
-                                </th>
-                                <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Arrears Previous Year
-                                </th>
-                                <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Total Amount
                                 </th>
                                 <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Cash on Hand Previous Day
                                 </th>
                                 <th scope="col"
-                                    class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Acknowledgement Receipt
                                 </th>
-                                <th scope="col" class="p-3">
+                                <th scope="col" class="p-2">
                                     <span class="sr-only">Action</span>
                                 </th>
                             </tr>
@@ -163,45 +151,39 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($cashreceipts as $cashreceipt)
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td class="px-3 py-1 whitespace-nowrap">
+                                <td class="px-2 py-1 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $cashreceipt->jdate }}</div>
                                 </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
+                                <td class="px-2 py-1 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $cashreceipt->jno }}</div>
                                 </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
+                                <td class="px-2 py-1 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $cashreceipt->official_receipt }}
                                     </div>
                                 </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ number_format($cashreceipt->current,2)
+                                <td class="px-2 py-1 whitespace-nowrap">
+                                    <div class="text-xs text-gray-900">{{ $cashreceipt->part
                                         }}</div>
                                 </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ number_format($cashreceipt->penalty,2)
+                                <td class="px-2 py-1 whitespace-nowrap">
+                                    <div class="text-sm font-bold text-gray-900 ">{{ number_format(
+
+                                          $cashreceipt->current
+                                        + $cashreceipt->penalty
+                                        + $cashreceipt->arrears_cy
+                                        + $cashreceipt->arrears_py
+                                        ,2)
                                         }}</div>
                                 </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ number_format($cashreceipt->arrears_cy,2)
+                                <td class="px-2 py-1 whitespace-nowrap">
+                                    <div class="text-sm font-bold text-gray-900">{{ number_format($cashreceipt->cod_prev_day,2)
                                         }}</div>
                                 </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ number_format($cashreceipt->arrears_py,2)
-                                        }}</div>
-                                </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ number_format($cashreceipt->arrears_py,2)
-                                        }}</div>
-                                </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ number_format($cashreceipt->cod_prev_day,2)
-                                        }}</div>
-                                </td>
-                                <td class="px-3 py-1 whitespace-nowrap">
+                                <td class="px-2 py-1 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $cashreceipt->a_receipt }}
                                     </div>
                                 </td>
-                                <td class="px-3 py-1 text-sm font-medium text-right whitespace-nowrap">
+                                <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
                                     @can('user-edit')
                                     <x-link-success href="{{ route('cashreceiptjournal.edit',['id'=>$cashreceipt->cid]) }}" >
                                         Edit
