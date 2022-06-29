@@ -12,6 +12,9 @@ use App\Http\Livewire\AccountGroup\AccountGroupEditComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceAddComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceEditComponent;
+use App\Http\Livewire\BillingJournal\BillingJournalAddComponent;
+use App\Http\Livewire\BillingJournal\BillingJournalComponent;
+use App\Http\Livewire\BillingJournal\BillingJournalEditComponent;
 use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalAddComponent;
 use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalComponent;
 use App\Http\Livewire\CashReceiptJournal\CashReceiptJournalEditComponent;
@@ -74,6 +77,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/cash-receipt-journal', CashReceiptJournalComponent::class)->name('cashreceiptjournal.index');
     Route::get('/cash-receipt-journal/create', CashReceiptJournalAddComponent::class)->name('cashreceiptjournal.create');
     Route::get('/cash-receipt-journal/{id}/edit', CashReceiptJournalEditComponent::class)->name('cashreceiptjournal.edit');
+
+    Route::get('/billing-journal', BillingJournalComponent::class)->name('billingjournal.index');
+    Route::get('/billing-journal/create', BillingJournalAddComponent::class)->name('billingjournal.create');
+    Route::get('/billing-journal/{id}/edit', BillingJournalEditComponent::class)->name('billingjournal.edit');
 
     // livewire End
 

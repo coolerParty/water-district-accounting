@@ -1240,11 +1240,11 @@ select {
 .-mt-px {
   margin-top: -1px;
 }
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
 .mb-3 {
   margin-bottom: 0.75rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
 }
 .mr-4 {
   margin-right: 1rem;
@@ -2262,6 +2262,18 @@ select {
 }
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+.selection\:text-center *::-moz-selection {
+  text-align: center;
+}
+.selection\:text-center *::selection {
+  text-align: center;
+}
+.selection\:text-center::-moz-selection {
+  text-align: center;
+}
+.selection\:text-center::selection {
+  text-align: center;
 }
 .hover\:overflow-y-auto:hover {
   overflow-y: auto;
