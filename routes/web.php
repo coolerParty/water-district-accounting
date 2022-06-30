@@ -22,6 +22,9 @@ use App\Http\Livewire\ChangePasswordComponent;
 use App\Http\Livewire\CheckDisbursement\CheckDisbursementAddComponent;
 use App\Http\Livewire\CheckDisbursement\CheckDisbursementComponent;
 use App\Http\Livewire\CheckDisbursement\CheckDisbursementEditComponent;
+use App\Http\Livewire\GeneralJournal\GeneralJournalAddComponent;
+use App\Http\Livewire\GeneralJournal\GeneralJournalComponent;
+use App\Http\Livewire\GeneralJournal\GeneralJournalEditComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalAddComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalEditComponent;
@@ -95,6 +98,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/check-disbursement-journal', CheckDisbursementComponent::class)->name('checkdisbursementjournal.index');
     Route::get('/check-disbursement-journal/create', CheckDisbursementAddComponent::class)->name('checkdisbursementjournal.create');
     Route::get('/check-disbursement-journal/{id}/edit', CheckDisbursementEditComponent::class)->name('checkdisbursementjournal.edit');
+
+    Route::get('/general-journal', GeneralJournalComponent::class)->name('generaljournal.index');
+    Route::get('/general-journal/create', GeneralJournalAddComponent::class)->name('generaljournal.create');
+    Route::get('/general-journal/{id}/edit', GeneralJournalEditComponent::class)->name('generaljournal.edit');
 
     // livewire End
 

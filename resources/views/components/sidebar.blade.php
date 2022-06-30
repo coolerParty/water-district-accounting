@@ -64,6 +64,7 @@
                     {{ (route('billingjournal.index') == substr(url()->current(), 0, strlen(route('billingjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('materialissuedjournal.index') == substr(url()->current(), 0, strlen(route('materialissuedjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('checkdisbursementjournal.index') == substr(url()->current(), 0, strlen(route('checkdisbursementjournal.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('generaljournal.index') == substr(url()->current(), 0, strlen(route('generaljournal.index')) )) ? 'bg-gray-100' : '' }}
                 "
                     :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
@@ -160,8 +161,10 @@
                     @endcan
                     @can('permission-show')
                     <li title="General Journal">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100"
-                            :class="{'justify-center': !isSidebarOpen}" href="#">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                        {{ (route('generaljournal.index') == substr(url()->current(), 0, strlen(route('generaljournal.index')) )) ? 'bg-gray-100' : '' }}
+                        "
+                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('generaljournal.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">

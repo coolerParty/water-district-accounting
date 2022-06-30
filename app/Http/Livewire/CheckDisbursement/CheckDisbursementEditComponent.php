@@ -93,7 +93,7 @@ class CheckDisbursementEditComponent extends Component
 
     public function mount($id)
     {
-        $dv                    = Disbursement::findOrFail($id);
+        $dv                      = Disbursement::findOrFail($id);
         $this->dv_id             = $dv->id;
         $this->dv_number         = $dv->dv_number;
         $this->payee             = $dv->payee;
