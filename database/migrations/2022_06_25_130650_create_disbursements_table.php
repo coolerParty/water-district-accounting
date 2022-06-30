@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('tin_no');
             $table->string('address');
             $table->string('fpa');
-            $table->enum('type_of_fun',['general','retirement']);
+            $table->enum('type_of_fund',['general','retirement']);
             $table->boolean('mds')->default(false);
             $table->boolean('commercial')->default(false);
             $table->boolean('ada')->default(false);
