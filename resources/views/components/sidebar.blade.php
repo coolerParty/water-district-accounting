@@ -65,13 +65,14 @@
                     {{ (route('materialissuedjournal.index') == substr(url()->current(), 0, strlen(route('materialissuedjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('checkdisbursementjournal.index') == substr(url()->current(), 0, strlen(route('checkdisbursementjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('generaljournal.index') == substr(url()->current(), 0, strlen(route('generaljournal.index')) )) ? 'bg-gray-100' : '' }}
-                "
-                    :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
+                " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                          </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+                        </svg>
                     </span>
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Accounting Entries</span>
                     <span class="absolute right-2" :class="{ 'lg:hidden': !isSidebarOpen }">
@@ -91,15 +92,12 @@
                     <li title="Cash Receipt Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('cashreceiptjournal.index') == substr(url()->current(), 0, strlen(route('cashreceiptjournal.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('cashreceiptjournal.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('cashreceiptjournal.index') }}">
                             <span>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
-                                    fill="currentColor">
-                                    <path fill-rule="evenodd"
-                                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z"
-                                        clip-rule="evenodd" />
-                                </svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                                  </svg>
                             </span>
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Cash Receipt Journal</span>
                         </a>
@@ -109,13 +107,12 @@
                     <li title="Billing Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('billingjournal.index') == substr(url()->current(), 0, strlen(route('billingjournal.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('billingjournal.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('billingjournal.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
-                                        d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
                                         clip-rule="evenodd" />
                                 </svg>
                             </span>
@@ -127,13 +124,14 @@
                     <li title="Materials Stock Issue Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('materialissuedjournal.index') == substr(url()->current(), 0, strlen(route('materialissuedjournal.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('materialissuedjournal.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}"
+                            href="{{ route('materialissuedjournal.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
+                                    <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z" />
                                     <path fill-rule="evenodd"
-                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z"
                                         clip-rule="evenodd" />
                                 </svg>
                             </span>
@@ -145,13 +143,13 @@
                     <li title="Check Disbursement Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('checkdisbursementjournal.index') == substr(url()->current(), 0, strlen(route('checkdisbursementjournal.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('checkdisbursementjournal.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}"
+                            href="{{ route('checkdisbursementjournal.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
-                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        d="M5 2a2 2 0 00-2 2v14l3.5-2 3.5 2 3.5-2 3.5 2V4a2 2 0 00-2-2H5zm2.5 3a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm6.207.293a1 1 0 00-1.414 0l-6 6a1 1 0 101.414 1.414l6-6a1 1 0 000-1.414zM12.5 10a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"
                                         clip-rule="evenodd" />
                                 </svg>
                             </span>
@@ -163,13 +161,12 @@
                     <li title="General Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('generaljournal.index') == substr(url()->current(), 0, strlen(route('generaljournal.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('generaljournal.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('generaljournal.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
-                                        d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z"
+                                        d="M3 5a2 2 0 012-2h10a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm11 1H6v8l4-2 4 2V6z"
                                         clip-rule="evenodd" />
                                 </svg>
                             </span>
@@ -205,8 +202,8 @@
                         {{ (route('beginningbalance.index') == substr(url()->current(), 0, strlen(route('beginningbalance.index')) )) ? 'bg-gray-100' : '' }}
                         {{ (route('accountchart.index') == substr(url()->current(), 0, strlen(route('accountchart.index')) )) ? 'bg-gray-100' : '' }}
                         {{ (route('accountgroup.index') == substr(url()->current(), 0, strlen(route('accountgroup.index')) )) ? 'bg-gray-100' : '' }}
-                "
-                    :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
+                        {{ (route('bank.index') == substr(url()->current(), 0, strlen(route('bank.index')) )) ? 'bg-gray-100' : '' }}
+                " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
@@ -246,9 +243,8 @@
                     </li>
                     <li title="Beginning Balance">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
-                        {{ (route('beginningbalance.index') == substr(url()->current(), 0, strlen(route('beginningbalance.index')) )) ? 'bg-gray-100' : '' }}"
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('beginningbalance.index') }}">
+                        {{ (route('beginningbalance.index') == substr(url()->current(), 0, strlen(route('beginningbalance.index')) )) ? 'bg-gray-100' : '' }}" "
+                            :class=" {'justify-center': !isSidebarOpen}" href="{{ route('beginningbalance.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -288,6 +284,19 @@
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Account Group</span>
                         </a>
                     </li>
+                    <li title="Bank">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
+                            {{ (route('bank.index') == substr(url()->current(), 0, strlen(route('bank.index')) )) ? 'bg-gray-100' : '' }}"
+                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('bank.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                                    <path fill-rule="evenodd" d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z" clip-rule="evenodd" />
+                                  </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">Bank</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li title="Security" x-data="{
@@ -315,8 +324,7 @@
                     {{ (route('users.index') == substr(url()->current(), 0, strlen(route('users.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('roles.index') == substr(url()->current(), 0, strlen(route('roles.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('permissions.index') == substr(url()->current(), 0, strlen(route('permissions.index')) )) ? 'bg-gray-100' : '' }}
-                "
-                    :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
+                " :class="{'justify-center': !isSidebarOpen}" x-ref="button" x-on:click="toggle()"
                     :aria-expanded="open" :aria-controls="$id('dropdown-button')">
                     <span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-400" fill="none"
@@ -343,8 +351,7 @@
                     <li title="Users">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('users.index') == substr(url()->current(), 0, strlen(route('users.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('users.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('users.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -361,8 +368,7 @@
                     <li title="Roles">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                             {{ (route('roles.index') == substr(url()->current(), 0, strlen(route('roles.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('roles.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('roles.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -379,8 +385,7 @@
                     <li title="Permissions">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                             {{ (route('permissions.index') == substr(url()->current(), 0, strlen(route('permissions.index')) )) ? 'bg-gray-100' : '' }}
-                        "
-                            :class="{'justify-center': !isSidebarOpen}" href="{{ route('permissions.index') }}">
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('permissions.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                     fill="currentColor">

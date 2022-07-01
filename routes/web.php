@@ -9,6 +9,9 @@ use App\Http\Livewire\AccountChart\AccountChartEditComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupAddComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupEditComponent;
+use App\Http\Livewire\Bank\BankAddComponent;
+use App\Http\Livewire\Bank\BankComponent;
+use App\Http\Livewire\Bank\BankEditComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceAddComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceComponent;
 use App\Http\Livewire\BeginningBalance\BeginningBalanceEditComponent;
@@ -102,6 +105,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/general-journal', GeneralJournalComponent::class)->name('generaljournal.index');
     Route::get('/general-journal/create', GeneralJournalAddComponent::class)->name('generaljournal.create');
     Route::get('/general-journal/{id}/edit', GeneralJournalEditComponent::class)->name('generaljournal.edit');
+
+    Route::get('/bank', BankComponent::class)->name('bank.index');
+    Route::get('/bank/create', BankAddComponent::class)->name('bank.create');
+    Route::get('/bank/{id}/edit', BankEditComponent::class)->name('bank.edit');
 
     // livewire End
 
