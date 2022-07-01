@@ -24,6 +24,7 @@
     <!-- Sidebar links -->
     <nav class="flex-1 overflow-hidden hover:overflow-y-auto">
         <ul class="p-2 overflow-hidden">
+            @can('dashboard-access')
             <li title="Dashboard">
                 <a href="{{ route('dashboard') }}" class="flex items-center p-2 space-x-2 hover:bg-gray-100
                     {{ (route('dashboard') == url()->current()) ? 'bg-gray-100' : '' }}"
@@ -38,6 +39,7 @@
                     <span :class="{ 'lg:hidden': !isSidebarOpen }">Dashboard</span>
                 </a>
             </li>
+            @endcan
             <li title="Accounting Entries" x-data="{
                 open: false,
                 toggle() {
@@ -88,7 +90,7 @@
                     x-transition:leave="transition ease-in duration-300"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
-                    @can('user-show')
+                    @can('cash-receipt-journal-show')
                     <li title="Cash Receipt Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('cashreceiptjournal.index') == substr(url()->current(), 0, strlen(route('cashreceiptjournal.index')) )) ? 'bg-gray-100' : '' }}
@@ -103,7 +105,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('role-show')
+                    @can('billing-show')
                     <li title="Billing Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('billingjournal.index') == substr(url()->current(), 0, strlen(route('billingjournal.index')) )) ? 'bg-gray-100' : '' }}
@@ -120,7 +122,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('permission-show')
+                    @can('material-journal-show')
                     <li title="Materials Stock Issue Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('materialissuedjournal.index') == substr(url()->current(), 0, strlen(route('materialissuedjournal.index')) )) ? 'bg-gray-100' : '' }}
@@ -139,7 +141,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('permission-show')
+                    @can('disbursement-journal-show')
                     <li title="Check Disbursement Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('checkdisbursementjournal.index') == substr(url()->current(), 0, strlen(route('checkdisbursementjournal.index')) )) ? 'bg-gray-100' : '' }}
@@ -157,7 +159,7 @@
                         </a>
                     </li>
                     @endcan
-                    @can('permission-show')
+                    @can('general-journal-show')
                     <li title="General Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('generaljournal.index') == substr(url()->current(), 0, strlen(route('generaljournal.index')) )) ? 'bg-gray-100' : '' }}
@@ -226,6 +228,7 @@
                     x-transition:leave="transition ease-in duration-300"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
+                    @can('annual-budget-show')
                     <li title="Annual Budget">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                             {{ (route('annual-budget.index') == substr(url()->current(), 0, strlen(route('annual-budget.index')) )) ? 'bg-gray-100' : '' }}"
@@ -241,6 +244,8 @@
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Annual Budget</span>
                         </a>
                     </li>
+                    @endcan
+                    @can('beginning-balance-show')
                     <li title="Beginning Balance">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('beginningbalance.index') == substr(url()->current(), 0, strlen(route('beginningbalance.index')) )) ? 'bg-gray-100' : '' }}" "
@@ -255,6 +260,8 @@
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Beginning Balance</span>
                         </a>
                     </li>
+                    @endcan
+                    @can('account-chart-show')
                     <li title="Accounts Code">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                             {{ (route('accountchart.index') == substr(url()->current(), 0, strlen(route('accountchart.index')) )) ? 'bg-gray-100' : '' }}"
@@ -269,6 +276,8 @@
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Accounts Chart</span>
                         </a>
                     </li>
+                    @endcan
+                    @can('account-group-show')
                     <li title="Account Group">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                             {{ (route('accountgroup.index') == substr(url()->current(), 0, strlen(route('accountgroup.index')) )) ? 'bg-gray-100' : '' }}"
@@ -284,6 +293,8 @@
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Account Group</span>
                         </a>
                     </li>
+                    @endcan
+                    @can('bank-show')
                     <li title="Bank">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                             {{ (route('bank.index') == substr(url()->current(), 0, strlen(route('bank.index')) )) ? 'bg-gray-100' : '' }}"
@@ -297,6 +308,7 @@
                             <span :class="{ 'lg:hidden': !isSidebarOpen }">Bank</span>
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </li>
             <li title="Security" x-data="{
