@@ -52,7 +52,7 @@ class BeginningBalanceEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('user-create')) {
+        if (!auth()->user()->can('beginning-balance-create')) {
             abort(404);
         }
     }

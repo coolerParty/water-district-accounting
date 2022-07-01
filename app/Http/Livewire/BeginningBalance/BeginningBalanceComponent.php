@@ -10,7 +10,7 @@ class BeginningBalanceComponent extends Component
 {
     public function destroy($id)
     {
-        if (!auth()->user()->can('user-delete')) {
+        if (!auth()->user()->can('beginning-balance-delete')) {
             abort(404);
         }
         $bal = BeginningBalance::find($id);
@@ -22,6 +22,9 @@ class BeginningBalanceComponent extends Component
 
     public function render()
     {
+        if (!auth()->user()->can('beginning-balance-show')) {
+            abort(404);
+        }
         $balances = BeginningBalance::with('accountChart')->select('id', 'accountchart_id', 'start_date', 'amount')->paginate(10);
         return view('livewire.beginning-balance.beginning-balance-component', ['balances' => $balances])->layout('layouts.base');
     }

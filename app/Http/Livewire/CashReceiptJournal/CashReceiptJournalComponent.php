@@ -12,8 +12,9 @@ class CashReceiptJournalComponent extends Component
 {
     public function destroy($cid,$jid)
     {
-        // $transaction = Transaction::where('journal_entry_voucher_id', $jid)->all();
-        // $transaction->delete();
+        if (!auth()->user()->can('cash-receipt-journal-delete')) {
+            abort(404);
+        }
 
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
@@ -27,7 +28,10 @@ class CashReceiptJournalComponent extends Component
 
     public function render()
     {
-        // $cashreceipts = CashReceipt::with('jev')->select('id','official_receipt','a_receipt','current','penalty','arrears_cy','arrears_py','cod_prev_day')->paginate(5);
+        if (!auth()->user()->can('cash-receipt-journal-show')) {
+            abort(404);
+        }
+
         $cashreceipts = DB::table('cash_receipts')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'cash_receipts.id')
             ->select('cash_receipts.id as cid', 'official_receipt', 'a_receipt', 'current', 'penalty', 'arrears_cy', 'arrears_py', 'cod_prev_day', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno','journal_entry_vouchers.id as jid','journal_entry_vouchers.particulars as part')

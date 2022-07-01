@@ -11,6 +11,10 @@ class BillingJournalComponent extends Component
 {
     public function destroy($bid, $jid)
     {
+        if (!auth()->user()->can('billing-delete')) {
+            abort(404);
+        }
+
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
 
@@ -23,6 +27,10 @@ class BillingJournalComponent extends Component
 
     public function render()
     {
+        if (!auth()->user()->can('billing-show')) {
+            abort(404);
+        }
+
         $billings = DB::table('billings')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'billings.id')
             ->select('billings.id as bid', 'zone', 'metered_sales', 'residential', 'comm', 'comm_a', 'comm_b', 'comm_c', 'government', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno', 'journal_entry_vouchers.id as jid', 'journal_entry_vouchers.particulars as part')

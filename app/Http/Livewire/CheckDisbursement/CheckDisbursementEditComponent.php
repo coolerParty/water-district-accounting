@@ -46,16 +46,22 @@ class CheckDisbursementEditComponent extends Component
 
     public function getMaxJevNumber()
     {
+        $this->confirmation();
+
         $this->jev_no = JournalEntryVoucher::where('id', '<>', $this->jev_id)->max('jev_no') + 1;
     }
 
     public function getMaxDVNumber()
     {
+        $this->confirmation();
+
         $this->dv_number = Disbursement::where('id', '<>', $this->dv_id)->max('dv_number') + 1;
     }
 
     public function showAddTransaction()
     {
+        $this->confirmation();
+
         $this->resetAddEdit();
         $this->enableEdit = false;
         $this->enableAdd = true;
@@ -63,6 +69,8 @@ class CheckDisbursementEditComponent extends Component
 
     public function showEditForm($id)
     {
+        $this->confirmation();
+
         $this->resetAddEdit();
         $this->enableEdit = true;
         $this->enableAdd = false;
@@ -75,6 +83,8 @@ class CheckDisbursementEditComponent extends Component
 
     public function removeTransaction($id)
     {
+        $this->confirmation();
+
         $t = Transaction::findOrFail($id);
         $t->delete();
 
@@ -83,6 +93,8 @@ class CheckDisbursementEditComponent extends Component
 
     public function resetAddEdit()
     {
+        $this->confirmation();
+
         $this->enableEdit     = false;
         $this->enableAdd      = false;
         $this->transaction_id = null;
@@ -148,6 +160,8 @@ class CheckDisbursementEditComponent extends Component
 
     public function update()
     {
+        $this->confirmation();
+
         $this->validate([
             'dv_number'         => ['required', 'numeric', 'min:0'],
             'payee'             => ['required', 'string', 'min:3'],
@@ -209,6 +223,8 @@ class CheckDisbursementEditComponent extends Component
 
     public function addTransaction()
     {
+        $this->confirmation();
+
         $this->validate([
             'accountCode' => ['required', 'integer'],
             'debit'       => ['required', 'numeric', 'min:0'],
@@ -228,6 +244,8 @@ class CheckDisbursementEditComponent extends Component
 
     public function updateTransaction()
     {
+        $this->confirmation();
+
         $this->validate([
             'accountCode' => ['required', 'integer'],
             'debit'       => ['required', 'numeric', 'min:0'],
@@ -244,8 +262,17 @@ class CheckDisbursementEditComponent extends Component
         $this->resetAddEdit();
     }
 
+    public function confirmation()
+    {
+        if (!auth()->user()->can('disbursement-journal-edit')) {
+            abort(404);
+        }
+    }
+
     public function render()
     {
+        $this->confirmation();
+
         $transactions = Transaction::with('accountChart')->select('id', 'accountchart_id', 'journal_entry_voucher_id', 'debit', 'credit')->where('journal_entry_voucher_id', $this->jev_id)->get();
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         $banks = Bank::select('id','bank_name')->get();

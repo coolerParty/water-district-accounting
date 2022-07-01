@@ -9,7 +9,7 @@ class AccountChartComponent extends Component
 {
     public function destroy($id)
     {
-        if (!auth()->user()->can('user-delete')) {
+        if (!auth()->user()->can('account-chart-delete')) {
             abort(404);
         }
         $account = AccountChart::find($id);
@@ -21,7 +21,7 @@ class AccountChartComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('user-show')) {
+        if (!auth()->user()->can('account-chart-show')) {
             abort(404);
         }
 

@@ -46,6 +46,8 @@ class MaterialIssuedJournalAddComponent extends Component
 
     public function store()
     {
+        $this->confirmation();
+
         $this->validate([
             'rsmi_no' => ['required', 'numeric', 'min:0'],
         ]);
@@ -83,8 +85,17 @@ class MaterialIssuedJournalAddComponent extends Component
         }
     }
 
+    public function confirmation()
+    {
+        if (!auth()->user()->can('material-journal-create')) {
+            abort(404);
+        }
+    }
+
     public function render()
     {
+        $this->confirmation();
+
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         return view('livewire.material-issued-journal.material-issued-journal-add-component',['accounts'=>$accounts])->layout('layouts.base');
     }

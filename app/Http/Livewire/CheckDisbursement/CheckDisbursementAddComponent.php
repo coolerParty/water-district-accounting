@@ -53,16 +53,22 @@ class CheckDisbursementAddComponent extends Component
 
     public function getMaxDVNumber()
     {
+        $this->confirmation();
+
         $this->dv_number = Disbursement::max('dv_number') + 1;
     }
 
     public function addJournal()
     {
+        $this->confirmation();
+
         $this->journals[] = ['accountCode' => '', 'debit' => 0, 'credit' => 0];
     }
 
     public function removeJournal($index)
     {
+        $this->confirmation();
+
         unset($this->journals[$index]);
         $this->journals = array_values($this->journals);
     }
@@ -95,6 +101,8 @@ class CheckDisbursementAddComponent extends Component
 
     public function store()
     {
+        $this->confirmation();
+
         $this->validate([
             'dv_number'         => ['required', 'numeric', 'min:0'],
             'payee'             => ['required', 'string', 'min:3'],
@@ -167,8 +175,17 @@ class CheckDisbursementAddComponent extends Component
         }
     }
 
+    public function confirmation()
+    {
+        if (!auth()->user()->can('disbursement-journal-create')) {
+            abort(404);
+        }
+    }
+
     public function render()
     {
+        $this->confirmation();
+
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         $banks = Bank::select('id','bank_name')->get();
         return view('livewire.check-disbursement.check-disbursement-add-component', ['accounts' => $accounts,'banks'=>$banks])->layout('layouts.base');

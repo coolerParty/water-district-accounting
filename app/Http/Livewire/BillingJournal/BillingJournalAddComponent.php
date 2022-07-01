@@ -63,6 +63,8 @@ class BillingJournalAddComponent extends Component
 
     public function store()
     {
+        $this->confirmation();
+
         $this->validate([
             'zone'          => ['required', 'numeric', 'min:0'],
             'metered_sales' => ['required', 'numeric', 'min:0'],
@@ -117,8 +119,17 @@ class BillingJournalAddComponent extends Component
         }
     }
 
+    public function confirmation()
+    {
+        if (!auth()->user()->can('billing-create')) {
+            abort(404);
+        }
+    }
+
     public function render()
     {
+        $this->confirmation();
+
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         return view('livewire.billing-journal.billing-journal-add-component', ['accounts' => $accounts])->layout('layouts.base');
     }

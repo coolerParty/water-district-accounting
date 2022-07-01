@@ -5,7 +5,7 @@
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-2xl font-semibold whitespace-nowrap">Cash Receipt Journal</h1>
         <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
-        @can('user-create')
+        @can('cash-receipt-journal-create')
             <a href="{{ route('cashreceiptjournal.create') }}"
                 class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
                 <span>
@@ -184,11 +184,11 @@
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('user-edit')
+                                    @can('cash-receipt-journal-edit')
                                     <x-link-success href="{{ route('cashreceiptjournal.edit',['id'=>$cashreceipt->cid]) }}" >
                                         Edit
                                     </x-link-success>
-                                    @can('user-delete')
+                                    @can('cash-receipt-journal-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this account chart?') || event.stopImmediatePropagation()"

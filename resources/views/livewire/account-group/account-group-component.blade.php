@@ -5,7 +5,7 @@
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-2xl font-semibold whitespace-nowrap">Account Group</h1>
         <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
-        @can('user-create')
+        @can('account-group-create')
         <a href="{{ route('accountgroup.create') }}"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
@@ -161,10 +161,10 @@
                                     </div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('user-edit')
+                                    @can('account-group-edit')
                                     <x-link-success href="{{ route('accountgroup.edit', ['id' => $account->id]) }}"> Edit
                                     </x-link-success>
-                                    @can('user-delete')
+                                    @can('account-group-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this Account Group?') || event.stopImmediatePropagation()"

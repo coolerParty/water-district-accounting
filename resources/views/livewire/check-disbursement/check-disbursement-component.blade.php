@@ -4,7 +4,7 @@
     <div
         class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-2xl font-semibold whitespace-nowrap">Check Disbursement Journal</h1>
-        @can('user-create')
+        @can('disbursement-journal-create')
         <a href="{{ route('checkdisbursementjournal.create') }}"
             class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
             <span>
@@ -168,12 +168,12 @@
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
-                                    @can('user-edit')
+                                    @can('disbursement-journal-edit')
                                     <x-link-success
                                         href="{{ route('checkdisbursementjournal.edit',['id'=>$disbursement->cdid]) }}">
                                         Edit
                                     </x-link-success>
-                                    @can('user-delete')
+                                    @can('disbursement-journal-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this account chart?') || event.stopImmediatePropagation()"

@@ -58,7 +58,7 @@ class BankEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('user-create')) {
+        if (!auth()->user()->can('bank-edit')) {
             abort(404);
         }
     }

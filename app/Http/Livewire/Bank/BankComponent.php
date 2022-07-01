@@ -9,7 +9,7 @@ class BankComponent extends Component
 {
     public function destroy($id)
     {
-        if (!auth()->user()->can('user-delete')) {
+        if (!auth()->user()->can('bank-delete')) {
             abort(404);
         }
         $bank = Bank::find($id);
@@ -21,7 +21,7 @@ class BankComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('user-show')) {
+        if (!auth()->user()->can('bank-show')) {
             abort(404);
         }
 

@@ -11,6 +11,10 @@ class GeneralJournalComponent extends Component
 {
     public function destroy($gid, $jid)
     {
+        if (!auth()->user()->can('general-journal-delete')) {
+            abort(404);
+        }
+
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
 
@@ -23,6 +27,11 @@ class GeneralJournalComponent extends Component
 
     public function render()
     {
+
+        if (!auth()->user()->can('general-journal-show')) {
+            abort(404);
+        }
+
         $generalJournals = DB::table('general_journals')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'general_journals.id')
             ->select('general_journals.id as gid', 'gen_number', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno', 'journal_entry_vouchers.id as jid', 'journal_entry_vouchers.particulars as part')

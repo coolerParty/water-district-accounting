@@ -29,11 +29,15 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function getMaxJevNumber()
     {
+        $this->confirmation();
+
         $this->jev_no = JournalEntryVoucher::where('id', '<>', $this->jev_id)->max('jev_no') + 1;
     }
 
     public function showAddTransaction()
     {
+        $this->confirmation();
+
         $this->resetAddEdit();
         $this->enableEdit = false;
         $this->enableAdd = true;
@@ -41,6 +45,8 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function showEditForm($id)
     {
+        $this->confirmation();
+
         $this->resetAddEdit();
         $this->enableEdit = true;
         $this->enableAdd = false;
@@ -53,6 +59,8 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function removeTransaction($id)
     {
+        $this->confirmation();
+
         $t = Transaction::findOrFail($id);
         $t->delete();
 
@@ -61,6 +69,8 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function resetAddEdit()
     {
+        $this->confirmation();
+
         $this->enableEdit     = false;
         $this->enableAdd      = false;
         $this->transaction_id = null;
@@ -92,6 +102,8 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function update()
     {
+        $this->confirmation();
+
         $this->validate([
             'rsmi_no' => ['required', 'numeric', 'min:0'],
         ]);
@@ -119,6 +131,8 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function addTransaction()
     {
+        $this->confirmation();
+
         $this->validate([
             'accountCode' => ['required', 'integer'],
             'debit'       => ['required', 'numeric', 'min:0'],
@@ -138,6 +152,8 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function updateTransaction()
     {
+        $this->confirmation();
+
         $this->validate([
             'accountCode' => ['required', 'integer'],
             'debit'       => ['required', 'numeric', 'min:0'],
@@ -154,8 +170,17 @@ class MaterialIssuedJournalEditComponent extends Component
         $this->resetAddEdit();
     }
 
+    public function confirmation()
+    {
+        if (!auth()->user()->can('material-journal-edit')) {
+            abort(404);
+        }
+    }
+
     public function render()
     {
+        $this->confirmation();
+
         $transactions = Transaction::with('accountChart')->select('id', 'accountchart_id', 'journal_entry_voucher_id', 'debit', 'credit')->where('journal_entry_voucher_id', $this->jev_id)->get();
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         return view('livewire.material-issued-journal.material-issued-journal-edit-component', ['transactions' => $transactions, 'accounts' => $accounts])->layout('layouts.base');

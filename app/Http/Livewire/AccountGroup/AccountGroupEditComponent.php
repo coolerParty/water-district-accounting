@@ -59,7 +59,7 @@ class AccountGroupEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('user-create')) {
+        if (!auth()->user()->can('account-group-edit')) {
             abort(404);
         }
     }
@@ -67,6 +67,7 @@ class AccountGroupEditComponent extends Component
     public function render()
     {
         $this->confirmation();
+
         return view('livewire.account-group.account-group-edit-component')->layout('layouts.base');
     }
 }

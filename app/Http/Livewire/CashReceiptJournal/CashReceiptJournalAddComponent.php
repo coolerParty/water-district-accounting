@@ -61,6 +61,9 @@ class CashReceiptJournalAddComponent extends Component
 
     public function store()
     {
+
+        $this->confirmation();
+
         $this->validate([
             'official_receipt' => ['required', 'min:5', 'max:150'],
             'a_receipt'        => ['required', 'min:5', 'max:150'],
@@ -116,8 +119,18 @@ class CashReceiptJournalAddComponent extends Component
 
     }
 
+    public function confirmation()
+    {
+        if (!auth()->user()->can('cash-receipt-journal-create')) {
+            abort(404);
+        }
+    }
+
+
     public function render()
     {
+        $this->confirmation();
+
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         return view('livewire.cash-receipt-journal.cash-receipt-journal-add-component', ['accounts' => $accounts])->layout('layouts.base');
     }

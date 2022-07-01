@@ -29,6 +29,8 @@ class GeneralJournalAddComponent extends Component
 
     public function getMaxGJNumber()
     {
+        $this->confirmation();
+
         $this->gen_number = GeneralJournal::max('gen_number') + 1;
     }
 
@@ -53,6 +55,8 @@ class GeneralJournalAddComponent extends Component
 
     public function store()
     {
+        $this->confirmation();
+
         $this->validate([
             'gen_number' => ['required', 'numeric', 'min:0'],
             'g_particulars' => ['required', 'string', 'min:5','max:200'],
@@ -92,8 +96,17 @@ class GeneralJournalAddComponent extends Component
         }
     }
 
+    public function confirmation()
+    {
+        if (!auth()->user()->can('general-journal-create')) {
+            abort(404);
+        }
+    }
+
     public function render()
     {
+        $this->confirmation();
+
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         return view('livewire.general-journal.general-journal-add-component',['accounts'=>$accounts])->layout('layouts.base');
     }

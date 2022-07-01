@@ -6,7 +6,7 @@
 <div class="flex flex-col items-start justify-between pb-6 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
     <h1 class="text-2xl font-semibold whitespace-nowrap">Annual Budget</h1>
     <!-- <a href="https://github.com/Kamona-WD/starter-dashboard-layout" target="_blank" class=" -->
-    @can('user-create')
+    @can('annual-budget-create')
     <!-- Modal Start-->
     <div x-data="{
         open: false,
@@ -226,11 +226,11 @@
                                 <div class="text-sm font-medium text-gray-900">{{ number_format($budget->amount,2) }}</div>
                             </td>
                             <td class="px-3 py-1 text-sm font-medium text-right whitespace-nowrap">
-                                @can('user-edit')
+                                @can('annual-budget-edit')
                                 <x-link-success href="{{ route('annual-budget.edit', $budget) }}" class="">Edit
                                 </x-link-success>
                                 @endcan
-                                @can('user-delete')
+                                @can('annual-budget-delete')
                                 <form method="POST" action="{{ route('annual-budget.destroy', $budget) }}"
                                     class="inline-block">
                                     @csrf

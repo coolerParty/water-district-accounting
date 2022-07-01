@@ -51,7 +51,7 @@ class AccountGroupAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('user-create')) {
+        if (!auth()->user()->can('account-group-create')) {
             abort(404);
         }
     }

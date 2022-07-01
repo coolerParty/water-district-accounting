@@ -64,7 +64,7 @@ class AccountChartEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('user-create')) {
+        if (!auth()->user()->can('account-chart-create')) {
             abort(404);
         }
     }

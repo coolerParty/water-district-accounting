@@ -10,7 +10,7 @@ class AnnualBudgetController extends Controller
 {
     public function index(Request $request)
     {
-        $this->authorize('user-show');
+        $this->authorize('annual-budget-show');
 
         $budgets = AnnualBudget::with('accountChart')->paginate(10);
 
@@ -21,7 +21,7 @@ class AnnualBudgetController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('user-create');
+        $this->authorize('annual-budget-create');
 
         $this->validate($request, [
             'amount'      => ['required', 'numeric'],
@@ -41,7 +41,7 @@ class AnnualBudgetController extends Controller
 
     public function edit($id)
     {
-        $this->authorize('permission-edit');
+        $this->authorize('annual-budget-edit');
 
         $budget = AnnualBudget::find($id);
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
@@ -50,7 +50,7 @@ class AnnualBudgetController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->authorize('permission-edit');
+        $this->authorize('annual-budget-edit');
 
         $this->validate($request, [
             'amount'      => ['required', 'numeric'],
@@ -70,7 +70,7 @@ class AnnualBudgetController extends Controller
 
     public function destroy($id)
     {
-        $this->authorize('permission-delete');
+        $this->authorize('annual-budget-delete');
 
         AnnualBudget::find($id)->delete();
 

@@ -9,7 +9,7 @@ class AccountGroupComponent extends Component
 {
     public function destroy($id)
     {
-        if (!auth()->user()->can('user-delete')) {
+        if (!auth()->user()->can('account-group-delete')) {
             abort(404);
         }
         $account = AccountGroup::find($id);
@@ -21,7 +21,7 @@ class AccountGroupComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('user-show')) {
+        if (!auth()->user()->can('account-group-show')) {
             abort(404);
         }
 

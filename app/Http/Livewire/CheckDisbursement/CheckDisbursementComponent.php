@@ -11,6 +11,10 @@ class CheckDisbursementComponent extends Component
 {
     public function destroy($cdid, $jid)
     {
+        if (!auth()->user()->can('disbursement-journal-delete')) {
+            abort(404);
+        }
+
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
 
@@ -23,6 +27,10 @@ class CheckDisbursementComponent extends Component
 
     public function render()
     {
+        if (!auth()->user()->can('disbursement-journal-show')) {
+            abort(404);
+        }
+
         $disbursements = DB::table('disbursements')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'disbursements.id')
             ->select(
