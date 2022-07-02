@@ -35,6 +35,9 @@ use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalAddComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalEditComponent;
 use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupAddComponent;
+use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupComponent;
+use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupEditComponent;
 use App\Http\Livewire\Users\UserAddComponent;
 use App\Http\Livewire\Users\UserComponent;
 use App\Http\Livewire\Users\UserEditComponent;
@@ -84,6 +87,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/major-account-group', MajorAccountGroupComponent::class)->name('majoraccountgroup.index');
     Route::get('/major-account-group/create', MajorAccountGroupAddComponent::class)->name('majoraccountgroup.create');
     Route::get('/major-account-group/{id}/edit', MajorAccountGroupEditComponent::class)->name('majoraccountgroup.edit');
+
+    Route::get('/sub-major-account-group', SubMajorAccountGroupComponent::class)->name('submajoraccountgroup.index');
+    Route::get('/sub-major-account-group/create', SubMajorAccountGroupAddComponent::class)->name('submajoraccountgroup.create');
+    Route::get('/sub-major-account-group/{id}/edit', SubMajorAccountGroupEditComponent::class)->name('submajoraccountgroup.edit');
 
     Route::get('/account-chart', AccountChartComponent::class)->name('accountchart.index');
     Route::get('/account-chart/create', AccountChartAddComponent::class)->name('accountchart.create');
