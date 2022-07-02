@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Livewire\AccountGroup;
+namespace App\Http\Livewire\MajorAccountGroup;
 
-use App\Models\AccountGroup;
+use App\Models\MajorAccountGroup;
 use Livewire\Component;
 
-class AccountGroupAddComponent extends Component
+class MajorAccountGroupAddComponent extends Component
 {
     public $seq_no;
     public $code;
@@ -16,7 +16,7 @@ class AccountGroupAddComponent extends Component
         $this->validateOnly($fields, [
             'seq_no' => ['nullable', 'numeric'],
             'code'   => ['required', 'string'],
-            'name'   => ['required', 'min:3','string','unique:account_groups'],
+            'name'   => ['required', 'min:3','string','unique:major_account_groups'],
         ]);
     }
 
@@ -27,16 +27,16 @@ class AccountGroupAddComponent extends Component
         $this->validate([
             'seq_no' => ['nullable', 'numeric'],
             'code'   => ['required', 'string'],
-            'name'   => ['required', 'min:3','string','unique:account_groups'],
+            'name'   => ['required', 'min:3','string','unique:major_account_groups'],
         ]);
 
-        $account         = new AccountGroup();
+        $account         = new MajorAccountGroup();
         $account->seq_no = $this->seq_no;
         $account->code   = $this->code;
         $account->name   = $this->name;
         $account->save();
 
-        return redirect()->route('accountgroup.index')
+        return redirect()->route('majoraccountgroup.index')
             ->with('create-success', 'Account Group "' . $this->name . '" created successfully.');
     }
 
@@ -51,6 +51,6 @@ class AccountGroupAddComponent extends Component
     {
         $this->confirmation();
 
-        return view('livewire.account-group.account-group-add-component')->layout('layouts.base');
+        return view('livewire.major-account-group.major-account-group-add-component')->layout('layouts.base');
     }
 }

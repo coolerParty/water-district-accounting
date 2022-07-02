@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Livewire\AccountGroup;
+namespace App\Http\Livewire\MajorAccountGroup;
 
-use App\Models\AccountGroup;
+use App\Models\MajorAccountGroup;
 use Livewire\Component;
 
-class AccountGroupComponent extends Component
+class MajorAccountGroupComponent extends Component
 {
     public function destroy($id)
     {
         if (!auth()->user()->can('account-group-delete')) {
             abort(404);
         }
-        $account = AccountGroup::find($id);
+        $account = MajorAccountGroup::find($id);
         $account->delete();
 
         return redirect()->route('users.index')
@@ -25,8 +25,7 @@ class AccountGroupComponent extends Component
             abort(404);
         }
 
-        $accounts = AccountGroup::select('id', 'code', 'name', 'seq_no')->paginate(10);
-
-        return view('livewire.account-group.account-group-component', ['accounts' => $accounts])->layout('layouts.base');
+        $accounts = MajorAccountGroup::select('id', 'code', 'name', 'seq_no')->paginate(10);
+        return view('livewire.major-account-group.major-account-group-component',['accounts'=>$accounts])->layout('layouts.base');
     }
 }

@@ -22,8 +22,8 @@ return new class extends Migration
             $table->BigInteger('submjracctgrp_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('acctgrp_id')->references('id')->on('account_groups');
-            $table->foreign('mjracctgrp_id')->references('id')->on('account_groups');
-            $table->foreign('submjracctgrp_id')->references('id')->on('account_groups');
+            $table->foreign('mjracctgrp_id')->references('id')->on('major_account_groups');
+            $table->foreign('submjracctgrp_id')->references('id')->on('sub_major_account_groups');
         });
     }
 

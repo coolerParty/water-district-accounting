@@ -18,7 +18,7 @@
             <span>Back</span>
         </a>
     </div>
-    <div class="max-w-full max-h-screen md:bg-gray-300 md:p-4">
+    <div class="max-w-full max-h-screen md:p-4">
 
         <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
             <x-jet-validation-errors class="mb-4" />

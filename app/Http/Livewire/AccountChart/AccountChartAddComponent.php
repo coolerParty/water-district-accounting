@@ -65,7 +65,7 @@ class AccountChartAddComponent extends Component
     {
         $this->confirmation();
 
-        $accountgroups = AccountGroup::select('id','code','name','type')->orderBy('seq_no','ASC')->orderBy('name','ASC')->get();
+        $accountgroups = AccountGroup::select('id','code','name')->orderBy('seq_no','ASC')->orderBy('name','ASC')->get();
 
         return view('livewire.account-chart.account-chart-add-component', ['accountgroups'=>$accountgroups])->layout('layouts.base');
     }

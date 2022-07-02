@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Livewire\AccountGroup;
+namespace App\Http\Livewire\MajorAccountGroup;
 
-use App\Models\AccountGroup;
+use App\Models\MajorAccountGroup;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 
-class AccountGroupEditComponent extends Component
+class MajorAccountGroupEditComponent extends Component
 {
     public $account_id;
     public $seq_no;
@@ -15,7 +15,7 @@ class AccountGroupEditComponent extends Component
 
     public function mount($id)
     {
-        $account = AccountGroup::findOrFail($id);
+        $account = MajorAccountGroup::findOrFail($id);
         $this->account_id = $account->id;
         $this->seq_no = $account->seq_no;
         $this->code = $account->code;
@@ -28,7 +28,7 @@ class AccountGroupEditComponent extends Component
         $this->validateOnly($fields, [
             'seq_no' => ['nullable', 'numeric'],
             'code'   => ['required', 'string'],
-            'name'   => ['required', 'min:3','string', Rule::unique('account_groups')->ignore($this->account_id)],
+            'name'   => ['required', 'min:3','string', Rule::unique('major_account_groups')->ignore($this->account_id)],
         ]);
     }
 
@@ -39,16 +39,16 @@ class AccountGroupEditComponent extends Component
         $this->validate([
             'seq_no' => ['nullable', 'numeric'],
             'code'   => ['required', 'string'],
-            'name'   => ['required', 'min:3','string', Rule::unique('account_groups')->ignore($this->account_id)],
+            'name'   => ['required', 'min:3','string', Rule::unique('major_account_groups')->ignore($this->account_id)],
         ]);
 
-        $account         = AccountGroup::find($this->account_id);
+        $account         = MajorAccountGroup::find($this->account_id);
         $account->seq_no = $this->seq_no;
         $account->code   = $this->code;
         $account->name   = $this->name;
         $account->save();
 
-        return redirect()->route('accountgroup.index')
+        return redirect()->route('majoraccountgroup.index')
             ->with('update-success', 'Account Group "' . $this->name . '" updated successfully.');
     }
 
@@ -63,6 +63,6 @@ class AccountGroupEditComponent extends Component
     {
         $this->confirmation();
 
-        return view('livewire.account-group.account-group-edit-component')->layout('layouts.base');
+        return view('livewire.major-account-group.major-account-group-edit-component')->layout('layouts.base');
     }
 }

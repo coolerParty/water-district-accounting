@@ -18,7 +18,7 @@
             <span>Back</span>
         </a>
     </div>
-    <div class="max-w-full max-h-screen md:bg-gray-300 md:p-4">
+    <div class="max-w-full max-h-screen md:p-4">
 
         <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
             <x-jet-validation-errors class="mb-4" />
@@ -49,10 +49,8 @@
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
                             <option value="">Select Account group</option>
                             @foreach($accountgroups as $accountgroup)
-                            @if($accountgroup->type == 1)
                             <option value="{{ $accountgroup->id }}">{{ $accountgroup->code . ' - ' . $accountgroup->name
                                 }}</option>
-                            @endif
                             @endforeach
                         </select>
                     </div>
@@ -66,10 +64,8 @@
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
                             <option value="">Select Major Account group</option>
                             @foreach($accountgroups as $accountgroup)
-                            @if($accountgroup->type == 2)
                             <option value="{{ $accountgroup->id }}">{{ $accountgroup->code . ' - ' . $accountgroup->name
                                 }}</option>
-                            @endif
                             @endforeach
                         </select>
                     </div>
@@ -84,10 +80,8 @@
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
                             <option value="">Select Sub Major Account group</option>
                             @foreach($accountgroups as $accountgroup)
-                            @if($accountgroup->type == 3)
                             <option value="{{ $accountgroup->id }}">{{ $accountgroup->code . ' - ' . $accountgroup->name
                                 }}</option>
-                            @endif
                             @endforeach
                         </select>
                     </div>

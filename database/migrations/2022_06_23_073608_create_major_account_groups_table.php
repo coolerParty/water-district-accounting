@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('account_groups', function (Blueprint $table) {
+        Schema::create('major_account_groups', function (Blueprint $table) {
             $table->id();
             $table->string('code');
             $table->string('name')->unique();
             $table->string('seq_no')->nullable();
-            // $table->string('type'); // 1: Account Group, 2: Major Account Group, 3: Sub Major Account Group,
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('account_groups');
+        Schema::dropIfExists('major_account_groups');
     }
 };

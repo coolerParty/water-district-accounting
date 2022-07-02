@@ -72,7 +72,7 @@ class AccountChartEditComponent extends Component
     public function render()
     {
         $this->confirmation();
-        $accountgroups = AccountGroup::select('id', 'code', 'name', 'type')->orderBy('seq_no', 'ASC')->orderBy('name', 'ASC')->get();
+        $accountgroups = AccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('name', 'ASC')->get();
         return view('livewire.account-chart.account-chart-edit-component', ['accountgroups' => $accountgroups])->layout('layouts.base');
     }
 }

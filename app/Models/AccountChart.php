@@ -17,11 +17,11 @@ class AccountChart extends Model
 
     public function MajorAccountGroup()
     {
-        return $this->belongsTo(AccountGroup::Class,'mjracctgrp_id');
+        return $this->belongsTo(MajorAccountGroup::Class,'mjracctgrp_id');
     }
 
     public function SubMajorAccountGroup()
     {
-        return $this->belongsTo(AccountGroup::Class,'submjracctgrp_id');
+        return $this->belongsTo(SubMajorAccountGroup::Class,'submjracctgrp_id');
     }
 }

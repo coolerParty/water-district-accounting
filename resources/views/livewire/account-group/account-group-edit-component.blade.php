@@ -17,7 +17,7 @@
             <span>Back</span>
         </a>
     </div>
-    <div class="max-w-full max-h-screen md:bg-gray-300 md:p-4">
+    <div class="max-w-full max-h-screen md:p-4">
 
         <section class="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
             <x-jet-validation-errors class="mb-4" />
@@ -47,19 +47,6 @@
                         <input id="name" type="text" name="name" value="{{ old('name') }}" wire:model="name" required
                             autofocus autocomplete="name"
                             class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
-                    </div>
-                </div>
-
-                <div class="mt-4">
-                    <div>
-                        <label for="type" class="text-gray-700 dark:text-gray-200">type</label>
-                        <select id="type" name="type" autocomplete="type-name" wire:model="type"
-                            class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
-                            <option value="">Select Type</option>
-                            <option value="1">Account Group</option>
-                            <option value="2">Major Account Group</option>
-                            <option value="3">Sub Major Account Group</option>
-                        </select>
                     </div>
                 </div>
 
