@@ -4,12 +4,26 @@ namespace App\Http\Livewire\MajorAccountGroup;
 
 use App\Models\MajorAccountGroup;
 use Livewire\Component;
+use App\Imports\MajorAccountGroupImport;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MajorAccountGroupAddComponent extends Component
 {
     public $seq_no;
     public $code;
     public $name;
+
+    use WithFileUploads;
+    public $file;
+
+    public function importFile()
+    {
+        Excel::queueImport(new MajorAccountGroupImport, $this->file);
+
+        return redirect()->route('majoraccountgroup.index')
+            ->with('create-success', 'File Uploaded successfully.');
+    }
 
     public function updated($fields)
     {

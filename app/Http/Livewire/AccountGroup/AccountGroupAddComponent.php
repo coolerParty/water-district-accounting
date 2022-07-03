@@ -2,14 +2,28 @@
 
 namespace App\Http\Livewire\AccountGroup;
 
+use App\Imports\AccountGroupImport;
 use App\Models\AccountGroup;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AccountGroupAddComponent extends Component
 {
     public $seq_no;
     public $code;
     public $name;
+
+    use WithFileUploads;
+    public $file;
+
+    public function importFile()
+    {
+        Excel::queueImport(new AccountGroupImport, $this->file);
+
+        return redirect()->route('accountgroup.index')
+            ->with('create-success', 'File Uploaded successfully.');
+    }
 
     public function updated($fields)
     {

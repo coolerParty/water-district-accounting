@@ -10,4 +10,8 @@ class AccountGroup extends Model
     use HasFactory;
 
     protected $table = "account_groups";
+
+    protected $fillable = [
+        'code', 'name','seq_no'
+    ];
 }
