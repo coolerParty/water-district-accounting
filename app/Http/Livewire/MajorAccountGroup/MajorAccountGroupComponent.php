@@ -25,7 +25,7 @@ class MajorAccountGroupComponent extends Component
             abort(404);
         }
 
-        $accounts = MajorAccountGroup::select('id', 'code', 'name', 'seq_no')->paginate(10);
+        $accounts = MajorAccountGroup::select('id', 'code', 'name', 'seq_no')->orderBy('code','ASC')->paginate(10);
         return view('livewire.major-account-group.major-account-group-component',['accounts'=>$accounts])->layout('layouts.base');
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->string('name')->unique();
-            $table->string('seq_no')->nullable();
+            $table->integer('seq_no')->nullable();
             // $table->string('type'); // 1: Account Group, 2: Major Account Group, 3: Sub Major Account Group,
             $table->timestamps();
         });

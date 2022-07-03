@@ -23,7 +23,7 @@
         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
                 <div class="overflow-hidden border-b border-gray-200 rounded-md shadow-md">
-                    <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
+                    <table class="min-w-full overflow-x-scroll divide-y divide-gray-200 table-auto">
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
@@ -156,13 +156,13 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->name }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->accountGroup->name }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->MajorAccountGroup->name }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4 ">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->SubMajorAccountGroup->name }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">

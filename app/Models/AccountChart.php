@@ -10,6 +10,10 @@ class AccountChart extends Model
     use HasFactory;
     protected $table = "account_charts";
 
+    protected $fillable = [
+        'code', 'name','acctgrp_id','mjracctgrp_id','submjracctgrp_id'
+    ];
+
     public function accountGroup()
     {
         return $this->belongsTo(AccountGroup::Class,'acctgrp_id');

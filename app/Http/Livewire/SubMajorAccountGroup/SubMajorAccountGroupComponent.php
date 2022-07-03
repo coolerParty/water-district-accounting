@@ -25,7 +25,7 @@ class SubMajorAccountGroupComponent extends Component
             abort(404);
         }
 
-        $accounts = SubMajorAccountGroup::select('id', 'code', 'name', 'seq_no')->paginate(10);
+        $accounts = SubMajorAccountGroup::select('id', 'code', 'name', 'seq_no')->orderBy('seq_no','ASC')->paginate(10);
 
         return view('livewire.sub-major-account-group.sub-major-account-group-component',['accounts'=>$accounts])->layout('layouts.base');
     }

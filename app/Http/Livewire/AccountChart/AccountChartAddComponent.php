@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\AccountChart;
 
+use App\Imports\AccountChartImport;
 use App\Models\AccountChart;
 use App\Models\AccountGroup;
 use Livewire\Component;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AccountChartAddComponent extends Component
 {
@@ -13,6 +16,23 @@ class AccountChartAddComponent extends Component
     public $acctgrp_id;
     public $mjracctgrp_id;
     public $submjracctgrp_id;
+
+    use WithFileUploads;
+    public $file;
+
+    public function importFile()
+    {
+        // Excel::queueImport(new AccountChartImport, $this->file);
+        $import = new AccountChartImport();
+        $import->import($this->file);
+
+        if($import->failures()->isNotEmpty()){
+            return back()->withFailures($import->failures());
+        }
+
+        return redirect()->route('accountchart.create')
+            ->with('create-success', 'File Uploaded successfully.');
+    }
 
     public function mount()
     {

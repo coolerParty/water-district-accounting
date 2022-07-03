@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('code');
             $table->string('name')->unique();
-            $table->string('seq_no')->nullable();
+            $table->integer('seq_no')->nullable();
             $table->timestamps();
         });
     }

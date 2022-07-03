@@ -27,7 +27,7 @@
                             <tr>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    Sequence No
+                                    ID
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -36,6 +36,10 @@
                                 <th scope="col"
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Name
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Sequence No
                                 </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     <span class="sr-only">Action</span>
@@ -135,13 +139,16 @@
                             @forelse($accounts as $account)
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $account->seq_no }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $account->id }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->code }}</div>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->name }}</div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="text-sm font-medium text-gray-900">{{ $account->seq_no }}</div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('account-group-edit')
