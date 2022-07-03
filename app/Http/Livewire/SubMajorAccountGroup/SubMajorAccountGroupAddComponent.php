@@ -4,12 +4,26 @@ namespace App\Http\Livewire\SubMajorAccountGroup;
 
 use App\Models\SubMajorAccountGroup;
 use Livewire\Component;
+use App\Imports\SubMajorAccountGroupImport;
+use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SubMajorAccountGroupAddComponent extends Component
 {
     public $seq_no;
     public $code;
     public $name;
+
+    use WithFileUploads;
+    public $file;
+
+    public function importFile()
+    {
+        Excel::queueImport(new SubMajorAccountGroupImport, $this->file);
+
+        return redirect()->route('submajoraccountgroup.index')
+            ->with('create-success', 'File Uploaded successfully.');
+    }
 
     public function updated($fields)
     {

@@ -10,4 +10,9 @@ class SubMajorAccountGroup extends Model
     use HasFactory;
 
     protected $table = "sub_major_account_groups";
+
+    protected $fillable = [
+        'code', 'name','seq_no'
+    ];
+
 }
