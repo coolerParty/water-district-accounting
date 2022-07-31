@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('disbursements', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('journal_entry_voucher_id')->unsigned();
             $table->integer('dv_number');
             $table->string('payee');
             $table->text('particulars');
@@ -33,6 +34,7 @@ return new class extends Migration
             $table->boolean('check_withdrawn')->default(false);
             $table->bigInteger('bank_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('journal_entry_voucher_id')->references('id')->on('journal_entry_vouchers')->onDelete('cascade');
             $table->foreign('bank_id')->references('id')->on('banks');
         });
     }

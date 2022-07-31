@@ -65,14 +65,9 @@ class GeneralJournalAddComponent extends Component
         try {
             DB::transaction(function () {
 
-                $gj              = new GeneralJournal();
-                $gj->gen_number  = $this->gen_number;
-                $gj->particulars = $this->g_particulars;
-                $gj->save();
 
                 $jev              = new JournalEntryVoucher();
                 $jev->jev_no      = JournalEntryVoucher::max('jev_no') + 1;
-                $jev->code_id     = $gj->id;
                 $jev->type        = 5;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;
@@ -86,6 +81,12 @@ class GeneralJournalAddComponent extends Component
                     $tran->credit                   = $journal['credit'];
                     $tran->save();
                 }
+
+                $gj                           = new GeneralJournal();
+                $gj->journal_entry_voucher_id = $jev->id;
+                $gj->gen_number               = $this->gen_number;
+                $gj->particulars              = $this->g_particulars;
+                $gj->save();
 
                 return redirect()->route('generaljournal.index')
                     ->with('create-success', 'General Journal "' . $gj->gen_number  . '" created successfully.');

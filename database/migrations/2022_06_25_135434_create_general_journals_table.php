@@ -15,9 +15,11 @@ return new class extends Migration
     {
         Schema::create('general_journals', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('journal_entry_voucher_id')->unsigned();
             $table->integer('gen_number');
             $table->text('particulars');
             $table->timestamps();
+            $table->foreign('journal_entry_voucher_id')->references('id')->on('journal_entry_vouchers')->onDelete('cascade');
         });
     }
 

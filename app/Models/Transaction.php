@@ -9,6 +9,8 @@ class Transaction extends Model
 {
     use HasFactory;
 
+    protected $table = "transactions";
+
     public function accountChart()
     {
         return $this->belongsTo(AccountChart::Class,'accountchart_id');

@@ -33,7 +33,7 @@ class GeneralJournalComponent extends Component
         }
 
         $generalJournals = DB::table('general_journals')
-            ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'general_journals.id')
+            ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'general_journals.journal_entry_voucher_id')
             ->select('general_journals.id as gid', 'gen_number', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno', 'journal_entry_vouchers.id as jid', 'journal_entry_vouchers.particulars as part')
             ->orderby('journal_entry_vouchers.jv_date', 'DESC')
             ->orderby('journal_entry_vouchers.jev_no', 'ASC')

@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('journal_entry_vouchers', function (Blueprint $table) {
             $table->id();
             $table->integer('jev_no');
-            $table->bigInteger('code_id');
             $table->integer('type');
             $table->date('jv_date');
             $table->text('particulars');

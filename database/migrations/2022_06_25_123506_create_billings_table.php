@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('billings', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('journal_entry_voucher_id')->unsigned();
             $table->string('zone');
             $table->integer('metered_sales');
             $table->integer('residential');
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->integer('comm_c');
             $table->integer('government');
             $table->timestamps();
+            $table->foreign('journal_entry_voucher_id')->references('id')->on('journal_entry_vouchers')->onDelete('cascade');
         });
     }
 

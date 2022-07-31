@@ -33,11 +33,11 @@ class CashReceiptJournalComponent extends Component
         }
 
         $cashreceipts = DB::table('cash_receipts')
-            ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'cash_receipts.id')
+            ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'cash_receipts.journal_entry_voucher_id')
             ->select('cash_receipts.id as cid', 'official_receipt', 'a_receipt', 'current', 'penalty', 'arrears_cy', 'arrears_py', 'cod_prev_day', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno','journal_entry_vouchers.id as jid','journal_entry_vouchers.particulars as part')
             ->orderby('journal_entry_vouchers.jv_date', 'DESC')
             ->orderby('journal_entry_vouchers.jev_no', 'ASC')
-            ->where('type',2)
+            ->where('type',1)
             ->paginate(10);
         return view('livewire.cash-receipt-journal.cash-receipt-journal-component', ['cashreceipts' => $cashreceipts])->layout('layouts.base');
     }

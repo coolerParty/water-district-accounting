@@ -15,4 +15,24 @@ class JournalEntryVoucher extends Model
     public function transactions(){
         return $this->HasMany (Transaction::class,'journal_entry_voucher_id')->get();
     }
+
+    public function cashReciept(){
+        return $this->hasOne (CashReceipt::class,'journal_entry_voucher_id')->where('type',1)->get();
+    }
+
+    public function billing(){
+        return $this->hasOne (Billing::class,'journal_entry_voucher_id')->where('type',2)->get();
+    }
+
+    public function materialIssuedJournal(){
+        return $this->hasOne (Billing::class,'journal_entry_voucher_id')->where('type',3)->get();
+    }
+
+    public function disbursement(){
+        return $this->hasOne (Disbursement::class,'journal_entry_voucher_id')->where('type',4)->get();
+    }
+
+    public function generalJournal(){
+        return $this->hasOne (GeneralJournal::class,'journal_entry_voucher_id')->where('type',5)->get();
+    }
 }

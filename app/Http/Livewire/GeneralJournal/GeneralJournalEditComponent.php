@@ -90,12 +90,12 @@ class GeneralJournalEditComponent extends Component
     public function mount($id)
     {
         $gj                  = GeneralJournal::findOrFail($id);
+        $this->jev_id        = $gj->journal_entry_voucher_id;
         $this->g_id          = $gj->id;
         $this->gen_number    = $gj->gen_number;
         $this->g_particulars = $gj->particulars;
 
-        $jev = JournalEntryVoucher::where('code_id', $this->g_id)->where('type', 5)->first();
-        $this->jev_id      = $jev->id;
+        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 5)->first();
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;

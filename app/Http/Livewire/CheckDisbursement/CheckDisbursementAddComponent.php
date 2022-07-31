@@ -101,6 +101,7 @@ class CheckDisbursementAddComponent extends Component
 
     public function store()
     {
+
         $this->confirmation();
 
         $this->validate([
@@ -129,29 +130,8 @@ class CheckDisbursementAddComponent extends Component
         try {
             DB::transaction(function () {
 
-                $disbursement                    = new Disbursement();
-                $disbursement->dv_number         = $this->dv_number;
-                $disbursement->payee             = $this->payee;
-                $disbursement->particulars       = $this->dvParticulars;
-                $disbursement->check_number      = $this->check_number;
-                $disbursement->amount            = $this->amount;
-                $disbursement->tin_no            = $this->tin_no;
-                $disbursement->address           = $this->address;
-                $disbursement->fpa               = $this->fpa;
-                $disbursement->type_of_fund      = $this->type_of_fund;
-                $disbursement->mds               = $this->mds;
-                $disbursement->commercial        = $this->commercial;
-                $disbursement->ada               = $this->ada;
-                $disbursement->cash_in_available = $this->cash_in_available;
-                $disbursement->subject_to_ada    = $this->subject_to_ada;
-                $disbursement->others            = $this->others;
-                $disbursement->check_withdrawn   = $this->check_withdrawn;
-                $disbursement->bank_id           = $this->bank_id;
-                $disbursement->save();
-
                 $jev              = new JournalEntryVoucher();
                 $jev->jev_no      = JournalEntryVoucher::max('jev_no') + 1;
-                $jev->code_id     = $disbursement->id;
                 $jev->type        = 4;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;
@@ -165,6 +145,27 @@ class CheckDisbursementAddComponent extends Component
                     $tran->credit                   = $journal['credit'];
                     $tran->save();
                 }
+
+                $disbursement                           = new Disbursement();
+                $disbursement->journal_entry_voucher_id = $jev->id;
+                $disbursement->dv_number                = $this->dv_number;
+                $disbursement->payee                    = $this->payee;
+                $disbursement->particulars              = $this->dvParticulars;
+                $disbursement->check_number             = $this->check_number;
+                $disbursement->amount                   = $this->amount;
+                $disbursement->tin_no                   = $this->tin_no;
+                $disbursement->address                  = $this->address;
+                $disbursement->fpa                      = $this->fpa;
+                $disbursement->type_of_fund             = $this->type_of_fund;
+                $disbursement->mds                      = $this->mds;
+                $disbursement->commercial               = $this->commercial;
+                $disbursement->ada                      = $this->ada;
+                $disbursement->cash_in_available        = $this->cash_in_available;
+                $disbursement->subject_to_ada           = $this->subject_to_ada;
+                $disbursement->others                   = $this->others;
+                $disbursement->check_withdrawn          = $this->check_withdrawn;
+                $disbursement->bank_id                  = $this->bank_id;
+                $disbursement->save();
 
                 return redirect()->route('checkdisbursementjournal.index')
                     ->with('create-success', 'Check Disbursement Journal "' . $disbursement->dv_number  . '" created successfully.');

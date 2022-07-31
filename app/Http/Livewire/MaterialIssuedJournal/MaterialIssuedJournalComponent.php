@@ -32,7 +32,7 @@ class MaterialIssuedJournalComponent extends Component
         }
 
         $mijs = DB::table('material_issued_journals')
-            ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'material_issued_journals.id')
+            ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'material_issued_journals.journal_entry_voucher_id')
             ->select('material_issued_journals.id as mid', 'rsmi_no', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno', 'journal_entry_vouchers.id as jid', 'journal_entry_vouchers.particulars as part')
             ->orderby('journal_entry_vouchers.jv_date', 'DESC')
             ->orderby('journal_entry_vouchers.jev_no', 'ASC')

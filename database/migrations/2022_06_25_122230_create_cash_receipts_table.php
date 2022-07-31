@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('cash_receipts', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('journal_entry_voucher_id')->unsigned();
             $table->string('official_receipt');
             $table->string('a_receipt'); // Acknowledgement Receipt
             $table->decimal('current', 11, 2);
@@ -23,6 +24,7 @@ return new class extends Migration
             $table->decimal('arrears_py', 11, 2);
             $table->decimal('cod_prev_day', 11, 2); // cash on hand previous day
             $table->timestamps();
+            $table->foreign('journal_entry_voucher_id')->references('id')->on('journal_entry_vouchers')->onDelete('cascade');
         });
     }
 

@@ -82,20 +82,8 @@ class BillingJournalAddComponent extends Component
         try {
             DB::transaction(function () {
 
-                $bill                = new Billing();
-                $bill->zone          = $this->zone;
-                $bill->metered_sales = $this->metered_sales;
-                $bill->residential   = $this->residential;
-                $bill->comm          = $this->comm;
-                $bill->comm_a        = $this->comm_a;
-                $bill->comm_b        = $this->comm_b;
-                $bill->comm_c        = $this->comm_c;
-                $bill->government    = $this->government;
-                $bill->save();
-
                 $jev              = new JournalEntryVoucher();
                 $jev->jev_no      = JournalEntryVoucher::max('jev_no') + 1;
-                $jev->code_id     = $bill->id;
                 $jev->type        = 2;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;
@@ -109,6 +97,18 @@ class BillingJournalAddComponent extends Component
                     $tran->credit                   = $journal['credit'];
                     $tran->save();
                 }
+
+                $bill                           = new Billing();
+                $bill->journal_entry_voucher_id = $jev->id;
+                $bill->zone                     = $this->zone;
+                $bill->metered_sales            = $this->metered_sales;
+                $bill->residential              = $this->residential;
+                $bill->comm                     = $this->comm;
+                $bill->comm_a                   = $this->comm_a;
+                $bill->comm_b                   = $this->comm_b;
+                $bill->comm_c                   = $this->comm_c;
+                $bill->government               = $this->government;
+                $bill->save();
 
                 return redirect()->route('billingjournal.index')
                     ->with('create-success', 'Billing Journal "' . $bill->zone  . '" created successfully.');

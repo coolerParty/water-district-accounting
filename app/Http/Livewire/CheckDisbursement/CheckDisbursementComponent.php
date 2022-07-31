@@ -32,7 +32,7 @@ class CheckDisbursementComponent extends Component
         }
 
         $disbursements = DB::table('disbursements')
-            ->join('journal_entry_vouchers', 'journal_entry_vouchers.code_id', '=', 'disbursements.id')
+            ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'disbursements.journal_entry_voucher_id')
             ->select(
                 'disbursements.id as cdid',
                 'dv_number',

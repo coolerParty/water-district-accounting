@@ -82,11 +82,11 @@ class MaterialIssuedJournalEditComponent extends Component
     public function mount($id)
     {
         $mij           = MaterialIssuedJournal::findOrFail($id);
+        $this->jev_id  = $mij->journal_entry_voucher_id;
         $this->mij_id  = $mij->id;
         $this->rsmi_no = $mij->rsmi_no;
 
-        $jev = JournalEntryVoucher::where('code_id', $this->mij_id)->where('type', 3)->first();
-        $this->jev_id      = $jev->id;
+        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 3)->first();
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;

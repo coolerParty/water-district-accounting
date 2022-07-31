@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('material_issued_journals', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('journal_entry_voucher_id')->unsigned();
             $table->string('rsmi_no');
             $table->timestamps();
+            $table->foreign('journal_entry_voucher_id')->references('id')->on('journal_entry_vouchers')->onDelete('cascade');
         });
     }
 

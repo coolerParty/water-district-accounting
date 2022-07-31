@@ -78,8 +78,9 @@ class BillingJournalEditComponent extends Component
 
     public function mount($id)
     {
-        $bj                    = Billing::findOrFail($id);
+        $bj                  = Billing::findOrFail($id);
         $this->bj_id         = $bj->id;
+        $this->jev_id        = $bj->journal_entry_voucher_id;
         $this->zone          = $bj->zone;
         $this->metered_sales = $bj->metered_sales;
         $this->residential   = $bj->residential;
@@ -89,8 +90,7 @@ class BillingJournalEditComponent extends Component
         $this->comm_c        = $bj->comm_c;
         $this->government    = $bj->government;
 
-        $jev = JournalEntryVoucher::where('code_id', $this->bj_id)->where('type', 2)->first();
-        $this->jev_id      = $jev->id;
+        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 2)->first();
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;

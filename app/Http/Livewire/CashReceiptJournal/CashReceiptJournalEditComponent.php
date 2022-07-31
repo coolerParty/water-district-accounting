@@ -86,6 +86,7 @@ class CashReceiptJournalEditComponent extends Component
     public function mount($id)
     {
         $crj                    = CashReceipt::findOrFail($id);
+        $this->jev_id           = $crj->journal_entry_voucher_id;
         $this->crj_id           = $crj->id;
         $this->official_receipt = $crj->official_receipt;
         $this->a_receipt        = $crj->a_receipt;
@@ -95,8 +96,7 @@ class CashReceiptJournalEditComponent extends Component
         $this->arrears_py       = $crj->arrears_py;
         $this->cod_prev_day     = $crj->cod_prev_day;
 
-        $jev = JournalEntryVoucher::where('code_id', $this->crj_id)->where('type', 1)->first();
-        $this->jev_id      = $jev->id;
+        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 1)->first();
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;

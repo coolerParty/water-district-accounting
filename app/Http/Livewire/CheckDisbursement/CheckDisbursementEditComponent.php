@@ -107,6 +107,7 @@ class CheckDisbursementEditComponent extends Component
     {
         $dv                      = Disbursement::findOrFail($id);
         $this->dv_id             = $dv->id;
+        $this->jev_id            = $dv->journal_entry_voucher_id;
         $this->dv_number         = $dv->dv_number;
         $this->payee             = $dv->payee;
         $this->dvParticulars     = $dv->particulars;
@@ -125,8 +126,7 @@ class CheckDisbursementEditComponent extends Component
         $this->check_withdrawn   = $dv->check_withdrawn;
         $this->bank_id           = $dv->bank_id;
 
-        $jev = JournalEntryVoucher::where('code_id', $this->dv_id)->where('type', 4)->first();
-        $this->jev_id      = $jev->id;
+        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 4)->first();
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;

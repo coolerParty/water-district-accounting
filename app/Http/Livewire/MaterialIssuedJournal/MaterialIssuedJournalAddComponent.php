@@ -55,13 +55,9 @@ class MaterialIssuedJournalAddComponent extends Component
         try {
             DB::transaction(function () {
 
-                $mij          = new MaterialIssuedJournal();
-                $mij->rsmi_no = $this->rsmi_no;
-                $mij->save();
 
                 $jev              = new JournalEntryVoucher();
                 $jev->jev_no      = JournalEntryVoucher::max('jev_no') + 1;
-                $jev->code_id     = $mij->id;
                 $jev->type        = 3;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;
@@ -75,6 +71,11 @@ class MaterialIssuedJournalAddComponent extends Component
                     $tran->credit                   = $journal['credit'];
                     $tran->save();
                 }
+
+                $mij                           = new MaterialIssuedJournal();
+                $mij->journal_entry_voucher_id = $jev->id;
+                $mij->rsmi_no                  = $this->rsmi_no;
+                $mij->save();
 
                 return redirect()->route('materialissuedjournal.index')
                     ->with('create-success', 'Material Issued Journal "' . $mij->rsmi_no  . '" created successfully.');

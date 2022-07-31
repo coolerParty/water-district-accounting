@@ -77,22 +77,11 @@ class CashReceiptJournalAddComponent extends Component
             'journals'         => ['required'],
         ]);
 
-            try {
-                DB::transaction(function () {
-
-                $cr                   = new CashReceipt();
-                $cr->official_receipt = $this->official_receipt;
-                $cr->a_receipt        = $this->a_receipt;
-                $cr->current          = $this->current;
-                $cr->penalty          = $this->penalty;
-                $cr->arrears_cy       = $this->arrears_cy;
-                $cr->arrears_py       = $this->arrears_py;
-                $cr->cod_prev_day     = $this->cod_prev_day;
-                $cr->save();
+        try {
+            DB::transaction(function () {
 
                 $jev              = new JournalEntryVoucher();
                 $jev->jev_no      = JournalEntryVoucher::max('jev_no') + 1;
-                $jev->code_id     = $cr->id;
                 $jev->type        = 1;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;
@@ -107,16 +96,24 @@ class CashReceiptJournalAddComponent extends Component
                     $tran->save();
                 }
 
+                $cr                   = new CashReceipt();
+                $cr->journal_entry_voucher_id = $jev->id;
+                $cr->official_receipt         = $this->official_receipt;
+                $cr->a_receipt                = $this->a_receipt;
+                $cr->current                  = $this->current;
+                $cr->penalty                  = $this->penalty;
+                $cr->arrears_cy               = $this->arrears_cy;
+                $cr->arrears_py               = $this->arrears_py;
+                $cr->cod_prev_day             = $this->cod_prev_day;
+                $cr->save();
+
                 return redirect()->route('cashreceiptjournal.index')
-            ->with('create-success', 'Cash Receipt Journal "' . $cr->official_receipt  . '" created successfully.');
-
+                    ->with('create-success', 'Cash Receipt Journal "' . $cr->official_receipt  . '" created successfully.');
             });
-
         } catch (\Exception $exception) {
             session()->flash('delete-success', 'Error occured! Please try again.');
             return;
         }
-
     }
 
     public function confirmation()
