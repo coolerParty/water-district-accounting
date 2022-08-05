@@ -161,7 +161,7 @@
                                     <div class="text-sm font-medium text-gray-900">{{ $cashreceipt->official_receipt }}
                                     </div>
                                 </td>
-                                <td class="px-2 py-1 whitespace-nowrap">
+                                <td class="px-2 py-1">
                                     <div class="text-xs text-gray-900">{{ $cashreceipt->part
                                         }}</div>
                                 </td>
@@ -184,16 +184,39 @@
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
+                                    <x-link-secondary href="{{ route('jev.show',['id'=>$cashreceipt->jid]) }}"
+                                        target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </x-link-secondary>
+                                    <x-link-secondary href="{{ route('jev.download',['id'=>$cashreceipt->jid]) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                          </svg>
+                                    </x-link-secondary>
                                     @can('cash-receipt-journal-edit')
                                     <x-link-success href="{{ route('cashreceiptjournal.edit',['id'=>$cashreceipt->cid]) }}" >
-                                        Edit
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path
+                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                        </svg>
                                     </x-link-success>
                                     @can('cash-receipt-journal-delete')
                                     @endcan
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this account chart?') || event.stopImmediatePropagation()"
                                         wire:click.prevent="destroy({{ $cashreceipt->cid }},{{ $cashreceipt->jid }})">
-                                        Delete
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
+                                            fill="currentColor">
+                                            <path fill-rule="evenodd"
+                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                clip-rule="evenodd" />
+                                        </svg>
                                     </x-link-danger>
                                     @endcan
                                 </td>
