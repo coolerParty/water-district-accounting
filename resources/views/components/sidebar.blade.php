@@ -91,7 +91,7 @@
                     x-transition:leave="transition ease-in duration-300"
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
-                    @can('cash-receipt-journal-show')
+                    @can('all-journal-show')
                     <li title="All Journal Transaction">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('alljournal.index') == substr(url()->current(), 0, strlen(route('alljournal.index')) )) ? 'bg-gray-100' : '' }}

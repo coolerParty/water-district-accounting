@@ -9,9 +9,12 @@ use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use DB;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CheckDisbursementAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $dv_number;
     public $payee;
     public $dvParticulars;
@@ -178,9 +181,11 @@ class CheckDisbursementAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('disbursement-journal-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('disbursement-journal-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('disbursement-journal-create');
     }
 
     public function render()

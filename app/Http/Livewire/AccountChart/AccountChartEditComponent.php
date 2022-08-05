@@ -6,9 +6,12 @@ use App\Models\AccountChart;
 use App\Models\AccountGroup;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AccountChartEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $account_id;
     public $code;
     public $name;
@@ -64,9 +67,11 @@ class AccountChartEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('account-chart-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('account-chart-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('account-chart-create');
     }
 
     public function render()

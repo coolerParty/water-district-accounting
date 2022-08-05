@@ -8,9 +8,12 @@ use App\Models\MaterialIssuedJournal;
 use App\Models\Transaction;
 use Livewire\Component;
 use DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class MaterialIssuedJournalEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $mij_id;
     public $rsmi_no;
 
@@ -172,9 +175,10 @@ class MaterialIssuedJournalEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('material-journal-edit')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('material-journal-edit')) {
+        //     abort(404);
+        // }
+        $this->authorize('material-journal-edit');
     }
 
     public function render()

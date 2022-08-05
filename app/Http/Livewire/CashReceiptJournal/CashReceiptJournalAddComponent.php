@@ -8,9 +8,12 @@ use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CashReceiptJournalAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $official_receipt;
     public $a_receipt;
     public $current = 0.00;
@@ -118,9 +121,11 @@ class CashReceiptJournalAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('cash-receipt-journal-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('cash-receipt-journal-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('cash-receipt-journal-create');
     }
 
 

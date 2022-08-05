@@ -6,14 +6,19 @@ use App\Models\Billing;
 use App\Models\JournalEntryVoucher;
 use Livewire\Component;
 use DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BillingJournalComponent extends Component
 {
+    use AuthorizesRequests;
+
     public function destroy($bid, $jid)
     {
-        if (!auth()->user()->can('billing-delete')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('billing-delete')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('billing-delete');
 
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
@@ -27,9 +32,11 @@ class BillingJournalComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('billing-show')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('billing-show')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('billing-show');
 
         $billings = DB::table('billings')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'billings.journal_entry_voucher_id')

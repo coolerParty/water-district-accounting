@@ -4,14 +4,20 @@ namespace App\Http\Livewire\SubMajorAccountGroup;
 
 use App\Models\SubMajorAccountGroup;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class SubMajorAccountGroupComponent extends Component
 {
+    use AuthorizesRequests;
+
     public function destroy($id)
     {
-        if (!auth()->user()->can('account-group-delete')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('account-group-delete')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('account-group-delete');
+
         $account = SubMajorAccountGroup::find($id);
         $account->delete();
 
@@ -21,9 +27,11 @@ class SubMajorAccountGroupComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('account-group-show')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('account-group-show')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('account-group-show');
 
         $accounts = SubMajorAccountGroup::select('id', 'code', 'name', 'seq_no')->orderBy('seq_no','ASC')->paginate(10);
 

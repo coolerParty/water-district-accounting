@@ -5,9 +5,12 @@ namespace App\Http\Livewire\BeginningBalance;
 use App\Models\AccountChart;
 use App\Models\BeginningBalance;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BeginningBalanceEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $bal_id;
     public $accountCode;
     public $start_date;
@@ -52,9 +55,11 @@ class BeginningBalanceEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('beginning-balance-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('beginning-balance-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('beginning-balance-create');
     }
 
     public function render()

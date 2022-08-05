@@ -4,15 +4,20 @@ namespace App\Http\Livewire\Users;
 
 use App\Models\User;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserComponent extends Component
 {
+    use AuthorizesRequests;
 
     public function destroy($user_id)
     {
-        if (!auth()->user()->can('user-delete')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('user-delete')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('user-delete');
+
         $user = User::find($user_id);
         if($user->profile_photo_path)
             {
@@ -27,9 +32,11 @@ class UserComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('user-show')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('user-show')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('user-show');
 
         $users = User::with('roles')->get();
 

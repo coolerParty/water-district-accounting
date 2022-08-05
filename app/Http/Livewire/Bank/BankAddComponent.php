@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Bank;
 
 use App\Models\Bank;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BankAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $bank_name;
     public $desc_name_brs;
     public $acct_number;
@@ -46,9 +49,11 @@ class BankAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('bank-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('bank-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('bank-create');
     }
 
     public function render()

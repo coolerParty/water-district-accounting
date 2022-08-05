@@ -6,14 +6,19 @@ use App\Models\CashReceipt;
 use App\Models\JournalEntryVoucher;
 use Livewire\Component;
 use DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CashReceiptJournalComponent extends Component
 {
+    use AuthorizesRequests;
+
     public function destroy($cid,$jid)
     {
-        if (!auth()->user()->can('cash-receipt-journal-delete')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('cash-receipt-journal-delete')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('cash-receipt-journal-delete');
 
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
@@ -27,9 +32,11 @@ class CashReceiptJournalComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('cash-receipt-journal-show')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('cash-receipt-journal-show')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('cash-receipt-journal-show');
 
         $cashreceipts = DB::table('cash_receipts')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'cash_receipts.journal_entry_voucher_id')

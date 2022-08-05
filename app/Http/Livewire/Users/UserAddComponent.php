@@ -10,9 +10,12 @@ use Laravel\Fortify\Rules\Password;
 use Intervention\Image\Facades\Image;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     use WithFileUploads;
     public $name;
     public $email;
@@ -81,9 +84,11 @@ class UserAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('user-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('user-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('user-create');
     }
 
     public function removeImage()

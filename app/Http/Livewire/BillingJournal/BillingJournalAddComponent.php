@@ -8,9 +8,12 @@ use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BillingJournalAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $zone;
     public $metered_sales;
     public $residential;
@@ -121,9 +124,11 @@ class BillingJournalAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('billing-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('billing-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('billing-create');
     }
 
     public function render()

@@ -13,6 +13,23 @@ class ReportFormController extends Controller
     public function index($id)
     {
         $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->first();
+
+        if($journal->type ==1){
+            $this->authorize('cash-receipt-journal-jev');
+        }
+        if($journal->type ==2){
+            $this->authorize('billing-jev');
+        }
+        if($journal->type ==3){
+            $this->authorize('material-journal-jev');
+        }
+        if($journal->type ==4){
+            $this->authorize('disbursement-journal-jev');
+        }
+        if($journal->type ==5){
+            $this->authorize('general-journal-jev');
+        }
+
         $transactions = Transaction::select('id', 'accountchart_id', 'debit', 'credit')->where('journal_entry_voucher_id', $id)->get();
         return view('report-form.jev-report', compact('journal', 'transactions'));
     }
@@ -20,6 +37,23 @@ class ReportFormController extends Controller
     public function downloadPdf($id)
     {
         $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->first();
+
+        if($journal->type ==1){
+            $this->authorize('cash-receipt-journal-jev');
+        }
+        if($journal->type ==2){
+            $this->authorize('billing-jev');
+        }
+        if($journal->type ==3){
+            $this->authorize('material-journal-jev');
+        }
+        if($journal->type ==4){
+            $this->authorize('disbursement-journal-jev');
+        }
+        if($journal->type ==5){
+            $this->authorize('general-journal-jev');
+        }
+
         $transactions = Transaction::select('id', 'accountchart_id', 'debit', 'credit')->where('journal_entry_voucher_id', $id)->get();
         $pdf = PDF::loadView('report-form.jev-report', compact('journal', 'transactions'));
 
