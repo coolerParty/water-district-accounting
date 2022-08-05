@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnnualBudgetController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\ReportFormController;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\AccountChart\AccountChartAddComponent;
 use App\Http\Livewire\AccountChart\AccountChartComponent;
@@ -9,6 +10,7 @@ use App\Http\Livewire\AccountChart\AccountChartEditComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupAddComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupComponent;
 use App\Http\Livewire\AccountGroup\AccountGroupEditComponent;
+use App\Http\Livewire\AllJournalTransactionComponent;
 use App\Http\Livewire\Bank\BankAddComponent;
 use App\Http\Livewire\Bank\BankComponent;
 use App\Http\Livewire\Bank\BankEditComponent;
@@ -120,11 +122,16 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/general-journal/create', GeneralJournalAddComponent::class)->name('generaljournal.create');
     Route::get('/general-journal/{id}/edit', GeneralJournalEditComponent::class)->name('generaljournal.edit');
 
+    Route::get('/all-journal', AllJournalTransactionComponent::class)->name('alljournal.index');
+
     Route::get('/bank', BankComponent::class)->name('bank.index');
     Route::get('/bank/create', BankAddComponent::class)->name('bank.create');
     Route::get('/bank/{id}/edit', BankEditComponent::class)->name('bank.edit');
 
     // livewire End
+    Route::get('/jev/{id}/view', [ReportFormController::class,'index'])->name('jev.show');
+    Route::get('/jev/{id}/download', [ReportFormController::class,'downloadPdf'])->name('jev.download');
+
 
 
 });

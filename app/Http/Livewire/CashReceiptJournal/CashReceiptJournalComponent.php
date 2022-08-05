@@ -4,7 +4,6 @@ namespace App\Http\Livewire\CashReceiptJournal;
 
 use App\Models\CashReceipt;
 use App\Models\JournalEntryVoucher;
-use App\Models\Transaction;
 use Livewire\Component;
 use DB;
 

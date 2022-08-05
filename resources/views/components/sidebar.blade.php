@@ -91,6 +91,20 @@
                     x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-90"
                     :id="$id('dropdown-button')" style="display: none;">
                     @can('cash-receipt-journal-show')
+                    <li title="All Journal Transaction">
+                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                        {{ (route('alljournal.index') == substr(url()->current(), 0, strlen(route('alljournal.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('alljournal.index') }}">
+                            <span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                    <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z" />
+                                </svg>
+                            </span>
+                            <span :class="{ 'lg:hidden': !isSidebarOpen }">All Journal Transaction</span>
+                        </a>
+                    </li>
+                    @endcan
+                    @can('cash-receipt-journal-show')
                     <li title="Cash Receipt Journal">
                         <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
                         {{ (route('cashreceiptjournal.index') == substr(url()->current(), 0, strlen(route('cashreceiptjournal.index')) )) ? 'bg-gray-100' : '' }}
