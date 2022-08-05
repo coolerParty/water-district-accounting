@@ -62,6 +62,7 @@
                 x-on:focusin.window="! $refs.panel.contains($event.target) && close()" x-id="['dropdown-button']">
 
                 <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
+                    {{ (route('alljournal.index') == substr(url()->current(), 0, strlen(route('alljournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('cashreceiptjournal.index') == substr(url()->current(), 0, strlen(route('cashreceiptjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('billingjournal.index') == substr(url()->current(), 0, strlen(route('billingjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('materialissuedjournal.index') == substr(url()->current(), 0, strlen(route('materialissuedjournal.index')) )) ? 'bg-gray-100' : '' }}
@@ -106,7 +107,7 @@
                     @endcan
                     @can('cash-receipt-journal-show')
                     <li title="Cash Receipt Journal">
-                        <a class="flex items-center p-2 space-x-2 text-sm border-t border-b hover:bg-gray-100
+                        <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
                         {{ (route('cashreceiptjournal.index') == substr(url()->current(), 0, strlen(route('cashreceiptjournal.index')) )) ? 'bg-gray-100' : '' }}
                         " :class="{'justify-center': !isSidebarOpen}" href="{{ route('cashreceiptjournal.index') }}">
                             <span>

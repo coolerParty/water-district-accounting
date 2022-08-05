@@ -162,19 +162,23 @@
 
                                     </div>
                                 </td>
-                                <td class="px-2 py-1 whitespace-nowrap">
+                                <td class="px-2 py-1">
                                     <div class="text-xs text-gray-900">{{ $journal->particulars
                                         }}</div>
                                 </td>
                                 <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
                                     @can('cash-receipt-journal-edit')
-                                    <x-link-secondary href="{{ route('jev.show',['id'=>$journal->id]) }}">
-                                        View Report
+                                    <x-link-secondary href="{{ route('jev.show',['id'=>$journal->id]) }}" target="_blank">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z" clip-rule="evenodd" />
+                                          </svg>
                                     </x-link-secondary>
                                     @endcan
                                     @can('cash-receipt-journal-edit')
                                     <x-link-secondary href="{{ route('jev.download',['id'=>$journal->id]) }}">
-                                        Download PDF
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                          </svg>
                                     </x-link-secondary>
                                     @endcan
                                 </td>

@@ -2,7 +2,13 @@
 <html lang="en">
 
 <head>
-    <title>CSS Template</title>
+    <title>JEV.No : {{ date('Y',
+        strtotime($journal->jv_date)) . '-' . date('m', strtotime($journal->jv_date)) .
+        '-'
+        }}@if(strlen($journal->jev_no)==1){{ '000' . $journal->jev_no
+        }}@elseif(strlen($journal->jev_no)==2){{ '00' . $journal->jev_no
+        }}@elseif(strlen($journal->jev_no)==3){{ '0' . $journal->jev_no }}@else{{ '0' . $journal->jev_no
+        }}@endif</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -98,7 +104,6 @@
 </head>
 
 <body>
-
     <div class="report">
         <div class="table">
             <table>
