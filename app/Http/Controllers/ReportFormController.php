@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class ReportFormController extends Controller
 {
-    public function index($id)
+    public function jevReport($id)
     {
         $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->first();
 
@@ -34,7 +34,7 @@ class ReportFormController extends Controller
         return view('report-form.jev-report', compact('journal', 'transactions'));
     }
 
-    public function downloadPdf($id)
+    public function jevPdf($id)
     {
         $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->first();
 
@@ -76,6 +76,39 @@ class ReportFormController extends Controller
         return $pdf->download($filename . '.pdf');
 
         // return view('report-form.jev-report', compact('journal', 'transactions'));
+    }
+
+    public function journalReport($type, $date_start, $date_end)
+    {
+        $journals = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')
+        ->where('type', $type)
+        ->where('jv_date','>=',$date_start)
+        ->where('jv_date','<=',$date_end)
+        ->orderBy('jv_date','ASC')
+        ->orderBy('jev_no','ASC')
+        ->with('transactions')
+        ->get();
+
+        return view('report-form.journals-report', compact('journals', 'date_start','date_end'));
+    }
+
+    public function journalPdf($type, $date_start, $date_end)
+    {
+        $journals = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')
+        ->where('type', $type)
+        ->where('jv_date','>=',$date_start)
+        ->where('jv_date','<=',$date_end)
+        ->orderBy('jv_date','ASC')
+        ->orderBy('jev_no','ASC')
+        ->with('transactions')
+        ->get();
+
+        $pdf = PDF::loadView('report-form.journals-report', compact('journals', 'date_start','date_end'));
+        $typename = $this->typeName($type);
+
+        $filename = 'Journal ' . $typename . '-' . $date_start . '-' . $date_end;
+
+        return $pdf->download($filename . '.pdf');
     }
 
     public function typeName($type)

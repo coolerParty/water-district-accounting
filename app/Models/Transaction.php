@@ -15,4 +15,9 @@ class Transaction extends Model
     {
         return $this->belongsTo(AccountChart::Class,'accountchart_id');
     }
+
+    public function jev()
+    {
+        return $this->belongsTo(JournalEntryVoucher::Class)->get();
+    }
 }
