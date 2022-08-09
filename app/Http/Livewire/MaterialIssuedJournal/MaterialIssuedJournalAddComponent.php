@@ -8,9 +8,12 @@ use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class MaterialIssuedJournalAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $rsmi_no;
 
     public $jev_date;
@@ -88,9 +91,11 @@ class MaterialIssuedJournalAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('material-journal-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('material-journal-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('material-journal-create');
     }
 
     public function render()

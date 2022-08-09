@@ -6,14 +6,19 @@ use App\Models\GeneralJournal;
 use App\Models\JournalEntryVoucher;
 use DB;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class GeneralJournalComponent extends Component
 {
+    use AuthorizesRequests;
+
     public function destroy($gid, $jid)
     {
-        if (!auth()->user()->can('general-journal-delete')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('general-journal-delete')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('general-journal-delete');
 
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
@@ -28,9 +33,11 @@ class GeneralJournalComponent extends Component
     public function render()
     {
 
-        if (!auth()->user()->can('general-journal-show')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('general-journal-show')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('general-journal-show');
 
         $generalJournals = DB::table('general_journals')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'general_journals.journal_entry_voucher_id')

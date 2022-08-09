@@ -8,9 +8,12 @@ use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CashReceiptJournalEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $crj_id;
     public $official_receipt;
     public $a_receipt;
@@ -205,9 +208,11 @@ class CashReceiptJournalEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('cash-receipt-journal-edit')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('cash-receipt-journal-edit')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('cash-receipt-journal-edit');
     }
 
     public function render()

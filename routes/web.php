@@ -37,6 +37,7 @@ use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalAddComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalEditComponent;
 use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\ReportGeneration\JournalsReportComponent;
 use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupAddComponent;
 use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupComponent;
 use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupEditComponent;
@@ -129,9 +130,13 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/bank/{id}/edit', BankEditComponent::class)->name('bank.edit');
 
     // livewire End
-    Route::get('/jev/{id}/view', [ReportFormController::class,'index'])->name('jev.show');
-    Route::get('/jev/{id}/download', [ReportFormController::class,'downloadPdf'])->name('jev.download');
+    Route::get('/jev/{id}/view', [ReportFormController::class,'jevReport'])->name('jev.show');
+    Route::get('/jev/{id}/download', [ReportFormController::class,'jevPdf'])->name('jev.download');
 
+    Route::get('/report/{journalType}/{date_start}/{date_end}', [ReportFormController::class,'journalReport'])->name('journal.show');
+    Route::get('/download/{journalType}/{date_start}/{date_end}', [ReportFormController::class,'journalPdf'])->name('journal.download');
+
+    Route::get('/journals-report', JournalsReportComponent::class)->name('journals.index');
 
 
 });

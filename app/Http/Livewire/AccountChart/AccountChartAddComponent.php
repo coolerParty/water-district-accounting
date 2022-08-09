@@ -8,9 +8,12 @@ use App\Models\AccountGroup;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class AccountChartAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $code;
     public $name;
     public $acctgrp_id;
@@ -76,9 +79,11 @@ class AccountChartAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('account-chart-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('account-chart-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('account-chart-create');
     }
 
     public function render()

@@ -87,6 +87,12 @@
             border-right: none;
         }
 
+        .x-5{
+            min-width: 60px;
+            padding-right: 5px;
+            padding-left: 5px;
+        }
+
         /* Table */
         table {
             font-family: arial, sans-serif;
@@ -108,13 +114,13 @@
         <div class="table">
             <table>
             <tr>
-                <th colspan="2" class="text-center text-bold">
+                <th colspan="3" class="text-center text-bold">
                     <div>JOURNAL ENTRY VOUCHER</div>
                     <div class="subtitle">Municipality of Tarangnan</div>
                     <div class="subtitle">Catarman Water Disctrict</div>
                 </th>
 
-                <th colspan="4" class="text-center text-bold">
+                <th colspan="3" class="text-center text-bold" style="min-width: 150px!important;">
                     <div class="subtitle">JEV.No : {{ date('Y',
                         strtotime($journal->jv_date)) . '-' . date('m', strtotime($journal->jv_date)) .
                         '-'
@@ -137,20 +143,20 @@
                     <th class="text-center">Center</th>
                     <th></th>
                     <th class="text-center">Code</th>
-                    <th class="text-center">p</th>
-                    <th class="text-center">Debit</th>
-                    <th class="text-center">Credit</th>
+                    <th class="text-center" style="width: 15px;">p</th>
+                    <th class="text-center x-5">Debit</th>
+                    <th class="text-center x-5">Credit</th>
                 </tr>
                 @foreach($transactions as $t)
                 <tr class="subtitle">
                     <td></td>
                     <td>{{ $t->accountChart->name }}</td>
-                    <td class="text-center" style="min-width: 90px;">{{ $t->accountChart->code }}</td>
+                    <td class="text-center" style="width: 105px;">{{ $t->accountChart->code }}</td>
                     <td></td>
-                    <td class="text-right" style="{{ ($t->debit == 0) ? 'color: #fff;' : '' }} min-width: 60px;">{{
-                        $t->debit }}</td>
-                    <td class="text-right" style="{{ ($t->credit == 0) ? 'color: #fff;' : '' }} min-width: 60px;">{{
-                        $t->credit }}</td>
+                    <td class="text-right x-5">{{
+                        ($t->debit == 0) ? '' : number_format($t->debit,2) }}</td>
+                    <td class="text-right x-5">{{
+                        ($t->credit == 0) ? '' : number_format($t->credit,2) }}</td>
                 </tr>
                 @endforeach
                 <tr class="subtitle">
@@ -162,8 +168,8 @@
                 <tr class="subtitle">
                     <td></td>
                     <td colspan="3"></td>
-                    <td class="text-right">{{ number_format($transactions->sum('debit'),2) }}</td>
-                    <td class="text-right">{{ number_format($transactions->sum('credit'),2) }}</td>
+                    <td class="text-right x-5">{{ number_format($transactions->sum('debit'),2) }}</td>
+                    <td class="text-right x-5">{{ number_format($transactions->sum('credit'),2) }}</td>
                 </tr>
 
             </table>

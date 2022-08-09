@@ -12,9 +12,12 @@ use Intervention\Image\Facades\Image;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     use WithFileUploads;
     public $user_id;
     public $name;
@@ -66,9 +69,11 @@ class UserEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('user-edit')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('user-edit')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('user-edit');
     }
 
     public function render()

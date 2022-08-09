@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->BigInteger('accountchart_id')->unsigned();
             $table->BigInteger('journal_entry_voucher_id')->unsigned();
+            // $table->foreignId('journal_entry_voucher_id')->constrained();
             $table->decimal('debit', 11, 2);
             $table->decimal('credit', 11, 2);
             $table->timestamps();

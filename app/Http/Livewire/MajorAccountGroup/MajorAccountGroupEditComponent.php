@@ -5,9 +5,12 @@ namespace App\Http\Livewire\MajorAccountGroup;
 use App\Models\MajorAccountGroup;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class MajorAccountGroupEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $account_id;
     public $seq_no;
     public $code;
@@ -54,9 +57,11 @@ class MajorAccountGroupEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('account-group-edit')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('account-group-edit')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('material-journal-edit');
     }
 
     public function render()

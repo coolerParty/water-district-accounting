@@ -6,14 +6,19 @@ use App\Models\Disbursement;
 use App\Models\JournalEntryVoucher;
 use Livewire\Component;
 use DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class CheckDisbursementComponent extends Component
 {
+    use AuthorizesRequests;
+
     public function destroy($cdid, $jid)
     {
-        if (!auth()->user()->can('disbursement-journal-delete')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('disbursement-journal-delete')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('disbursement-journal-delete');
 
         $jev = JournalEntryVoucher::find($jid);
         $jev->delete();
@@ -27,9 +32,11 @@ class CheckDisbursementComponent extends Component
 
     public function render()
     {
-        if (!auth()->user()->can('disbursement-journal-show')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('disbursement-journal-show')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('disbursement-journal-show');
 
         $disbursements = DB::table('disbursements')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'disbursements.journal_entry_voucher_id')

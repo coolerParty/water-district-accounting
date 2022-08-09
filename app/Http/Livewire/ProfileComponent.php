@@ -10,6 +10,7 @@ use Livewire\WithFileUploads;
 use Carbon\Carbon;
 use Illuminate\Validation\Rule;
 
+
 class ProfileComponent extends Component
 {
     use WithFileUploads;
@@ -92,7 +93,7 @@ class ProfileComponent extends Component
     public function confirmation()
     {
         if (!Auth::check()) {
-            Abort(403);
+            Abort(404);
         }
     }
 

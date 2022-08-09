@@ -8,9 +8,12 @@ use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use DB;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class GeneralJournalAddComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $gen_number;
     public $g_particulars;
 
@@ -99,9 +102,11 @@ class GeneralJournalAddComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('general-journal-create')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('general-journal-create')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('general-journal-create');
     }
 
     public function render()

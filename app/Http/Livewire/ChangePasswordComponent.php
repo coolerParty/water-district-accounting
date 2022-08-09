@@ -50,7 +50,7 @@ class ChangePasswordComponent extends Component
     {
         if(!Auth::check())
         {
-            Abort(403);
+            Abort(404);
         }
     }
 

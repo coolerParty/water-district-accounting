@@ -8,9 +8,12 @@ use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BillingJournalEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $bj_id;
     public $zone;
     public $metered_sales;
@@ -36,11 +39,15 @@ class BillingJournalEditComponent extends Component
 
     public function getMaxJevNumber()
     {
+        $this->confirmation();
+
         $this->jev_no = JournalEntryVoucher::where('id', '<>', $this->jev_id)->max('jev_no') + 1;
     }
 
     public function showAddTransaction()
     {
+        $this->confirmation();
+
         $this->resetAddEdit();
         $this->enableEdit = false;
         $this->enableAdd = true;
@@ -48,6 +55,8 @@ class BillingJournalEditComponent extends Component
 
     public function showEditForm($id)
     {
+        $this->confirmation();
+
         $this->resetAddEdit();
         $this->enableEdit = true;
         $this->enableAdd = false;
@@ -60,6 +69,8 @@ class BillingJournalEditComponent extends Component
 
     public function removeTransaction($id)
     {
+        $this->confirmation();
+
         $t = Transaction::findOrFail($id);
         $t->delete();
 
@@ -115,6 +126,8 @@ class BillingJournalEditComponent extends Component
 
     public function update()
     {
+        $this->confirmation();
+
         $this->validate([
             'zone'          => ['required', 'numeric', 'min:0'],
             'metered_sales' => ['required', 'numeric', 'min:0'],
@@ -158,6 +171,8 @@ class BillingJournalEditComponent extends Component
 
     public function addTransaction()
     {
+        $this->confirmation();
+
         $this->validate([
             'accountCode' => ['required', 'integer'],
             'debit'       => ['required', 'numeric', 'min:0'],
@@ -177,6 +192,8 @@ class BillingJournalEditComponent extends Component
 
     public function updateTransaction()
     {
+        $this->confirmation();
+
         $this->validate([
             'accountCode' => ['required', 'integer'],
             'debit'       => ['required', 'numeric', 'min:0'],
@@ -193,8 +210,15 @@ class BillingJournalEditComponent extends Component
         $this->resetAddEdit();
     }
 
+    public function confirmation()
+    {
+        $this->authorize('billing-edit');
+    }
+
     public function render()
     {
+        $this->confirmation();
+
         $transactions = Transaction::with('accountChart')->select('id', 'accountchart_id', 'journal_entry_voucher_id', 'debit', 'credit')->where('journal_entry_voucher_id', $this->jev_id)->get();
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         return view('livewire.billing-journal.billing-journal-edit-component', ['transactions' => $transactions, 'accounts' => $accounts])->layout('layouts.base');

@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Bank;
 
 use App\Models\Bank;
 use Livewire\Component;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class BankEditComponent extends Component
 {
+    use AuthorizesRequests;
+
     public $bank_id;
     public $bank_name;
     public $desc_name_brs;
@@ -58,9 +61,11 @@ class BankEditComponent extends Component
 
     public function confirmation()
     {
-        if (!auth()->user()->can('bank-edit')) {
-            abort(404);
-        }
+        // if (!auth()->user()->can('bank-edit')) {
+        //     abort(404);
+        // }
+
+        $this->authorize('bank-edit');
     }
 
     public function render()

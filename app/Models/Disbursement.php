@@ -13,6 +13,6 @@ class Disbursement extends Model
 
     public function jev()
     {
-        return $this->belongsTo(JournalEntryVoucher::Class,'journal_entry_voucher_id')->where('type',4)->get();
+        return $this->belongsTo(JournalEntryVoucher::Class,'journal_entry_voucher_id');
     }
 }
