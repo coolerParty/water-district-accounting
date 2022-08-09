@@ -106,6 +106,10 @@
             width: 60px !important;
         }
 
+        .border-none{
+            border:none;
+        }
+
         /* Table */
         table {
             font-family: arial, sans-serif;
@@ -388,18 +392,24 @@
                     </td>
                 </tr>
                 @endforeach
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="text-right"><b>{{ number_format($transaction->sum('debit'),2) }}</b></td>
+                    <td class="text-right"><b>{{ number_format($transaction->sum('credit'),2) }}</b></td>
+                </tr>
             </table>
         </div>
 
-        <div class="subtitle">
+        <div class="p-10 subtitle">
             <table>
                 <tr>
-                    <td>
+                    <td class="border-none">
                         <div>Prepared by:</div>
                         <div class="text-center text-bold">Angerlyn Colonia, CPA</div>
                         <div class="text-center">Corporate Accounts Analyst</div>
                     </td>
-                    <td>
+                    <td class="border-none">
                         <div>Certified by:</div>
                         <div class="text-center text-bold">Eleonor A. Villarta, MBA</div>
                         <div class="text-center">AGSD Manager</div>

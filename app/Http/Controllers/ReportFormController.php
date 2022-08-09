@@ -108,6 +108,8 @@ class ReportFormController extends Controller
 
         $filename = 'Journal ' . $typename . '-' . $date_start . '-' . $date_end;
 
+        $pdf->setPaper('LEGAL', 'landscape');
+
         return $pdf->download($filename . '.pdf');
     }
 

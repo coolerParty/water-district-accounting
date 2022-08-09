@@ -18,6 +18,6 @@ class Transaction extends Model
 
     public function jev()
     {
-        return $this->belongsTo(JournalEntryVoucher::Class)->get();
+        return $this->belongsTo(JournalEntryVoucher::Class);
     }
 }
