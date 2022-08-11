@@ -141,7 +141,7 @@
 
                 <tr class="subtitle">
                     <th class="text-center" rowspan="4">Date</th>
-                    <th class="text-center" rowspan="4">RCID No.</th>
+                    <th class="text-center" rowspan="4">OR No.</th>
                     <th class="text-center" rowspan="4">JEV No.</th>
                     <th class="text-center" rowspan="4">Payor</th>
                     <th class="text-center" colspan="6">Collections</th>
@@ -187,9 +187,15 @@
                 @forelse($journals as $journal)
                 <tr class="subtitle">
                     <td class="text-center">{{ $journal->jv_date }}</td>
-                    <td class="text-center"></td>
-                    <td class="text-center">{{ $journal->jev_no }}</td>
-                    <td class="text-center"></td>
+                    <td class="text-center">{{ $journal->cashReciept->official_receipt }}</td>
+                    <td class="text-center">{{ date('Y',
+                        strtotime($journal->jv_date)) . '-' . date('m', strtotime($journal->jv_date)) .
+                        '-'
+                        }}@if(strlen($journal->jev_no)==1){{ '000' . $journal->jev_no
+                        }}@elseif(strlen($journal->jev_no)==2){{ '00' . $journal->jev_no
+                        }}@elseif(strlen($journal->jev_no)==3){{ '0' . $journal->jev_no }}@else{{ '0' . $journal->jev_no
+                        }}@endif</td>
+                    <td class="text-center">{{ $journal->cashReciept->a_receipt }}</td>
                     <td class="text-right x-5">
                         @foreach($journal->transactions as $d)
                         @if($d->debit <> 0 && $d->accountChart->code == '1-01-01-010')
@@ -372,35 +378,34 @@
             <table class="sub-report">
                 <tr>
                     <th class="text-center">Account Name</th>
-                    <th class="text-center">Account Name</th>
+                    <th class="text-center">Account Code</th>
                     <th class="text-center">Debit</th>
                     <th class="text-center">Credit</th>
                 </tr>
-                @foreach($journal->transactions as $transaction)
-                <tr>
-                    <td>{{ $transaction->accountChart->name }}</td>
-                    <td class="text-center x-5">{{ $transaction->accountChart->code }}</td>
-                    <td class="text-right">
-                        @if($transaction->debit <> 0)
-                            {{ number_format($transaction->debit,2) }}
-                        @endif
-                    </td>
-                    <td class="text-right">
-                        @if($transaction->credit <> 0)
-                            {{ number_format($transaction->credit,2) }}
-                        @endif
-                    </td>
-                </tr>
+                @foreach($recaps as $recap)
+                    <tr>
+                        <td>{{ $recap->name }}</td>
+                        <td class="text-center x-5">{{ $recap->code }}</td>
+                        <td class="text-right">
+                            @if($recap->tdebit <> 0)
+                                {{ number_format($recap->tdebit,2) }}
+                            @endif
+                        </td>
+                        <td class="text-right">
+                            @if($recap->tcredit <> 0)
+                                {{ number_format($recap->tcredit,2) }}
+                            @endif
+                        </td>
+                    </tr>
                 @endforeach
                 <tr>
                     <td></td>
                     <td></td>
-                    <td class="text-right"><b>{{ number_format($transaction->sum('debit'),2) }}</b></td>
-                    <td class="text-right"><b>{{ number_format($transaction->sum('credit'),2) }}</b></td>
+                    <td class="text-right"><b>{{ number_format($recaps->sum('tdebit'),2) }}</b></td>
+                    <td class="text-right"><b>{{ number_format($recaps->sum('tcredit'),2) }}</b></td>
                 </tr>
             </table>
         </div>
-
         <div class="p-10 subtitle">
             <table>
                 <tr>

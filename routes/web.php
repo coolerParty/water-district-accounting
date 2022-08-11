@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\AnnualBudgetController;
 use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ReportFormController;
+use App\Http\Controllers\JEVReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Livewire\AccountChart\AccountChartAddComponent;
 use App\Http\Livewire\AccountChart\AccountChartComponent;
@@ -130,11 +130,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/bank/{id}/edit', BankEditComponent::class)->name('bank.edit');
 
     // livewire End
-    Route::get('/jev/{id}/view', [ReportFormController::class,'jevReport'])->name('jev.show');
-    Route::get('/jev/{id}/download', [ReportFormController::class,'jevPdf'])->name('jev.download');
+    Route::get('/jev/{id}/view', [JEVReportController::class,'jevReport'])->name('jev.show');
+    Route::get('/jev/{id}/download', [JEVReportController::class,'jevPdf'])->name('jev.download');
 
-    Route::get('/report/{journalType}/{date_start}/{date_end}', [ReportFormController::class,'journalReport'])->name('journal.show');
-    Route::get('/download/{journalType}/{date_start}/{date_end}', [ReportFormController::class,'journalPdf'])->name('journal.download');
+    Route::get('/report/{journalType}/{date_start}/{date_end}', [JEVReportController::class,'journalReport'])->name('journal.show');
+    Route::get('/download/{journalType}/{date_start}/{date_end}', [JEVReportController::class,'journalPdf'])->name('journal.download');
 
     Route::get('/journals-report', JournalsReportComponent::class)->name('journals.index');
 

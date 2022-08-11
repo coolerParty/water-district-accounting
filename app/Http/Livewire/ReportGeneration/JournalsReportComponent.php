@@ -4,7 +4,9 @@ namespace App\Http\Livewire\ReportGeneration;
 
 use App\Models\JournalEntryVoucher;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use PhpParser\Node\Stmt\Foreach_;
 
 class JournalsReportComponent extends Component
 {
