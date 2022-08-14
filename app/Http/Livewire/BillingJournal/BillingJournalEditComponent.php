@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class BillingJournalEditComponent extends Component
 {
@@ -90,6 +91,10 @@ class BillingJournalEditComponent extends Component
     public function mount($id)
     {
         $bj                  = Billing::findOrFail($id);
+        if(empty($bj))
+        {
+            abort(404);
+        }
         $this->bj_id         = $bj->id;
         $this->jev_id        = $bj->journal_entry_voucher_id;
         $this->zone          = $bj->zone;
@@ -101,7 +106,11 @@ class BillingJournalEditComponent extends Component
         $this->comm_c        = $bj->comm_c;
         $this->government    = $bj->government;
 
-        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 2)->first();
+        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 2)->visibleTo(Auth::user())->first();
+        if(empty($jev))
+        {
+            abort(404);
+        }
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;
@@ -155,7 +164,11 @@ class BillingJournalEditComponent extends Component
                 $bj->government    = $this->government;
                 $bj->save();
 
-                $jev              = JournalEntryVoucher::find($this->jev_id);
+                $jev              = JournalEntryVoucher::where('id',$this->jev_id)->visibleTo(Auth::user())->first();
+                if(empty($jev))
+                {
+                    abort(404);
+                }
                 $jev->jev_no      = $this->jev_no;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;

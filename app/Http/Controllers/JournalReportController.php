@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JournalEntryVoucher;
+use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDF;
@@ -45,24 +46,29 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->where('user_id', Auth::user()->id)
+            ->visibleTo(Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
-            ->with('transactions')
             ->get();
 
-            if (empty($journals)) {
-                abort(404);
-            }
+        if (empty($journals)) {
+            abort(404);
+        }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
             ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'))
+            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->groupBy('code', 'name')
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
+            ->groupBy('code', 'name', 'seqdebit')
+            ->orderBy('seqdebit', 'ASC')
             ->orderBy('code', 'ASC')
             ->get();
 
@@ -75,24 +81,29 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->where('user_id', Auth::user()->id)
+            ->visibleTo('user_id', Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
-            ->with('transactions')
             ->get();
 
-            if (empty($journals)) {
-                abort(404);
-            }
+        if (empty($journals)) {
+            abort(404);
+        }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
             ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'))
+            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->groupBy('code', 'name')
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
+            ->groupBy('code', 'name','seqdebit')
+            ->orderBy('seqdebit', 'ASC')
             ->orderBy('code', 'ASC')
             ->get();
 
@@ -112,10 +123,9 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->where('user_id', Auth::user()->id)
+            ->visibleTo('user_id', Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
-            ->with('transactions')
             ->get();
 
         if (empty($journals)) {
@@ -125,11 +135,17 @@ class JournalReportController extends Controller
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
             ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'))
+            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->groupBy('code', 'name')
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
+            ->groupBy('code', 'name','seqdebit')
+            ->orderBy('seqdebit', 'ASC')
             ->orderBy('code', 'ASC')
             ->get();
 
@@ -142,24 +158,29 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->where('user_id', Auth::user()->id)
+            ->visibleTo('user_id', Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
-            ->with('transactions')
             ->get();
 
-            if (empty($journals)) {
-                abort(404);
-            }
+        if (empty($journals)) {
+            abort(404);
+        }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
             ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'))
+            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->groupBy('code', 'name')
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
+            ->groupBy('code', 'name','seqdebit')
+            ->orderBy('seqdebit', 'ASC')
             ->orderBy('code', 'ASC')
             ->get();
 
@@ -179,24 +200,29 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->where('user_id', Auth::user()->id)
+            ->visibleTo('user_id', Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
-            ->with('transactions')
             ->get();
 
-            if (empty($journals)) {
-                abort(404);
-            }
+        if (empty($journals)) {
+            abort(404);
+        }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
             ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'))
+            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->groupBy('code', 'name')
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
+            ->groupBy('code', 'name','seqdebit')
+            ->orderBy('seqdebit', 'ASC')
             ->orderBy('code', 'ASC')
             ->get();
 
@@ -209,24 +235,29 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->where('user_id', Auth::user()->id)
+            ->visibleTo('user_id', Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
-            ->with('transactions')
             ->get();
 
-            if (empty($journals)) {
-                abort(404);
-            }
+        if (empty($journals)) {
+            abort(404);
+        }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
             ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'))
+            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->groupBy('code', 'name')
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
+            ->groupBy('code', 'name','seqdebit')
+            ->orderBy('seqdebit', 'ASC')
             ->orderBy('code', 'ASC')
             ->get();
 

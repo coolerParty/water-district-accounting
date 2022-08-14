@@ -7,6 +7,7 @@ use App\Models\JournalEntryVoucher;
 use DB;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralJournalComponent extends Component
 {
@@ -45,6 +46,11 @@ class GeneralJournalComponent extends Component
             ->orderby('journal_entry_vouchers.jv_date', 'DESC')
             ->orderby('journal_entry_vouchers.jev_no', 'ASC')
             ->where('type', 5)
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
             ->paginate(10);
         return view('livewire.general-journal.general-journal-component', ['generalJournals' => $generalJournals])->layout('layouts.base');
     }

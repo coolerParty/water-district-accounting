@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class CashReceiptJournalEditComponent extends Component
 {
@@ -99,7 +100,11 @@ class CashReceiptJournalEditComponent extends Component
         $this->arrears_py       = $crj->arrears_py;
         $this->cod_prev_day     = $crj->cod_prev_day;
 
-        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 1)->first();
+        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 1)->visibleTo(Auth::user())->first();
+        if(empty($jev))
+        {
+            abort(404);
+        }
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;
@@ -142,6 +147,10 @@ class CashReceiptJournalEditComponent extends Component
             DB::transaction(function () {
 
                 $cr                   = CashReceipt::find($this->crj_id);
+                if(empty($cr))
+                {
+                    abort(404);
+                }
                 $cr->official_receipt = $this->official_receipt;
                 $cr->a_receipt        = $this->a_receipt;
                 $cr->current          = $this->current;
@@ -151,7 +160,11 @@ class CashReceiptJournalEditComponent extends Component
                 $cr->cod_prev_day     = $this->cod_prev_day;
                 $cr->save();
 
-                $jev              = JournalEntryVoucher::find($this->jev_id);
+                $jev              = JournalEntryVoucher::visibleTo(Auth::user())->where('id', $this->jev_id)->first();
+                if(empty($jev))
+                {
+                    abort(404);
+                }
                 $jev->jev_no      = $this->jev_no;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;

@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Livewire\Component;
 use DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralJournalEditComponent extends Component
 {
@@ -93,12 +94,20 @@ class GeneralJournalEditComponent extends Component
     public function mount($id)
     {
         $gj                  = GeneralJournal::findOrFail($id);
+        if($gj)
+        {
+            abort(404);
+        }
         $this->jev_id        = $gj->journal_entry_voucher_id;
         $this->g_id          = $gj->id;
         $this->gen_number    = $gj->gen_number;
         $this->g_particulars = $gj->particulars;
 
-        $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 5)->first();
+        $jev = JournalEntryVoucher::visibleTo(Auth::user())->where('id', $this->jev_id)->where('type', 5)->first();
+        if(empty($jev))
+        {
+            abort(404);
+        }
         $this->jev_date    = $jev->jv_date;
         $this->jev_no      = $jev->jev_no;
         $this->particulars = $jev->particulars;
@@ -130,7 +139,11 @@ class GeneralJournalEditComponent extends Component
                 $gj->particulars = $this->g_particulars;
                 $gj->save();
 
-                $jev              = JournalEntryVoucher::find($this->jev_id);
+                $jev              = JournalEntryVoucher::where('id',$this->jev_id)->visibleTo(Auth::user())->firt();
+                if(empty($jev))
+                {
+                    abort(404);
+                }
                 $jev->jev_no      = $this->jev_no;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;

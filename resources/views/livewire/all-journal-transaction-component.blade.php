@@ -272,7 +272,7 @@
                             </tr>
                             @empty
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-                                <td colspan="4" class="px-6 py-4 text-center whitespace-nowrap">
+                                <td colspan="5" class="px-6 py-4 text-center whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">No Journals Found!</div>
                                 </td>
                             </tr>
