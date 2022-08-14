@@ -7,6 +7,7 @@ use App\Models\JournalEntryVoucher;
 use Livewire\Component;
 use DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class CashReceiptJournalComponent extends Component
 {
@@ -44,6 +45,11 @@ class CashReceiptJournalComponent extends Component
             ->orderby('journal_entry_vouchers.jv_date', 'DESC')
             ->orderby('journal_entry_vouchers.jev_no', 'ASC')
             ->where('type',1)
+            ->where(function ($query){
+                if (!auth()->user()->can('Super Admin')) {
+                    $query->where('user_id', Auth::user()->id);
+                }
+            })
             ->paginate(10);
         return view('livewire.cash-receipt-journal.cash-receipt-journal-component', ['cashreceipts' => $cashreceipts])->layout('layouts.base');
     }

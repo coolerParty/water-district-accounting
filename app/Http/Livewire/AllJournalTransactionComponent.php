@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\JournalEntryVoucher;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class AllJournalTransactionComponent extends Component
 {
@@ -28,7 +29,7 @@ class AllJournalTransactionComponent extends Component
     {
         $this->authorize('all-journal-show');
 
-        $journals = JournalEntryVoucher::select('id','jev_no','type','jv_date','particulars')->orderBy('jv_date','Desc')->paginate(10);
+        $journals = JournalEntryVoucher::select('id','jev_no','type','jv_date','particulars')->visibleTo(Auth::user())->orderBy('jv_date','Desc')->paginate(10);
         return view('livewire.all-journal-transaction-component',['journals'=>$journals])->layout('layouts.base');
     }
 }

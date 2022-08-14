@@ -198,17 +198,17 @@
                     <td class="text-center">{{ $journal->cashReciept->a_receipt }}</td>
                     <td class="text-right x-5">
                         @foreach($journal->transactions as $d)
-                        @if($d->debit <> 0 && $d->accountChart->code == '1-01-01-010')
+                            @if($d->debit <> 0 && $d->accountChart->code == '1-01-01-010')
                             {{ number_format($d->debit,2) }}
                             @endif
-                            @endforeach
+                        @endforeach
                     </td>
                     <td class="text-right x-5">
                         @foreach($journal->transactions as $d)
                         @if($d->credit <> 0 && $d->accountChart->code == '1-01-01-020')
                             {{ number_format($d->credit,2) }}
                             @endif
-                            @endforeach
+                        @endforeach
                     </td>
                     <td class="text-right x-5">
                         @foreach($journal->transactions as $d)

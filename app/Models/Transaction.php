@@ -13,11 +13,12 @@ class Transaction extends Model
 
     public function accountChart()
     {
-        return $this->belongsTo(AccountChart::Class,'accountchart_id');
+        return $this->belongsTo(AccountChart::Class,'accountchart_id')->select('id','code','name');
     }
 
     public function jev()
     {
         return $this->belongsTo(JournalEntryVoucher::Class);
     }
+
 }

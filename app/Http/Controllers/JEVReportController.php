@@ -11,7 +11,7 @@ class JEVReportController extends Controller
 {
     public function jevReport($id)
     {
-        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->where('user_id', Auth::user()->id)->first();
+        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->visibleTo(Auth::user())->first();
         if(empty($journal))
         {
             abort(404);
@@ -25,7 +25,7 @@ class JEVReportController extends Controller
 
     public function jevPdf($id)
     {
-        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->where('user_id', Auth::user()->id)->first();
+        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->visibleTo(Auth::user())->first();
         if(empty($journal))
         {
             abort(404);
