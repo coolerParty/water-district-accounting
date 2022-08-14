@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('journal_entry_vouchers', function (Blueprint $table) {
             $table->id();
+            $table->BigInteger('user_id')->unsigned();
             $table->integer('jev_no');
             $table->integer('type');
             $table->date('jv_date');
             $table->text('particulars');
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

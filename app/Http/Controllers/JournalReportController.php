@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\JournalEntryVoucher;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDF;
 
@@ -10,6 +11,8 @@ class JournalReportController extends Controller
 {
     public function journalReport($type, $date_start, $date_end)
     {
+        $this->confirmation($type);
+
         if ($type == 1) {
             return $this->cashRecieptJournalReport($type, $date_start, $date_end);
         }
@@ -23,6 +26,8 @@ class JournalReportController extends Controller
 
     public function journalPdf($type, $date_start, $date_end)
     {
+        $this->confirmation($type);
+
         if ($type == 1) {
             return $this->cashRecieptJournalPDF($type, $date_start, $date_end);
         }
@@ -40,10 +45,15 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
+            ->where('user_id', Auth::user()->id)
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->with('transactions')
             ->get();
+
+            if (empty($journals)) {
+                abort(404);
+            }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
@@ -65,10 +75,15 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
+            ->where('user_id', Auth::user()->id)
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->with('transactions')
             ->get();
+
+            if (empty($journals)) {
+                abort(404);
+            }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
@@ -97,10 +112,15 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
+            ->where('user_id', Auth::user()->id)
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->with('transactions')
             ->get();
+
+        if (empty($journals)) {
+            abort(404);
+        }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
@@ -122,10 +142,15 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
+            ->where('user_id', Auth::user()->id)
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->with('transactions')
             ->get();
+
+            if (empty($journals)) {
+                abort(404);
+            }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
@@ -154,10 +179,15 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
+            ->where('user_id', Auth::user()->id)
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->with('transactions')
             ->get();
+
+            if (empty($journals)) {
+                abort(404);
+            }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
@@ -179,10 +209,15 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
+            ->where('user_id', Auth::user()->id)
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->with('transactions')
             ->get();
+
+            if (empty($journals)) {
+                abort(404);
+            }
 
         $recaps = DB::table('transactions')
             ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
@@ -205,6 +240,25 @@ class JournalReportController extends Controller
         return $pdf->download($filename . '.pdf');
     }
 
+    public function confirmation($type)
+    {
+        if ($type == 1) {
+            $this->authorize('cash-receipt-journal-report');
+        }
+        if ($type == 2) {
+            $this->authorize('billing-report');
+        }
+        if ($type == 3) {
+            $this->authorize('material-journal-report');
+        }
+        if ($type == 4) {
+            $this->authorize('disbursement-journal-report');
+        }
+        if ($type == 5) {
+            $this->authorize('general-journal-report');
+        }
+    }
+
     public function typeName($type)
     {
         if ($type == 1) {
@@ -221,5 +275,4 @@ class JournalReportController extends Controller
             return "";
         }
     }
-
 }

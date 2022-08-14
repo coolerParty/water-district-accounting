@@ -4,30 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
+use Illuminate\Support\Facades\Auth;
 use PDF;
-use Illuminate\Support\Facades\DB;
 
 class JEVReportController extends Controller
 {
     public function jevReport($id)
     {
-        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->first();
+        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if(empty($journal))
+        {
+            abort(404);
+        }
 
-        if ($journal->type == 1) {
-            $this->authorize('cash-receipt-journal-jev');
-        }
-        if ($journal->type == 2) {
-            $this->authorize('billing-jev');
-        }
-        if ($journal->type == 3) {
-            $this->authorize('material-journal-jev');
-        }
-        if ($journal->type == 4) {
-            $this->authorize('disbursement-journal-jev');
-        }
-        if ($journal->type == 5) {
-            $this->authorize('general-journal-jev');
-        }
+        $this->confirmation($journal->type);
 
         $transactions = Transaction::select('id', 'accountchart_id', 'debit', 'credit')->where('journal_entry_voucher_id', $id)->get();
         return view('report-form.jev-report', compact('journal', 'transactions'));
@@ -35,23 +25,13 @@ class JEVReportController extends Controller
 
     public function jevPdf($id)
     {
-        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->first();
+        $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if(empty($journal))
+        {
+            abort(404);
+        }
 
-        if ($journal->type == 1) {
-            $this->authorize('cash-receipt-journal-jev');
-        }
-        if ($journal->type == 2) {
-            $this->authorize('billing-jev');
-        }
-        if ($journal->type == 3) {
-            $this->authorize('material-journal-jev');
-        }
-        if ($journal->type == 4) {
-            $this->authorize('disbursement-journal-jev');
-        }
-        if ($journal->type == 5) {
-            $this->authorize('general-journal-jev');
-        }
+        $this->confirmation($journal->type);
 
         $transactions = Transaction::select('id', 'accountchart_id', 'debit', 'credit')->where('journal_entry_voucher_id', $id)->get();
         $pdf = PDF::loadView('report-form.jev-report', compact('journal', 'transactions'));
@@ -75,6 +55,25 @@ class JEVReportController extends Controller
         return $pdf->download($filename . '.pdf');
 
         // return view('report-form.jev-report', compact('journal', 'transactions'));
+    }
+
+    public function confirmation($type)
+    {
+        if ($type == 1) {
+            $this->authorize('cash-receipt-journal-jev');
+        }
+        if ($type == 2) {
+            $this->authorize('billing-jev');
+        }
+        if ($type == 3) {
+            $this->authorize('material-journal-jev');
+        }
+        if ($type == 4) {
+            $this->authorize('disbursement-journal-jev');
+        }
+        if ($type == 5) {
+            $this->authorize('general-journal-jev');
+        }
     }
 
     public function typeName($type)
