@@ -5,13 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\JournalEntryVoucher;
 use App\Models\Transaction;
 use PDF;
-use Illuminate\Support\Facades\DB;
 
 class JEVReportController extends Controller
 {
     public function jevReport($id)
     {
         $journal = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->where('id', $id)->first();
+        if(!empty($journal))
+        {
+            abort(404);
+        }
 
         if ($journal->type == 1) {
             $this->authorize('cash-receipt-journal-jev');
