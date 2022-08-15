@@ -55,22 +55,8 @@ class JournalReportController extends Controller
             abort(404);
         }
 
-        $recaps = DB::table('transactions')
-            ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
-            ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
-            ->where('type', $type)
-            ->where('jv_date', '>=', $date_start)
-            ->where('jv_date', '<=', $date_end)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
-            ->groupBy('code', 'name', 'seqdebit')
-            ->orderBy('seqdebit', 'ASC')
-            ->orderBy('code', 'ASC')
-            ->get();
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
+
 
         return view('report-form.crj-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
     }
@@ -90,22 +76,7 @@ class JournalReportController extends Controller
             abort(404);
         }
 
-        $recaps = DB::table('transactions')
-            ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
-            ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
-            ->where('type', $type)
-            ->where('jv_date', '>=', $date_start)
-            ->where('jv_date', '<=', $date_end)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
-            ->groupBy('code', 'name','seqdebit')
-            ->orderBy('seqdebit', 'ASC')
-            ->orderBy('code', 'ASC')
-            ->get();
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
 
         $pdf = PDF::loadView('report-form.crj-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
         $typename = $this->typeName($type);
@@ -132,22 +103,7 @@ class JournalReportController extends Controller
             abort(404);
         }
 
-        $recaps = DB::table('transactions')
-            ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
-            ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
-            ->where('type', $type)
-            ->where('jv_date', '>=', $date_start)
-            ->where('jv_date', '<=', $date_end)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
-            ->groupBy('code', 'name','seqdebit')
-            ->orderBy('seqdebit', 'ASC')
-            ->orderBy('code', 'ASC')
-            ->get();
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
 
         return view('report-form.bj-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
     }
@@ -167,22 +123,7 @@ class JournalReportController extends Controller
             abort(404);
         }
 
-        $recaps = DB::table('transactions')
-            ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
-            ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
-            ->where('type', $type)
-            ->where('jv_date', '>=', $date_start)
-            ->where('jv_date', '<=', $date_end)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
-            ->groupBy('code', 'name','seqdebit')
-            ->orderBy('seqdebit', 'ASC')
-            ->orderBy('code', 'ASC')
-            ->get();
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
 
         $pdf = PDF::loadView('report-form.bj-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
         $typename = $this->typeName($type);
@@ -209,22 +150,7 @@ class JournalReportController extends Controller
             abort(404);
         }
 
-        $recaps = DB::table('transactions')
-            ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
-            ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
-            ->where('type', $type)
-            ->where('jv_date', '>=', $date_start)
-            ->where('jv_date', '<=', $date_end)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
-            ->groupBy('code', 'name','seqdebit')
-            ->orderBy('seqdebit', 'ASC')
-            ->orderBy('code', 'ASC')
-            ->get();
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
 
         return view('report-form.gj-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
     }
@@ -244,22 +170,7 @@ class JournalReportController extends Controller
             abort(404);
         }
 
-        $recaps = DB::table('transactions')
-            ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
-            ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
-            ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
-            ->where('type', $type)
-            ->where('jv_date', '>=', $date_start)
-            ->where('jv_date', '<=', $date_end)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
-            ->groupBy('code', 'name','seqdebit')
-            ->orderBy('seqdebit', 'ASC')
-            ->orderBy('code', 'ASC')
-            ->get();
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
 
         $pdf = PDF::loadView('report-form.gj-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
         $typename = $this->typeName($type);
@@ -269,6 +180,26 @@ class JournalReportController extends Controller
         $pdf->setPaper('LEGAL', 'landscape');
 
         return $pdf->download($filename . '.pdf');
+    }
+
+    public function recapitulation($type, $date_start, $date_end)
+    {
+        return DB::table('transactions')
+        ->join('journal_entry_vouchers', 'transactions.journal_entry_voucher_id', '=', 'journal_entry_vouchers.id')
+        ->join('account_charts', 'transactions.accountchart_id', '=', 'account_charts.id')
+        ->select('code', 'name', DB::raw('sum(debit) as tdebit'), DB::raw('sum(credit) as tcredit'), DB::raw('IF(debit = 0 , 2 , 1) as seqdebit'))
+        ->where('type', $type)
+        ->where('jv_date', '>=', $date_start)
+        ->where('jv_date', '<=', $date_end)
+        ->where(function ($query){
+            if (!auth()->user()->can('Super Admin')) {
+                $query->where('user_id', Auth::user()->id);
+            }
+        })
+        ->groupBy('code', 'name', 'seqdebit')
+        ->orderBy('seqdebit', 'ASC')
+        ->orderBy('code', 'ASC')
+        ->get();
     }
 
     public function confirmation($type)
