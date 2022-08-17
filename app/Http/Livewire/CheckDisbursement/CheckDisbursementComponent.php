@@ -7,6 +7,7 @@ use App\Models\JournalEntryVoucher;
 use Livewire\Component;
 use DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class CheckDisbursementComponent extends Component
 {
@@ -14,10 +15,6 @@ class CheckDisbursementComponent extends Component
 
     public function destroy($cdid, $jid)
     {
-        // if (!auth()->user()->can('disbursement-journal-delete')) {
-        //     abort(404);
-        // }
-
         $this->authorize('disbursement-journal-delete');
 
         $jev = JournalEntryVoucher::find($jid);
@@ -32,28 +29,15 @@ class CheckDisbursementComponent extends Component
 
     public function render()
     {
-        // if (!auth()->user()->can('disbursement-journal-show')) {
-        //     abort(404);
-        // }
-
         $this->authorize('disbursement-journal-show');
 
-        $disbursements = DB::table('disbursements')
-            ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'disbursements.journal_entry_voucher_id')
-            ->select(
-                'disbursements.id as cdid',
-                'dv_number',
-                'check_number',
-                'amount',
-                'journal_entry_vouchers.jv_date as jdate',
-                'journal_entry_vouchers.jev_no as jno',
-                'journal_entry_vouchers.id as jid',
-                'journal_entry_vouchers.particulars as part'
-            )
-            ->orderby('journal_entry_vouchers.jv_date', 'DESC')
-            ->orderby('journal_entry_vouchers.jev_no', 'ASC')
+        $disbursements = JournalEntryVoucher::with('disbursement')->select('id', 'jv_date', 'jev_no', 'particulars')
             ->where('type', 4)
+            ->orderBy('jv_date', 'DESC')
+            ->orderBy('jev_no', 'DESC')
+            ->visibleTo(Auth::user())
             ->paginate(10);
+
         return view('livewire.check-disbursement.check-disbursement-component', ['disbursements' => $disbursements])->layout('layouts.base');
     }
 }

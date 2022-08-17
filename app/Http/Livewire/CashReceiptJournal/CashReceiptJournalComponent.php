@@ -5,7 +5,6 @@ namespace App\Http\Livewire\CashReceiptJournal;
 use App\Models\CashReceipt;
 use App\Models\JournalEntryVoucher;
 use Livewire\Component;
-use DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,12 +12,8 @@ class CashReceiptJournalComponent extends Component
 {
     use AuthorizesRequests;
 
-    public function destroy($cid,$jid)
+    public function destroy($cid, $jid)
     {
-        // if (!auth()->user()->can('cash-receipt-journal-delete')) {
-        //     abort(404);
-        // }
-
         $this->authorize('cash-receipt-journal-delete');
 
         $jev = JournalEntryVoucher::find($jid);
@@ -33,24 +28,15 @@ class CashReceiptJournalComponent extends Component
 
     public function render()
     {
-        // if (!auth()->user()->can('cash-receipt-journal-show')) {
-        //     abort(404);
-        // }
-
         $this->authorize('cash-receipt-journal-show');
 
-        $cashreceipts = DB::table('cash_receipts')
-            ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'cash_receipts.journal_entry_voucher_id')
-            ->select('cash_receipts.id as cid', 'official_receipt', 'a_receipt', 'current', 'penalty', 'arrears_cy', 'arrears_py', 'cod_prev_day', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno','journal_entry_vouchers.id as jid','journal_entry_vouchers.particulars as part')
-            ->orderby('journal_entry_vouchers.jv_date', 'DESC')
-            ->orderby('journal_entry_vouchers.jev_no', 'ASC')
-            ->where('type',1)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
+        $cashreceipts = JournalEntryVoucher::with('cashReciept')->select('id', 'jv_date', 'jev_no', 'particulars')
+            ->where('type', 1)
+            ->orderBy('jv_date', 'DESC')
+            ->orderBy('jev_no', 'DESC')
+            ->visibleTo(Auth::user())
             ->paginate(10);
+
         return view('livewire.cash-receipt-journal.cash-receipt-journal-component', ['cashreceipts' => $cashreceipts])->layout('layouts.base');
     }
 }

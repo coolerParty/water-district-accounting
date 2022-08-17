@@ -139,16 +139,16 @@
                             @forelse($generalJournals as $gj)
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $gj->jv_date }}</div>
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm md:font-medium">{{ $gj->jv_date }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $gj->jev_no }}</div>
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm md:font-medium">{{ $gj->jev_no }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-xs text-gray-900">{{ $gj->generalJournal->gen_number }}</div>
+                                    <div class="text-xs text-gray-900 md:text-sm md:font-medium">{{ $gj->generalJournal->gen_number }}</div>
                                 </td>
                                 <td class="px-2 py-1">
-                                    <div class="text-xs font-medium text-gray-900">{{ $gj->particulars }}
+                                    <div class="text-xs font-medium text-gray-900 lg:text-sm md:font-medium">{{ $gj->particulars }}
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
