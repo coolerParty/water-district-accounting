@@ -94,7 +94,7 @@ class GeneralJournalEditComponent extends Component
     public function mount($id)
     {
         $gj                  = GeneralJournal::findOrFail($id);
-        if($gj)
+        if(empty($gj))
         {
             abort(404);
         }

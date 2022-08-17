@@ -136,24 +136,24 @@
                             <!-- flash message End -->
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @forelse($generalJournals as $generalJournal)
+                            @forelse($generalJournals as $gj)
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $generalJournal->jdate }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $gj->jv_date }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $generalJournal->jno }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $gj->jev_no }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-xs text-gray-900">{{ $generalJournal->gen_number }}</div>
+                                    <div class="text-xs text-gray-900">{{ $gj->generalJournal->gen_number }}</div>
                                 </td>
                                 <td class="px-2 py-1">
-                                    <div class="text-xs font-medium text-gray-900">{{ $generalJournal->part }}
+                                    <div class="text-xs font-medium text-gray-900">{{ $gj->particulars }}
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
                                     @can('general-journal-jev')
-                                    <x-link-secondary href="{{ route('jev.show',['id'=>$generalJournal->jid]) }}"
+                                    <x-link-secondary href="{{ route('jev.show',['id'=>$gj->id]) }}"
                                         target="_blank">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
@@ -162,7 +162,7 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </x-link-secondary>
-                                    <x-link-secondary href="{{ route('jev.download',['id'=>$generalJournal->jid]) }}">
+                                    <x-link-secondary href="{{ route('jev.download',['id'=>$gj->id]) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                                           </svg>
@@ -170,7 +170,7 @@
                                     @endcan
                                     @can('general-journal-edit')
                                     <x-link-success
-                                        href="{{ route('generaljournal.edit',['id'=>$generalJournal->gid]) }}">
+                                        href="{{ route('generaljournal.edit',['id'=>$gj->generalJournal->id]) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path
@@ -181,7 +181,7 @@
                                     @can('general-journal-delete')
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this account chart?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $generalJournal->gid }},{{ $generalJournal->jid }})">
+                                        wire:click.prevent="destroy({{ $gj->generalJournal->id }},{{ $gj->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path fill-rule="evenodd"

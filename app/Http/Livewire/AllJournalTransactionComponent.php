@@ -29,7 +29,7 @@ class AllJournalTransactionComponent extends Component
     {
         $this->authorize('all-journal-show');
 
-        $journals = JournalEntryVoucher::select('id','jev_no','type','jv_date','particulars')->visibleTo(Auth::user())->orderBy('jv_date','Desc')->paginate(10);
-        return view('livewire.all-journal-transaction-component',['journals'=>$journals])->layout('layouts.base');
+        $journals = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')->visibleTo(Auth::user())->orderBy('jv_date', 'Desc')->orderBy('jev_no', 'DESC')->paginate(10);
+        return view('livewire.all-journal-transaction-component', ['journals' => $journals])->layout('layouts.base');
     }
 }

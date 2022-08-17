@@ -147,11 +147,10 @@
                                     </thead>
                                     <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($journals as $index => $jev)
-                                        <tr class="transition-all hover:bg-gray-100">
-
-                                                <td class="p-2 whitespace-nowrap">
+                                            <tr class="transition-all hover:bg-gray-100">
+                                                <td class="p-2">
                                                     <select name="journals[{{ $index }}][accountCode]"
-                                                        wire:model="journals.{{ $index }}.accountCode" class="block w-full p-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
+                                                        wire:model="journals.{{ $index }}.accountCode" class="block w-full p-2 text-sm leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
                                                         <option value="">Select Account</option>
                                                         @foreach($accounts as $account)
                                                         <option value="{{ $account->id }}">{{ $account->code . ' - ' . $account->name }}</option>
@@ -159,13 +158,13 @@
                                                     </select>
                                                     @error('journals.{{ $index }}.accountCode')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                                 </td>
-                                                <td class="p-2 whitespace-nowrap">
-                                                    <input type="number" step="any" name="journals[{{ $index }}][debit]" class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                                                <td class="p-2 w-50 whitespace-nowrap">
+                                                    <input type="number" step="any" name="journals[{{ $index }}][debit]" class="block w-full p-2 text-sm leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500 "
                                                         wire:model="journals.{{ $index }}.debit" />
                                                         @error('journals.{{ $index }}.debit')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                                 </td>
-                                                <td class="p-2 whitespace-nowrap">
-                                                    <input type="number" step="any"  name="subTasks[{{ $index }}][credit]" class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
+                                                <td class="p-2 w-50 whitespace-nowrap">
+                                                    <input type="number" step="any"  name="subTasks[{{ $index }}][credit]" class="block w-full p-2 text-sm leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500 "
                                                         wire:model="journals.{{ $index }}.credit" />
                                                         @error('journals.{{ $index }}.credit')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                                 </td>
@@ -175,15 +174,15 @@
                                             </tr>
                                         @endforeach
                                         <tr class="transition-all bg-gray-400">
-                                            <td class="p-2 whitespace-nowrap">
+                                            <td class="p-2 text-sm whitespace-nowrap ">
                                                 Total
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <input type="number" step="any" value="{{ array_sum(array_column($journals,'debit')) }}" class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
+                                                <input type="number" step="any" value="{{ array_sum(array_column($journals,'debit')) }}" class="block w-full p-2 text-sm leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
                                                     disabled />
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <input type="number" step="any" value="{{ array_sum(array_column($journals,'credit')) }}"  class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
+                                                <input type="number" step="any" value="{{ array_sum(array_column($journals,'credit')) }}"  class="block w-full p-2 text-sm leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
                                                     disabled />
                                             </td>
                                             <td class="p-2 whitespace-nowrap">

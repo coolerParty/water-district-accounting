@@ -5,6 +5,8 @@ namespace App\Http\Livewire\AccountChart;
 use App\Imports\AccountChartImport;
 use App\Models\AccountChart;
 use App\Models\AccountGroup;
+use App\Models\MajorAccountGroup;
+use App\Models\SubMajorAccountGroup;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
@@ -29,7 +31,7 @@ class AccountChartAddComponent extends Component
         $import = new AccountChartImport();
         $import->import($this->file);
 
-        if($import->failures()->isNotEmpty()){
+        if ($import->failures()->isNotEmpty()) {
             return back()->withFailures($import->failures());
         }
 
@@ -46,7 +48,7 @@ class AccountChartAddComponent extends Component
     {
         $this->validateOnly($fields, [
             'code'             => ['required', 'string'],
-            'name'             => ['required', 'min:3','string','unique:account_charts'],
+            'name'             => ['required', 'min:3', 'string', 'unique:account_charts'],
             'acctgrp_id'       => ['required'],
             'mjracctgrp_id'    => ['required'],
             'submjracctgrp_id' => ['required'],
@@ -59,7 +61,7 @@ class AccountChartAddComponent extends Component
 
         $this->validate([
             'code'             => ['required', 'string'],
-            'name'             => ['required', 'min:3','string','unique:account_charts'],
+            'name'             => ['required', 'min:3', 'string', 'unique:account_charts'],
             'acctgrp_id'       => ['required'],
             'mjracctgrp_id'    => ['required'],
             'submjracctgrp_id' => ['required'],
@@ -90,8 +92,10 @@ class AccountChartAddComponent extends Component
     {
         $this->confirmation();
 
-        $accountgroups = AccountGroup::select('id','code','name')->orderBy('seq_no','ASC')->orderBy('name','ASC')->get();
+        $accountgroups = AccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('code', 'ASC')->get();
+        $majorAccountGroups = MajorAccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('code', 'ASC')->get();
+        $subMajorAccountGroups = SubMajorAccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('code', 'ASC')->get();
 
-        return view('livewire.account-chart.account-chart-add-component', ['accountgroups'=>$accountgroups])->layout('layouts.base');
+        return view('livewire.account-chart.account-chart-add-component', ['accountgroups' => $accountgroups, 'majorAccountGroups' => $majorAccountGroups, 'subMajorAccountGroups' => $subMajorAccountGroups])->layout('layouts.base');
     }
 }
