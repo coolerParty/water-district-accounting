@@ -117,8 +117,8 @@
                             wire:model="mjracctgrp_id"
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
                             <option value="">Select Major Account group</option>
-                            @foreach($accountgroups as $accountgroup)
-                            <option value="{{ $accountgroup->id }}">{{ $accountgroup->code . ' - ' . $accountgroup->name
+                            @foreach($majorAccountGroups as $majorAccountGroup)
+                            <option value="{{ $majorAccountGroup->id }}">{{ $majorAccountGroup->code . ' - ' . $majorAccountGroup->name
                                 }}</option>
                             @endforeach
                         </select>
@@ -133,8 +133,8 @@
                             wire:model="submjracctgrp_id"
                             class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
                             <option value="">Select Sub Major Account group</option>
-                            @foreach($accountgroups as $accountgroup)
-                            <option value="{{ $accountgroup->id }}">{{ $accountgroup->code . ' - ' . $accountgroup->name
+                            @foreach($subMajorAccountGroups as $subMajorAccountGroup)
+                            <option value="{{ $subMajorAccountGroup->id }}">{{ $subMajorAccountGroup->code . ' - ' . $subMajorAccountGroup->name
                                 }}</option>
                             @endforeach
                         </select>

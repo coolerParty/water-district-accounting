@@ -67,7 +67,7 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->visibleTo('user_id', Auth::user())
+            ->visibleTo(Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->get();
@@ -94,7 +94,7 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->visibleTo('user_id', Auth::user())
+            ->visibleTo(Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->get();
@@ -114,7 +114,7 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->visibleTo('user_id', Auth::user())
+            ->visibleTo(Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->get();
@@ -141,7 +141,7 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->visibleTo('user_id', Auth::user())
+            ->visibleTo(Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->get();
@@ -161,7 +161,7 @@ class JournalReportController extends Controller
             ->where('type', $type)
             ->where('jv_date', '>=', $date_start)
             ->where('jv_date', '<=', $date_end)
-            ->visibleTo('user_id', Auth::user())
+            ->visibleTo(Auth::user())
             ->orderBy('jv_date', 'ASC')
             ->orderBy('jev_no', 'ASC')
             ->get();

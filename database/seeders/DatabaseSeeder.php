@@ -19,6 +19,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PermissionSeeder::class,
             AdminUserSeeder::class,
+            AccountGroupSeeder::class,
+            BankSeeder::class,
+            CashReceiptJournalSeeder::class,
+            BillingSeeder::class,
+            MaterialIssuedJournalSeeder::class,
+            DisbursementSeeder::class,
+            GeneralJournalSeeder::class,
         ]);
     }
 }

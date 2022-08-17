@@ -4,6 +4,8 @@ namespace App\Http\Livewire\AccountChart;
 
 use App\Models\AccountChart;
 use App\Models\AccountGroup;
+use App\Models\MajorAccountGroup;
+use App\Models\SubMajorAccountGroup;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -77,7 +79,9 @@ class AccountChartEditComponent extends Component
     public function render()
     {
         $this->confirmation();
-        $accountgroups = AccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('name', 'ASC')->get();
-        return view('livewire.account-chart.account-chart-edit-component', ['accountgroups' => $accountgroups])->layout('layouts.base');
+        $accountgroups = AccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('code', 'ASC')->get();
+        $majorAccountGroups = MajorAccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('code', 'ASC')->get();
+        $subMajorAccountGroups = SubMajorAccountGroup::select('id', 'code', 'name')->orderBy('seq_no', 'ASC')->orderBy('code', 'ASC')->get();
+        return view('livewire.account-chart.account-chart-edit-component', ['accountgroups' => $accountgroups, 'majorAccountGroups' => $majorAccountGroups, 'subMajorAccountGroups' => $subMajorAccountGroups])->layout('layouts.base');
     }
 }
