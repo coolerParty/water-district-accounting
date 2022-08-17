@@ -39,7 +39,7 @@
                                 </th>
                                 <th scope="col"
                                     class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
-                                    metered_sales
+                                    Metered Sales
                                 </th>
                                 <th scope="col"
                                     class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
@@ -143,26 +143,26 @@
                             @forelse($billings as $billing)
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $billing->jdate }}</div>
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm">{{ $billing->jv_date }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $billing->jno }}</div>
+                                    <div class="text-xs font-bold text-gray-900 md:text-sm">{{ $billing->jev_no }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $billing->zone }}
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm">{{ $billing->billing->zone }}
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-xs text-gray-900">{{ $billing->metered_sales }}</div>
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm">{{ $billing->billing->metered_sales }}</div>
                                 </td>
                                 <td class="px-2 py-1">
-                                    <div class="text-xs font-medium text-gray-900">{{ $billing->part }}
+                                    <div class="text-xs font-medium text-gray-900 lg:text-sm">{{ $billing->particulars }}
                                     </div>
                                 </td>
-                                <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
+                                <td class="px-2 py-1 text-sm font-medium text-right md:whitespace-nowrap">
                                     @can('billing-jev')
-                                    <x-link-secondary href="{{ route('jev.show',['id'=>$billing->jid]) }}"
-                                        target="_blank">
+                                    <x-link-secondary href="{{ route('jev.show',['id'=>$billing->id]) }}"
+                                        target="_blank" >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path fill-rule="evenodd"
@@ -170,14 +170,14 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </x-link-secondary>
-                                    <x-link-secondary href="{{ route('jev.download',['id'=>$billing->jid]) }}">
+                                    <x-link-secondary href="{{ route('jev.download',['id'=>$billing->id]) }}" >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                                           </svg>
                                     </x-link-secondary>
                                     @endcan
                                     @can('billing-edit')
-                                    <x-link-success href="{{ route('billingjournal.edit',['id'=>$billing->bid]) }}">
+                                    <x-link-success href="{{ route('billingjournal.edit',['id'=>$billing->billing->id]) }}" >
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path
@@ -186,9 +186,9 @@
                                     </x-link-success>
                                     @endcan
                                     @can('billing-delete')
-                                    <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
+                                    <x-link-danger href="#" class="btn btn-danger btn-sm text-light "
                                         onclick="confirm('Are you sure, You want to delete this account chart?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $billing->bid }},{{ $billing->jid }})">
+                                        wire:click.prevent="destroy({{ $billing->billing->id }},{{ $billing->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path fill-rule="evenodd"

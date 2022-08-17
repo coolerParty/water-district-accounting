@@ -147,29 +147,29 @@
                             @forelse($disbursements as $disbursement)
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $disbursement->jdate }}</div>
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm">{{ $disbursement->jv_date }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $disbursement->jno }}</div>
+                                    <div class="text-xs font-bold text-gray-900 md:text-sm">{{ $disbursement->jev_no }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $disbursement->dv_number }}
+                                    <div class="text-xs font-bold text-gray-900 md:text-sm">{{ $disbursement->disbursement->dv_number }}
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-xs text-gray-900">{{ $disbursement->check_number }}</div>
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm">{{ $disbursement->disbursement->check_number }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-xs text-gray-900">{{ number_format($disbursement->amount,2) }}
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm">{{ number_format($disbursement->disbursement->amount,2) }}
                                     </div>
                                 </td>
                                 <td class="px-2 py-1">
-                                    <div class="text-xs font-medium text-gray-900">{{ $disbursement->part }}
+                                    <div class="text-xs font-medium text-gray-900 lg:text-sm">{{ $disbursement->particulars }}
                                     </div>
                                 </td>
-                                <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
+                                <td class="px-2 py-1 text-sm font-medium text-right md:whitespace-nowrap">
                                     @can('disbursement-journal-jev')
-                                    <x-link-secondary href="{{ route('jev.show',['id'=>$disbursement->jid]) }}"
+                                    <x-link-secondary href="{{ route('jev.show',['id'=>$disbursement->id]) }}"
                                         target="_blank">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
@@ -178,7 +178,7 @@
                                                 clip-rule="evenodd" />
                                         </svg>
                                     </x-link-secondary>
-                                    <x-link-secondary href="{{ route('jev.download',['id'=>$disbursement->jid]) }}">
+                                    <x-link-secondary href="{{ route('jev.download',['id'=>$disbursement->id]) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd" />
                                           </svg>
@@ -186,7 +186,7 @@
                                     @endcan
                                     @can('disbursement-journal-edit')
                                     <x-link-success
-                                        href="{{ route('checkdisbursementjournal.edit',['id'=>$disbursement->cdid]) }}">
+                                        href="{{ route('checkdisbursementjournal.edit',['id'=>$disbursement->disbursement->id]) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path
@@ -197,7 +197,7 @@
                                     @can('disbursement-journal-delete')
                                     <x-link-danger href="#" class="btn btn-danger btn-sm text-light"
                                         onclick="confirm('Are you sure, You want to delete this account chart?') || event.stopImmediatePropagation()"
-                                        wire:click.prevent="destroy({{ $disbursement->cdid }},{{ $disbursement->jid }})">
+                                        wire:click.prevent="destroy({{ $disbursement->disbursement->id }},{{ $disbursement->id }})">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20"
                                             fill="currentColor">
                                             <path fill-rule="evenodd"

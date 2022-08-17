@@ -19,7 +19,7 @@ class CashReceiptFactory extends Factory
 
         return [
             // 'journal_entry_voucher_id' => $this->faker->unique()->numberBetween(1,500),
-            'official_receipt' => $this->faker->word,
+            'official_receipt' => $this->faker->unique->numerify('#######'),
             'a_receipt'        => $this->faker->word,                     // Acknowledgement Receipt
             'current'          => $this->faker->numberBetween(100,500),
             'penalty'          => $this->faker->numberBetween(100,500),

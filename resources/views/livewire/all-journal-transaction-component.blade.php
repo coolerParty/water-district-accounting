@@ -128,7 +128,7 @@
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
 
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">
+                                    <div class="text-xs font-bold text-gray-900 md:text-sm">
                                         @if($journal->type == 1)
                                         CRJ
                                         @elseif($journal->type == 2)
@@ -143,10 +143,10 @@
                                     </div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ $journal->jv_date }}</div>
+                                    <div class="text-xs font-medium text-gray-900 md:text-sm">{{ $journal->jv_date }}</div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
-                                    <div class="text-sm font-medium text-gray-900">{{ date('Y',
+                                    <div class="text-xs font-bold text-gray-900 md:text-sm">{{ date('Y',
                                         strtotime($journal->jv_date)) . '-' . date('m', strtotime($journal->jv_date)) .
                                         '-'
                                         }}
@@ -163,10 +163,10 @@
                                     </div>
                                 </td>
                                 <td class="px-2 py-1">
-                                    <div class="text-xs text-gray-900">{{ $journal->particulars
+                                    <div class="text-xs text-gray-900 md:text-sm">{{ $journal->particulars
                                         }}</div>
                                 </td>
-                                <td class="px-2 py-1 text-sm font-medium text-right whitespace-nowrap">
+                                <td class="px-2 py-1 text-sm font-medium text-right md:whitespace-nowrap">
                                     @if($journal->type == 1)
                                     @can('cash-receipt-journal-jev')
                                     <x-link-secondary href="{{ route('jev.show',['id'=>$journal->id]) }}"

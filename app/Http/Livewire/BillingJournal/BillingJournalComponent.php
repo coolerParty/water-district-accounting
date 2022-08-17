@@ -5,7 +5,6 @@ namespace App\Http\Livewire\BillingJournal;
 use App\Models\Billing;
 use App\Models\JournalEntryVoucher;
 use Livewire\Component;
-use DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,10 +14,6 @@ class BillingJournalComponent extends Component
 
     public function destroy($bid, $jid)
     {
-        // if (!auth()->user()->can('billing-delete')) {
-        //     abort(404);
-        // }
-
         $this->authorize('billing-delete');
 
         $jev = JournalEntryVoucher::find($jid);
@@ -33,24 +28,15 @@ class BillingJournalComponent extends Component
 
     public function render()
     {
-        // if (!auth()->user()->can('billing-show')) {
-        //     abort(404);
-        // }
-
         $this->authorize('billing-show');
 
-        $billings = DB::table('billings')
-            ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'billings.journal_entry_voucher_id')
-            ->select('billings.id as bid', 'zone', 'metered_sales', 'residential', 'comm', 'comm_a', 'comm_b', 'comm_c', 'government', 'journal_entry_vouchers.jv_date as jdate', 'journal_entry_vouchers.jev_no as jno', 'journal_entry_vouchers.id as jid', 'journal_entry_vouchers.particulars as part')
-            ->orderby('journal_entry_vouchers.jv_date', 'DESC')
-            ->orderby('journal_entry_vouchers.jev_no', 'ASC')
-            ->where('type',2)
-            ->where(function ($query){
-                if (!auth()->user()->can('Super Admin')) {
-                    $query->where('user_id', Auth::user()->id);
-                }
-            })
+        $billings = JournalEntryVoucher::with('billing')->select('id', 'jv_date', 'jev_no', 'particulars')
+            ->where('type', 2)
+            ->orderBy('jv_date', 'DESC')
+            ->orderBy('jev_no', 'DESC')
+            ->visibleTo(Auth::user())
             ->paginate(10);
+
         return view('livewire.billing-journal.billing-journal-component', ['billings' => $billings])->layout('layouts.base');
     }
 }
