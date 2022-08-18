@@ -1258,6 +1258,9 @@ select {
 .mr-1 {
   margin-right: 0.25rem;
 }
+.mr-6 {
+  margin-right: 1.5rem;
+}
 .block {
   display: block;
 }
@@ -1521,6 +1524,12 @@ select {
 .cursor-pointer {
   cursor: pointer;
 }
+.select-none {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
 .list-inside {
   list-style-position: inside;
 }
@@ -1549,6 +1558,9 @@ select {
 }
 .place-content-center {
   place-content: center;
+}
+.content-center {
+  align-content: center;
 }
 .items-start {
   align-items: flex-start;
@@ -1616,6 +1628,11 @@ select {
   --tw-space-y-reverse: 0;
   margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
 }
 .divide-y > :not([hidden]) ~ :not([hidden]) {
   --tw-divide-y-reverse: 0;
@@ -2013,6 +2030,12 @@ select {
 }
 .pt-8 {
   padding-top: 2rem;
+}
+.pr-3 {
+  padding-right: 0.75rem;
+}
+.pr-6 {
+  padding-right: 1.5rem;
 }
 .text-left {
   text-align: left;
@@ -2499,6 +2522,11 @@ select {
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
+.focus\:ring-0:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(0px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
 .focus\:ring-gray-300:focus {
   --tw-ring-opacity: 1;
   --tw-ring-color: rgb(209 213 219 / var(--tw-ring-opacity));
@@ -2904,6 +2932,10 @@ select {
     width: 25%;
   }
 
+  .md\:w-2\/6 {
+    width: 33.333333%;
+  }
+
   .md\:w-2\/4 {
     width: 50%;
   }
@@ -2985,10 +3017,6 @@ select {
 
   .md\:font-medium {
     font-weight: 500;
-  }
-
-  .md\:font-bold {
-    font-weight: 700;
   }
 
   .md\:focus\:border:focus {
@@ -3073,10 +3101,6 @@ select {
   .lg\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
-  }
-
-  .lg\:font-medium {
-    font-weight: 500;
   }
 
   .lg\:shadow-none {
