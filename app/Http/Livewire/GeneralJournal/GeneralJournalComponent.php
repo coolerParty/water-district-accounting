@@ -48,12 +48,6 @@ class GeneralJournalComponent extends Component
     {
         $this->authorize('general-journal-show');
 
-        // $generalJournals = JournalEntryVoucher::with('generalJournal')->select('id', 'jv_date', 'jev_no', 'particulars')
-        //     ->where('type', 5)
-        //     ->orderBy('jv_date', 'DESC')
-        //     ->orderBy('jev_no', 'DESC')
-        //     ->visibleTo(Auth::user())
-        //     ->paginate(10);
         $generalJournals = DB::table('general_journals')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'general_journals.journal_entry_voucher_id')
             ->select('general_journals.id as gid', 'gen_number', 'jv_date', 'jev_no', 'journal_entry_vouchers.id as jid', 'journal_entry_vouchers.particulars as part')

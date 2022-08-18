@@ -37,9 +37,6 @@ class AllJournalTransactionComponent extends Component
             abort(404);
         }
 
-        // $jev = JournalEntryVoucher::find($jid);
-        // $jev->delete();
-
 
         return redirect()->route('alljournal.index')
             ->with('delete-success', 'Journal has been deleted successfully.');

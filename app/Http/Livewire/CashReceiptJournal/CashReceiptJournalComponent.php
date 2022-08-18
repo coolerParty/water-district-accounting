@@ -70,15 +70,6 @@ class CashReceiptJournalComponent extends Component
             ->orderBy($this->sortColumn , $this->sortDirection)
             ->paginate($this->perPage);
 
-        // $cashreceipts = JournalEntryVoucher::with('cashReciept')->select('id', 'jv_date', 'jev_no', 'particulars')
-        //     ->where('type', 1)
-        //     ->visibleTo(Auth::user())
-        //     ->search('jv_date', $this->search)
-        //     ->search('jev_no', $this->search)
-        //     ->search('particulars', $this->search)
-        //     ->orderBy($this->sortColumn , $this->sortDirection)
-        //     ->paginate($this->perPage);
-
         return view('livewire.cash-receipt-journal.cash-receipt-journal-component', ['cashreceipts' => $cashreceipts])->layout('layouts.base');
     }
 }
