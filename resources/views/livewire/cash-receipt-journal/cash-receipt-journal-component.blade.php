@@ -59,8 +59,8 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
-                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase cursor-pointer"
-                                    wire:click="sortByColumn('jv_date')">
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase 
+                                    cursor-pointer" wire:click="sortByColumn('jv_date')">
                                     <div class="flex content-center space-x-4">
                                         <span>Date</span>
                                         @if ($sortColumn == 'jv_date' && $sortDirection == 'desc')
