@@ -43,8 +43,12 @@
                     </div>
                     {{-- search form end --}}
                     <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
+                        <x-link-danger class="p-2 m-2 cursor-pointer" wire:click.prevent="deleteSelected" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()"><span class="mr-2">({{ count($selectedJournals) }})</span> Delete Selected</x-link-danger>
                         <thead class="bg-gray-50">
                             <tr>
+                                <th class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase cursor-pointer">
+                                    <input type="checkbox" wire:model="selectAll" class="text-indigo-600 bg-indigo-900 border-gray-300 rounded shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                </th>
                                 <th scope="col"
                                     class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase cursor-pointer"
                                     wire:click="sortByColumn('type')">
@@ -230,7 +234,9 @@
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($journals as $journal)
                             <tr class="transition-all hover:bg-gray-100 hover:shadow-lg">
-
+                                <td class="px-2 py-1 whitespace-nowrap"><input type="checkbox" value="{{ $journal->id }}"
+                                    class="{{ $journal->jev_no  }} rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-indigo-900"
+                                    wire:model="selectedJournals"></td>
                                 <td class="px-2 py-1 whitespace-nowrap">
                                     <div class="text-xs font-bold text-gray-900 md:text-sm">
                                         @if($journal->type == 1)
@@ -252,19 +258,6 @@
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
                                     <div class="text-xs font-bold text-gray-900 md:text-sm">
-                                        <!-- {{ date('Y',
-                                        strtotime($journal->jv_date)) . '-' . date('m', strtotime($journal->jv_date)) .
-                                        '-'
-                                        }}
-                                        @if(strlen($journal->jev_no)==1)
-                                        {{ '000' . $journal->jev_no }}
-                                        @elseif(strlen($journal->jev_no)==2)
-                                        {{ '00' . $journal->jev_no }}
-                                        @elseif(strlen($journal->jev_no)==3)
-                                        {{ '0' . $journal->jev_no }}
-                                        @else
-                                        {{ '0' . $journal->jev_no }}
-                                        @endif -->
                                         {{ $journal->jev_no }}
                                     </div>
                                 </td>

@@ -18,6 +18,43 @@ class AllJournalTransactionComponent extends Component
     public $sortDirection = 'asc';
     public $perPage = '10';
 
+    public $selectedJournals = [];
+    public $selectAll = false;
+
+    public function render()
+    {
+        $this->authorize('all-journal-show');
+
+        $journals = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')
+        ->visibleTo(Auth::user())
+        ->search('jv_date', $this->search)
+        ->search('jev_no', $this->search)
+        ->search('particulars', $this->search)
+        ->orderBy($this->sortColumn , $this->sortDirection)
+        ->paginate($this->perPage);
+
+        return view('livewire.all-journal-transaction-component', ['journals' => $journals])->layout('layouts.base');
+    }
+
+    public function deleteSelected()
+    {
+        JournalEntryVoucher::query()
+        ->whereIn('id', $this->selectedJournals)
+        ->delete();
+        $this->selectedJournals = [];
+        $this->selectAll = false;
+    }
+
+    public function updatedSelectAll($value)
+    {
+        if($value){
+            $this->selectedJournals = JournalEntryVoucher::pluck('id');
+        }
+        else{
+            $this->selectedJournals = [];
+        }
+    }
+
     public function sortByColumn($column)
     {
         if($this->sortColumn == $column)
@@ -40,20 +77,5 @@ class AllJournalTransactionComponent extends Component
 
         return redirect()->route('alljournal.index')
             ->with('delete-success', 'Journal has been deleted successfully.');
-    }
-
-    public function render()
-    {
-        $this->authorize('all-journal-show');
-
-        $journals = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')
-        ->visibleTo(Auth::user())
-        ->search('jv_date', $this->search)
-        ->search('jev_no', $this->search)
-        ->search('particulars', $this->search)
-        ->orderBy($this->sortColumn , $this->sortDirection)
-        ->paginate($this->perPage);
-
-        return view('livewire.all-journal-transaction-component', ['journals' => $journals])->layout('layouts.base');
     }
 }
