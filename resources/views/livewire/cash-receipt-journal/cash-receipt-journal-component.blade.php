@@ -59,8 +59,7 @@
                         <thead class="bg-gray-50">
                             <tr>
                                 <th scope="col"
-                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase 
-                                    cursor-pointer" wire:click="sortByColumn('jv_date')">
+                                    class="p-2 text-xs font-medium tracking-wider text-left text-gray-500 uppercase cursor-pointer" wire:click="sortByColumn('jv_date')">
                                     <div class="flex content-center space-x-4">
                                         <span>Date</span>
                                         @if ($sortColumn == 'jv_date' && $sortDirection == 'desc')
@@ -287,9 +286,9 @@
                                     </div>
                                 </td>
                                 <td class="px-2 py-1">
-                                    <div class="text-xs font-medium text-gray-900 lg:text-sm">{{
-                                        $cashreceipt->particulars
-                                        }}</div>
+                                    <div class="text-xs font-medium text-gray-900 lg:text-sm">
+                                        {{ \Illuminate\Support\Str::limit($cashreceipt->particulars, 80, $end='...') }}
+                                        </div>
                                 </td>
                                 <td class="px-2 py-1 whitespace-nowrap">
                                     <div class="text-xs font-medium text-gray-900 lg:text-sm">{{ $cashreceipt->a_receipt
