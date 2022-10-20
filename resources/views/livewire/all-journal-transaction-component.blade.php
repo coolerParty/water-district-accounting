@@ -262,8 +262,7 @@
                                     </div>
                                 </td>
                                 <td class="px-2 py-1">
-                                    <div class="text-xs text-gray-900 md:text-sm">{{ $journal->particulars
-                                        }}</div>
+                                    <div class="text-xs text-gray-900 md:text-sm">{{ \Illuminate\Support\Str::limit($journal->particulars, 100, $end='...') }}</div>
                                 </td>
                                 <td class="px-2 py-1 text-sm font-medium text-right md:whitespace-nowrap">
                                     @if($journal->type == 1)
