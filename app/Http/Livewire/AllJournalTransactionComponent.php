@@ -32,7 +32,6 @@ class AllJournalTransactionComponent extends Component
         ->search('particulars', $this->search)
         ->orderBy($this->sortColumn , $this->sortDirection)
         ->paginate($this->perPage);
-
         return view('livewire.all-journal-transaction-component', ['journals' => $journals])->layout('layouts.base');
     }
 
@@ -48,7 +47,13 @@ class AllJournalTransactionComponent extends Component
     public function updatedSelectAll($value)
     {
         if($value){
-            $this->selectedJournals = JournalEntryVoucher::pluck('id');
+
+            $this->selectedJournals = JournalEntryVoucher::visibleTo(Auth::user())
+            ->search('jv_date', $this->search)
+            ->search('jev_no', $this->search)
+            ->search('particulars', $this->search)
+            ->orderBy($this->sortColumn , $this->sortDirection)
+            ->paginate($this->perPage)->pluck('id');
         }
         else{
             $this->selectedJournals = [];

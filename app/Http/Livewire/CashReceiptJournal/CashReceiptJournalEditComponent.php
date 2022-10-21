@@ -37,17 +37,44 @@ class CashReceiptJournalEditComponent extends Component
     public $enableEdit = false;
     public $enableAdd = false;
 
+    public $search;
+    public $accountCharts = [];
+    public $showModal = false;
+
     public function getMaxJevNumber()
     {
         $this->confirmation();
-
         $this->jev_no = JournalEntryVoucher::where('id', '<>', $this->jev_id)->max('jev_no') + 1;
+    }
+
+    public function showSearchAccounts()
+    {
+        $this->confirmation();
+        $this->resetSearchAccount();
+        $this->showModal = true;
+    }
+
+    public function closeModal()
+    {
+        $this->resetSearchAccount();
+    }
+
+    public function resetSearchAccount()
+    {
+        $this->search = null;
+        $this->accountCharts = [];
+        $this->showModal = false;
+    }
+
+    public function selectAccount($accountID)
+    {
+        $this->accountCode = $accountID;
+        $this->closeModal();
     }
 
     public function showAddTransaction()
     {
         $this->confirmation();
-
         $this->resetAddEdit();
         $this->enableEdit = false;
         $this->enableAdd = true;
@@ -101,8 +128,7 @@ class CashReceiptJournalEditComponent extends Component
         $this->cod_prev_day     = $crj->cod_prev_day;
 
         $jev = JournalEntryVoucher::where('id', $this->jev_id)->where('type', 1)->visibleTo(Auth::user())->first();
-        if(empty($jev))
-        {
+        if (empty($jev)) {
             abort(404);
         }
         $this->jev_date    = $jev->jv_date;
@@ -112,7 +138,6 @@ class CashReceiptJournalEditComponent extends Component
 
     public function updated($fields)
     {
-
         $this->validateOnly($fields, [
             'official_receipt' => ['required', 'min:5', 'max:150'],
             'a_receipt'        => ['required', 'min:5', 'max:150'],
@@ -128,9 +153,7 @@ class CashReceiptJournalEditComponent extends Component
 
     public function update()
     {
-
         $this->confirmation();
-
         $this->validate([
             'official_receipt' => ['required', 'min:5', 'max:150'],
             'a_receipt'        => ['required', 'min:5', 'max:150'],
@@ -145,10 +168,8 @@ class CashReceiptJournalEditComponent extends Component
 
         try {
             DB::transaction(function () {
-
                 $cr                   = CashReceipt::find($this->crj_id);
-                if(empty($cr))
-                {
+                if (empty($cr)) {
                     abort(404);
                 }
                 $cr->official_receipt = $this->official_receipt;
@@ -161,8 +182,7 @@ class CashReceiptJournalEditComponent extends Component
                 $cr->save();
 
                 $jev              = JournalEntryVoucher::visibleTo(Auth::user())->where('id', $this->jev_id)->first();
-                if(empty($jev))
-                {
+                if (empty($jev)) {
                     abort(404);
                 }
                 $jev->jev_no      = $this->jev_no;
@@ -181,7 +201,6 @@ class CashReceiptJournalEditComponent extends Component
     public function addTransaction()
     {
         $this->confirmation();
-
         $this->validate([
             'accountCode' => ['required', 'integer'],
             'debit'       => ['required', 'numeric', 'min:0'],
@@ -221,10 +240,6 @@ class CashReceiptJournalEditComponent extends Component
 
     public function confirmation()
     {
-        // if (!auth()->user()->can('cash-receipt-journal-edit')) {
-        //     abort(404);
-        // }
-
         $this->authorize('cash-receipt-journal-edit');
     }
 
@@ -234,6 +249,14 @@ class CashReceiptJournalEditComponent extends Component
 
         $transactions = Transaction::with('accountChart')->select('id', 'accountchart_id', 'journal_entry_voucher_id', 'debit', 'credit')->where('journal_entry_voucher_id', $this->jev_id)->get();
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
-        return view('livewire.cash-receipt-journal.cash-receipt-journal-edit-component', ['transactions' => $transactions, 'accounts' => $accounts])->layout('layouts.base');
+        $accountsModal = AccountChart::select('id', 'code', 'name')
+            ->when($this->search, function ($query) {
+                $query->orWhere('code', 'like',  '%' . $this->search . '%')
+                    ->orWhere('name', 'like',  '%' . $this->search . '%');
+            })
+            ->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
+        return view('livewire.cash-receipt-journal.cash-receipt-journal-edit-component', [
+            'transactions' => $transactions, 'accounts' => $accounts, 'accountsModal' => $accountsModal
+        ])->layout('layouts.base');
     }
 }
