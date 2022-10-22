@@ -61,11 +61,13 @@ class MaterialIssuedJournalComponent extends Component
                     $query->where('user_id', Auth::user()->id);
                 }
             })
-            ->Where(function ($query) {
-                $query->Orwhere('jv_date', 'like', '%' . $this->search . '%')
-                    ->Orwhere('jev_no', 'like', '%' . $this->search . '%')
-                    ->Orwhere('particulars', 'like', '%' . $this->search . '%')
-                    ->Orwhere('rsmi_no', 'like', '%' . $this->search . '%');
+            ->when($this->search, function ($query) {
+                $query->Where(function ($query) {
+                    $query->orWhere('jv_date', 'like', '%' . $this->search . '%')
+                            ->orWhere('jev_no', 'like', '%' . $this->search . '%')
+                            ->orWhere('particulars', 'like', '%' . $this->search . '%')
+                            ->orWhere('rsmi_no', 'like', '%' . $this->search . '%');
+                });
             })
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->perPage);

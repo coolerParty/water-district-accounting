@@ -60,12 +60,14 @@ class CashReceiptJournalComponent extends Component
                     $query->where('user_id', Auth::user()->id);
                 }
             })
-            ->Where(function($query) {
-                $query->Orwhere('jv_date','like', '%' . $this->search .'%')
-                        ->Orwhere('jev_no','like', '%' . $this->search .'%')
-                        ->Orwhere('particulars','like', '%' . $this->search .'%')
-                        ->Orwhere('official_receipt','like', '%' . $this->search .'%')
-                        ->Orwhere('a_receipt','like', '%' . $this->search .'%');
+            ->when($this->search, function ($query) {
+                $query->Where(function ($query) {
+                    $query->orWhere('jv_date','like', '%' . $this->search .'%')
+                            ->orWhere('jev_no','like', '%' . $this->search .'%')
+                            ->orWhere('particulars','like', '%' . $this->search .'%')
+                            ->orWhere('official_receipt','like', '%' . $this->search .'%')
+                            ->orWhere('a_receipt','like', '%' . $this->search .'%');
+                });
             })
             ->orderBy($this->sortColumn , $this->sortDirection)
             ->paginate($this->perPage);

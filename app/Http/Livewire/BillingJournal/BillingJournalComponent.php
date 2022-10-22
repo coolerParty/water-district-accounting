@@ -22,12 +22,9 @@ class BillingJournalComponent extends Component
 
     public function sortByColumn($column)
     {
-        if($this->sortColumn == $column)
-        {
+        if ($this->sortColumn == $column) {
             $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
-        }
-        else
-        {
+        } else {
             $this->sortDirection = 'asc';
         }
         $this->sortColumn = $column;
@@ -51,22 +48,24 @@ class BillingJournalComponent extends Component
     {
         $this->authorize('billing-show');
 
-            $billings = DB::table('billings')
+        $billings = DB::table('billings')
             ->join('journal_entry_vouchers', 'journal_entry_vouchers.id', '=', 'billings.journal_entry_voucher_id')
             ->select('billings.id as bid', 'zone', 'metered_sales', 'residential', 'comm', 'comm_a', 'comm_b', 'comm_c', 'government', 'jv_date', 'jev_no', 'journal_entry_vouchers.id as jid', 'particulars')
-            ->where('type',2)
-            ->where(function ($query){
+            ->where('type', 2)
+            ->where(function ($query) {
                 if (!auth()->user()->can('Super Admin')) {
                     $query->where('user_id', Auth::user()->id);
                 }
             })
-            ->Where(function($query) {
-                $query->Orwhere('jv_date','like', '%' . $this->search .'%')
-                        ->Orwhere('jev_no','like', '%' . $this->search .'%')
-                        ->Orwhere('particulars','like', '%' . $this->search .'%')
-                        ->Orwhere('zone','like', '%' . $this->search .'%');
+            ->when($this->search, function ($query) {
+                $query->Where(function ($query) {
+                    $query->orWhere('jv_date', 'like', '%' . $this->search . '%')
+                        ->orWhere('jev_no', 'like', '%' . $this->search . '%')
+                        ->orWhere('particulars', 'like', '%' . $this->search . '%')
+                        ->orWhere('zone', 'like', '%' . $this->search . '%');
+                });
             })
-            ->orderBy($this->sortColumn , $this->sortDirection)
+            ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->perPage);
 
         return view('livewire.billing-journal.billing-journal-component', ['billings' => $billings])->layout('layouts.base');
