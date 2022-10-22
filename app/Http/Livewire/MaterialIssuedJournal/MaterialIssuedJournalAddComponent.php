@@ -22,6 +22,42 @@ class MaterialIssuedJournalAddComponent extends Component
 
     public $journals = [];
 
+    // Account Codes Search Modal
+    public $journals_index;
+    public $search;
+    public $accountCharts = [];
+    public $showModal = false;
+
+    // Account Codes Search Modal Start
+    public function showSearchAccounts($index)
+    {
+        $this->confirmation();
+        $this->resetSearchAccount();
+
+        $this->journals_index = $index;
+        $this->showModal = true;
+    }
+
+    public function selectAccount($accountID)
+    {
+        $this->journals[$this->journals_index]['accountCode'] = $accountID;
+        $this->closeModal();
+    }
+
+    public function closeModal()
+    {
+        $this->resetSearchAccount();
+    }
+
+    public function resetSearchAccount()
+    {
+        $this->journals_index = null;
+        $this->search = null;
+        $this->accountCharts = [];
+        $this->showModal = false;
+    }
+    // Account Codes Search Modal End
+
     public function mount()
     {
         $this->journals = [
@@ -103,6 +139,15 @@ class MaterialIssuedJournalAddComponent extends Component
         $this->confirmation();
 
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
-        return view('livewire.material-issued-journal.material-issued-journal-add-component',['accounts'=>$accounts])->layout('layouts.base');
+        // Account Codes Search Modal
+        $accountsModal = AccountChart::select('id', 'code', 'name')
+            ->when($this->search, function ($query) {
+                $query->orWhere('code', 'like' ,  '%' . $this->search . '%')
+                    ->orWhere('name', 'like' ,  '%' . $this->search . '%');
+            })
+            ->orderBy('code', 'ASC')
+            ->orderBy('name', 'ASC')
+            ->get();
+        return view('livewire.material-issued-journal.material-issued-journal-add-component',['accounts'=>$accounts, 'accountsModal' => $accountsModal])->layout('layouts.base');
     }
 }

@@ -69,6 +69,10 @@
                                         <tr>
                                             <th scope="col"
                                                 class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                                Find
+                                            </th>
+                                            <th scope="col"
+                                                class="p-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                                 account code
                                             </th>
                                             <th scope="col"
@@ -88,7 +92,17 @@
                                     <tbody class="bg-white divide-y divide-gray-200">
                                         @foreach ($journals as $index => $jev)
                                         <tr class="transition-all hover:bg-gray-100">
-
+                                            <td class="p-2">
+                                                <button wire:click.prevent="showSearchAccounts({{ $index }})"
+                                                    class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                        fill="currentColor" class="w-5 h-5">
+                                                        <path fill-rule="evenodd"
+                                                            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                                            clip-rule="evenodd" />
+                                                    </svg>
+                                                </button>
+                                            </td>
                                                 <td class="p-2 whitespace-nowrap">
                                                     <select name="journals[{{ $index }}][accountCode]"
                                                         wire:model="journals.{{ $index }}.accountCode" class="block w-full p-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
@@ -115,7 +129,7 @@
                                             </tr>
                                         @endforeach
                                         <tr class="transition-all bg-gray-400">
-                                            <td class="p-2 whitespace-nowrap">
+                                            <td class="p-2 whitespace-nowrap" colspan="2">
                                                 Total
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
@@ -147,4 +161,52 @@
             </form>
         </section>
     </div>
+    {{-- Show-Modal Start --}}
+    <style>
+        .modal-body {
+            max-height: calc(100vh - 200px) !important;
+            overflow-y: auto !important;
+        }
+    </style>
+    <x-jet-dialog-modal wire:model="showModal">
+        <x-slot name="title">Search Accounts</x-slot>
+        <x-slot name="content" class="w-full">
+            <div class="w-full modal-body ">
+                <!-- <x-jet-validation-errors class="mb-4" /> -->
+                <section class="max-w-4xl p-2 mx-auto dark:bg-gray-800">
+
+                        <div class="w-full px-2 mb-2">
+                            <!-- <label class="text-gray-700 dark:text-gray-200" for="search">Search</label> -->
+                            <input id="search" type="text" name="search" value="{{ old('search') }}"
+                                wire:model.lazy="search" required autofocus autocomplete="search"
+                                class="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring ">
+                        </div>
+
+                    <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse($accountsModal as $item)
+                            <tr class="transition-all hover:bg-gray-100">
+                                <td class="p-2"><button type="button"
+                                        wire:click.prevent="selectAccount({{ $item->id }})"
+                                        class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Select</button>
+                                </td>
+                                <td class="p-2 text-xs dark:text-white">{{ $item->code }}</td>
+                                <td class="p-2 text-xs dark:text-white">{{ $item->name }}</td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="3" class="p-2 dark:text-white">No item found!</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </section>
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-link-danger type="button" wire:click.prevent="closeModal"
+                class="text-white bg-gray-600 cursor-pointer hover:bg-gray-800">Close</x-link-danger>
+        </x-slot>
+    </x-jet-dialog-modal>
+    {{-- Show-Modal End --}}
 </div>
