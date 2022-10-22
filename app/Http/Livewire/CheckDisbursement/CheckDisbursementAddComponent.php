@@ -39,6 +39,41 @@ class CheckDisbursementAddComponent extends Component
 
     public $journals = [];
 
+    // Account Codes Search Modal
+    public $journals_index;
+    public $search;
+    public $accountCharts = [];
+    public $showModal = false;
+
+    // Account Codes Search Modal Start
+    public function showSearchAccounts($index)
+    {
+        $this->confirmation();
+        $this->resetSearchAccount();
+        $this->journals_index = $index;
+        $this->showModal = true;
+    }
+
+    public function selectAccount($accountID)
+    {
+        $this->journals[$this->journals_index]['accountCode'] = $accountID;
+        $this->closeModal();
+    }
+
+    public function closeModal()
+    {
+        $this->resetSearchAccount();
+    }
+
+    public function resetSearchAccount()
+    {
+        $this->journals_index = null;
+        $this->search = null;
+        $this->accountCharts = [];
+        $this->showModal = false;
+    }
+    // Account Codes Search Modal End
+
     public function mount()
     {
         $this->journals = [
@@ -181,10 +216,6 @@ class CheckDisbursementAddComponent extends Component
 
     public function confirmation()
     {
-        // if (!auth()->user()->can('disbursement-journal-create')) {
-        //     abort(404);
-        // }
-
         $this->authorize('disbursement-journal-create');
     }
 
@@ -194,6 +225,17 @@ class CheckDisbursementAddComponent extends Component
 
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
         $banks = Bank::select('id','bank_name')->get();
-        return view('livewire.check-disbursement.check-disbursement-add-component', ['accounts' => $accounts,'banks'=>$banks])->layout('layouts.base');
+        // Account Codes Search Modal
+        $accountsModal = AccountChart::select('id', 'code', 'name')
+            ->when($this->search, function ($query) {
+                $query->orWhere('code', 'like' ,  '%' . $this->search . '%')
+                    ->orWhere('name', 'like' ,  '%' . $this->search . '%');
+            })
+            ->orderBy('code', 'ASC')
+            ->orderBy('name', 'ASC')
+            ->get();
+        return view('livewire.check-disbursement.check-disbursement-add-component', [
+                'accounts' => $accounts,'banks'=>$banks, 'accountsModal' => $accountsModal
+            ])->layout('layouts.base');
     }
 }
