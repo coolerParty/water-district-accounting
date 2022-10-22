@@ -234,7 +234,7 @@
             </form>
         </section>
     </div>
-    {{-- Show-Product-Modal Start --}}
+    {{-- Show-Modal Start --}}
     <style>
         .modal-body {
             max-height: calc(100vh - 200px) !important;
@@ -281,5 +281,5 @@
                 class="text-white bg-gray-600 cursor-pointer hover:bg-gray-800">Close</x-link-danger>
         </x-slot>
     </x-jet-dialog-modal>
-    {{-- Show-Product-Modal End --}}
+    {{-- Show-Modal End --}}
 </div>

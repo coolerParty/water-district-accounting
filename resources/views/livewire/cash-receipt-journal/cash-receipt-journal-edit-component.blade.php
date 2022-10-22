@@ -4,8 +4,7 @@
     <div
         class="flex flex-col items-start justify-between pb-6 mb-2 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-lg font-semibold whitespace-nowrap">Cash Receipt Journal <span
-            class="text-base text-gray-400">/</span> Edit <span
-                class="text-base text-gray-400">/</span>
+                class="text-base text-gray-400">/</span> Edit <span class="text-base text-gray-400">/</span>
             <span class="text-2xl">JEV No. {{ $jev_no }}</span>
         </h1>
         <a href="{{ route('cashreceiptjournal.index') }}"
@@ -114,9 +113,9 @@
                         </label>
                         <div class="flex flex-wrap space-x-1">
                             <input id="jev_no" type="text" value="{{ old('jev_no') }}" wire:model="jev_no"
-                            class="block w-3.5/5 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('jev_no') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
+                                class="block w-3.5/5 px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('jev_no') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
 
-                              <x-link-success href="#" wire:click.prevent="getMaxJevNumber" class="w-1.5/5">
+                            <x-link-success href="#" wire:click.prevent="getMaxJevNumber" class="w-1.5/5">
                                 Jev Number
                             </x-link-success>
                         </div>
@@ -343,17 +342,18 @@
                                     $transaction->id)
                                     )
                                     <tr class="transition-all hover:bg-gray-100">
-
                                         <td class="p-2 whitespace-nowrap">
                                             <div class="text-sm font-medium text-gray-900">{{
                                                 $transaction->accountchart->code }}</div>
                                         </td>
                                         <td class="p-2 text-right whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">{{ number_format($transaction->debit,2) }}
+                                            <div class="text-sm font-medium text-gray-900">{{
+                                                number_format($transaction->debit,2) }}
                                             </div>
                                         </td>
                                         <td class="p-2 text-right whitespace-nowrap">
-                                            <div class="text-sm font-medium text-gray-900">{{ number_format($transaction->credit,2) }}</div>
+                                            <div class="text-sm font-medium text-gray-900">{{
+                                                number_format($transaction->credit,2) }}</div>
                                         </td>
                                         <td class="p-2 text-right whitespace-nowrap">
                                             @can('user-edit')
@@ -371,21 +371,18 @@
                                             @endcan
                                         </td>
                                     </tr>
-
                                     @else
                                     <tr class="transition-all hover:bg-gray-100">
-
                                         <td class="flex flex-row p-2 space-x-1 whitespace-nowrap">
                                             <button wire:click.prevent="showSearchAccounts()"
-                                                    class="px-3 py-1 text-xs leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                        fill="currentColor" class="w-3 h-3">
-                                                        <path fill-rule="evenodd"
-                                                            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-
-                                                </button>
+                                                class="px-3 py-1 text-xs leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                    fill="currentColor" class="w-3 h-3">
+                                                    <path fill-rule="evenodd"
+                                                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
                                             <select wire:model="accountCode"
                                                 class="block w-full p-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
                                                 <option value="">Select Account</option>
@@ -433,15 +430,14 @@
 
                                         <td class="flex flex-row p-2 space-x-1 whitespace-nowrap">
                                             <button wire:click.prevent="showSearchAccounts()"
-                                                    class="px-3 py-1 text-xs leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                                        fill="currentColor" class="w-3 h-3">
-                                                        <path fill-rule="evenodd"
-                                                            d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
-                                                            clip-rule="evenodd" />
-                                                    </svg>
-
-                                                </button>
+                                                class="px-3 py-1 text-xs leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                                    fill="currentColor" class="w-3 h-3">
+                                                    <path fill-rule="evenodd"
+                                                        d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </button>
                                             <select wire:model="accountCode"
                                                 class="block w-full p-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
                                                 <option value="">Select Account</option>
@@ -489,13 +485,13 @@
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
                                             <p
-                                                class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
-                                                >{{ number_format($transactions->sum('debit'),2) }}</p>
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500">
+                                                {{ number_format($transactions->sum('debit'),2) }}</p>
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
                                             <p
-                                                class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500"
-                                                >{{ number_format($transactions->sum('credit'),2) }}</p>
+                                                class="block w-full p-2 leading-tight text-right text-gray-700 border border-gray-200 rounded appearance-none bg-gray-50 focus:outline-none focus:bg-white focus:border-gray-500">
+                                                {{ number_format($transactions->sum('credit'),2) }}</p>
                                         </td>
                                         <td class="p-2 whitespace-nowrap">
 
@@ -504,9 +500,9 @@
                                 </tbody>
                             </table>
                             @if(
-                                ($enableAdd == false && $enableEdit == false)
-                                ||
-                                ($enableAdd == true && $enableEdit == false)
+                            ($enableAdd == false && $enableEdit == false)
+                            ||
+                            ($enableAdd == true && $enableEdit == false)
                             )
                             <div class="w-full p-3">
                                 <button type="button"
@@ -532,11 +528,11 @@
         <x-slot name="content" class="w-full">
             <div class="w-full modal-body ">
                 <section class="relative max-w-4xl p-2 mx-auto dark:bg-gray-800">
-                        <div class="sticky top-0 left-0 z-10 w-full px-2 mb-2 bg-white">
-                            <input id="search" type="text" name="search" value="{{ old('search') }}"
-                                wire:model.lazy="search" required autofocus autocomplete="search"
-                                class="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring ">
-                        </div>
+                    <div class="sticky top-0 left-0 z-10 w-full px-2 mb-2 bg-white">
+                        <input id="search" type="text" name="search" value="{{ old('search') }}"
+                            wire:model.lazy="search" required autofocus autocomplete="search"
+                            class="block w-full px-4 py-2 mt-2 text-gray-700 border border-gray-300 rounded-md bg-gray-50 dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring ">
+                    </div>
                     <table class="min-w-full overflow-x-scroll divide-y divide-gray-200">
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($accountsModal as $item)

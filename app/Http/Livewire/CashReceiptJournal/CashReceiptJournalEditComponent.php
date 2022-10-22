@@ -37,6 +37,7 @@ class CashReceiptJournalEditComponent extends Component
     public $enableEdit = false;
     public $enableAdd = false;
 
+    // Account Codes Search Modal
     public $search;
     public $accountCharts = [];
     public $showModal = false;
@@ -47,6 +48,7 @@ class CashReceiptJournalEditComponent extends Component
         $this->jev_no = JournalEntryVoucher::where('id', '<>', $this->jev_id)->max('jev_no') + 1;
     }
 
+    // Account Codes Search Modal Start
     public function showSearchAccounts()
     {
         $this->confirmation();
@@ -71,6 +73,7 @@ class CashReceiptJournalEditComponent extends Component
         $this->accountCode = $accountID;
         $this->closeModal();
     }
+    // Account Codes Search Modal End
 
     public function showAddTransaction()
     {
@@ -83,7 +86,6 @@ class CashReceiptJournalEditComponent extends Component
     public function showEditForm($id)
     {
         $this->confirmation();
-
         $this->resetAddEdit();
         $this->enableEdit = true;
         $this->enableAdd = false;
@@ -249,12 +251,17 @@ class CashReceiptJournalEditComponent extends Component
 
         $transactions = Transaction::with('accountChart')->select('id', 'accountchart_id', 'journal_entry_voucher_id', 'debit', 'credit')->where('journal_entry_voucher_id', $this->jev_id)->get();
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
+
+        // Account Codes Search Modal
         $accountsModal = AccountChart::select('id', 'code', 'name')
             ->when($this->search, function ($query) {
                 $query->orWhere('code', 'like',  '%' . $this->search . '%')
                     ->orWhere('name', 'like',  '%' . $this->search . '%');
             })
-            ->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
+            ->orderBy('code', 'ASC')
+            ->orderBy('name', 'ASC')
+            ->get();
+
         return view('livewire.cash-receipt-journal.cash-receipt-journal-edit-component', [
             'transactions' => $transactions, 'accounts' => $accounts, 'accountsModal' => $accountsModal
         ])->layout('layouts.base');
