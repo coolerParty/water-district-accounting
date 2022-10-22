@@ -29,11 +29,13 @@ class CashReceiptJournalAddComponent extends Component
 
     public $journals = [];
 
+    // Account Codes Search Modal
     public $journals_index;
     public $search;
     public $accountCharts = [];
     public $showModal = false;
 
+    // Account Codes Search Modal Start
     public function showSearchAccounts($index)
     {
         $this->confirmation();
@@ -41,8 +43,6 @@ class CashReceiptJournalAddComponent extends Component
 
         $this->journals_index = $index;
         $this->showModal = true;
-        // dd($this->journals[$index]);
-        // $this->journals[$index]['accountCode'] = 1;
     }
 
     public function selectAccount($accountID)
@@ -63,6 +63,8 @@ class CashReceiptJournalAddComponent extends Component
         $this->accountCharts = [];
         $this->showModal = false;
     }
+    // Account Codes Search Modal End
+
 
     public function mount()
     {
@@ -158,10 +160,6 @@ class CashReceiptJournalAddComponent extends Component
 
     public function confirmation()
     {
-        // if (!auth()->user()->can('cash-receipt-journal-create')) {
-        //     abort(404);
-        // }
-
         $this->authorize('cash-receipt-journal-create');
     }
 
@@ -169,14 +167,18 @@ class CashReceiptJournalAddComponent extends Component
     public function render()
     {
         $this->confirmation();
-
         $accounts = AccountChart::select('id', 'code', 'name')->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
+
+        // Account Codes Search Modal
         $accountsModal = AccountChart::select('id', 'code', 'name')
             ->when($this->search, function ($query) {
-            $query->orWhere('code', 'like' ,  '%' . $this->search . '%')
-                ->orWhere('name', 'like' ,  '%' . $this->search . '%');
-        })
-        ->orderBy('code', 'ASC')->orderBy('name', 'ASC')->get();
+                $query->orWhere('code', 'like' ,  '%' . $this->search . '%')
+                    ->orWhere('name', 'like' ,  '%' . $this->search . '%');
+            })
+            ->orderBy('code', 'ASC')
+            ->orderBy('name', 'ASC')
+            ->get();
+
         return view('livewire.cash-receipt-journal.cash-receipt-journal-add-component', ['accounts' => $accounts, 'accountsModal' => $accountsModal])->layout('layouts.base');
     }
 }
