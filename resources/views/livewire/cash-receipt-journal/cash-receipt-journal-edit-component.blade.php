@@ -427,7 +427,6 @@
                                     @endforeach
                                     @if($enableAdd == true)
                                     <tr class="transition-all hover:bg-gray-100">
-
                                         <td class="flex flex-row p-2 space-x-1 whitespace-nowrap">
                                             <button wire:click.prevent="showSearchAccounts()"
                                                 class="px-3 py-1 text-xs leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">

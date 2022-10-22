@@ -65,7 +65,6 @@ class CashReceiptJournalAddComponent extends Component
     }
     // Account Codes Search Modal End
 
-
     public function mount()
     {
         $this->journals = [
