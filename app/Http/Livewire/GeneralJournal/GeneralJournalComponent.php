@@ -57,11 +57,13 @@ class GeneralJournalComponent extends Component
                     $query->where('user_id', Auth::user()->id);
                 }
             })
-            ->Where(function ($query) {
-                $query->Orwhere('jv_date', 'like', '%' . $this->search . '%')
-                    ->Orwhere('jev_no', 'like', '%' . $this->search . '%')
-                    ->Orwhere('journal_entry_vouchers.particulars', 'like', '%' . $this->search . '%')
-                    ->Orwhere('gen_number', 'like', '%' . $this->search . '%');
+            ->when($this->search, function ($query) {
+                $query->Where(function ($query) {
+                    $query->orWhere('jv_date', 'like', '%' . $this->search . '%')
+                            ->orWhere('jev_no', 'like', '%' . $this->search . '%')
+                            ->orWhere('journal_entry_vouchers.particulars', 'like', '%' . $this->search . '%')
+                            ->orWhere('gen_number', 'like', '%' . $this->search . '%');
+                });
             })
             ->orderBy($this->sortColumn, $this->sortDirection)
             ->paginate($this->perPage);
