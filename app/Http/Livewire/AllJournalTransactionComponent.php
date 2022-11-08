@@ -52,8 +52,7 @@ class AllJournalTransactionComponent extends Component
             ->search('jv_date', $this->search)
             ->search('jev_no', $this->search)
             ->search('particulars', $this->search)
-            ->orderBy($this->sortColumn , $this->sortDirection)
-            ->paginate($this->perPage)->pluck('id');
+            ->get()->pluck('id');
         }
         else{
             $this->selectedJournals = [];
@@ -78,8 +77,6 @@ class AllJournalTransactionComponent extends Component
         if (!auth()->user()->can('cash-receipt-journal-delete')) {
             abort(404);
         }
-
-
         return redirect()->route('alljournal.index')
             ->with('delete-success', 'Journal has been deleted successfully.');
     }
