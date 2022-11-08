@@ -10,6 +10,7 @@ use Illuminate\Database\Seeder;
 
 class DisbursementSeeder extends Seeder
 {
+    private $amount = 0.00;
     /**
      * Run the database seeds.
      *
@@ -17,15 +18,23 @@ class DisbursementSeeder extends Seeder
      */
     public function run()
     {
-        JournalEntryVoucher::factory(500)->create([
+        JournalEntryVoucher::factory(100)->create([
             'type' => 4
         ])->each(function ($journal) {
             Disbursement::factory(1)->create([
                 'journal_entry_voucher_id' => $journal->id,
             ]);
         })->each(function ($journal) {
-            Transaction::factory(5)->create([
-                'journal_entry_voucher_id' => $journal->id
+            $this->amount = rand(100.00,1000.00);
+            Transaction::factory(1)->create([
+                'journal_entry_voucher_id' => $journal->id,
+                'debit' => $this->amount,
+                'credit' => 0,
+            ]);
+            Transaction::factory(1)->create([
+                'journal_entry_voucher_id' => $journal->id,
+                'debit' => 0,
+                'credit' => $this->amount,
             ]);
         });
     }

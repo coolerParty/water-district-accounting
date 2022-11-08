@@ -40,7 +40,7 @@ class GeneralJournalComponent extends Component
         $gj = GeneralJournal::find($gid);
         $gj->delete();
 
-        return redirect()->route('generaljournal.index')
+        return back()
             ->with('delete-success', 'General Journal deleted successfully.');
     }
 

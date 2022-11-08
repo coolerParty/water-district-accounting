@@ -19,7 +19,7 @@ class JournalEntryVoucherFactory extends Factory
     {
         return [
             'user_id'     => 1,
-            'jev_no'      => $this->faker->unique()->numberBetween(1,2501),
+            'jev_no'      => $this->faker->unique()->numberBetween(1,501),
             'jv_date'     => Carbon::now(),
             'particulars' => $this->faker->text(130),
         ];
