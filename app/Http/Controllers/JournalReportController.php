@@ -20,6 +20,9 @@ class JournalReportController extends Controller
         if ($type == 2) {
             return $this->billingJournalReport($type, $date_start, $date_end);
         }
+        if ($type == 4) {
+            return $this->checkDisbursementJournalReport($type, $date_start, $date_end);
+        }
         if ($type == 5) {
             return $this->generalJournalReport($type, $date_start, $date_end);
         }
@@ -34,6 +37,9 @@ class JournalReportController extends Controller
         }
         if ($type == 2) {
             return $this->billingJournalPDF($type, $date_start, $date_end);
+        }
+        if ($type == 4) {
+            return $this->checkDisbursementJournalPDF($type, $date_start, $date_end);
         }
         if ($type == 5) {
             return $this->generalJournalPDF($type, $date_start, $date_end);
@@ -134,6 +140,56 @@ class JournalReportController extends Controller
 
         return $pdf->download($filename . '.pdf');
     }
+
+    // Check Disbursement Journals Report Start
+    public function checkDisbursementJournalReport($type, $date_start, $date_end)
+    {
+        $journals = JournalEntryVoucher::with('disbursement', 'transactions')->select('id', 'jev_no', 'type', 'jv_date', 'particulars')
+            ->where('type', $type)
+            ->where('jv_date', '>=', $date_start)
+            ->where('jv_date', '<=', $date_end)
+            ->visibleTo(Auth::user())
+            ->orderBy('jv_date', 'ASC')
+            ->orderBy('jev_no', 'ASC')
+            ->get();
+
+        if (empty($journals)) {
+            abort(404);
+        }
+
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
+
+
+        return view('report-form.dv-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
+    }
+
+    public function checkDisbursementJournalPDF($type, $date_start, $date_end)
+    {
+        $journals = JournalEntryVoucher::with('disbursement', 'transactions')->select('id', 'jev_no', 'type', 'jv_date', 'particulars')
+            ->where('type', $type)
+            ->where('jv_date', '>=', $date_start)
+            ->where('jv_date', '<=', $date_end)
+            ->visibleTo(Auth::user())
+            ->orderBy('jv_date', 'ASC')
+            ->orderBy('jev_no', 'ASC')
+            ->get();
+
+        if (empty($journals)) {
+            abort(404);
+        }
+
+        $recaps = $this->recapitulation($type, $date_start, $date_end);
+
+        $pdf = PDF::loadView('report-form.dv-journals-report', compact('journals', 'date_start', 'date_end', 'recaps'));
+        $typename = $this->typeName($type);
+
+        $filename = 'Journal ' . $typename . '-' . $date_start . '-' . $date_end;
+
+        $pdf->setPaper('LEGAL', 'landscape');
+
+        return $pdf->download($filename . '.pdf');
+    }
+    // Check Disbursement Journals Report End
 
     public function generalJournalReport($type, $date_start, $date_end)
     {
