@@ -198,9 +198,7 @@
                                         @foreach ($journals as $index => $jev)
                                         <tr class="transition-all hover:bg-gray-100">
                                             <td class="p-2">
-                                                <button wire:click.prevent="showSearchAccounts({{
-                                                        $index
-                                                    }})"
+                                                <button wire:click.prevent="showSearchAccounts({{ $index }})"
                                                     class="px-6 py-2 mr-2 leading-5 text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-gray-600">
                                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                                         fill="currentColor" class="w-5 h-5">
@@ -211,66 +209,35 @@
                                                 </button>
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <select name="journals[{{
-                                                        $index
-                                                    }}][accountCode]" wire:model="journals.{{
-                                                        $index
-                                                    }}.accountCode"
+                                                <select name="journals[{{ $index }}][accountCode]"
+                                                    wire:model="journals.{{ $index }}.accountCode"
                                                     class="block w-full p-2 leading-tight text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500">
-                                                    <option value="">
-                                                        Select Account
-                                                    </option>
-                                                    @foreach($accounts as
-                                                    $account)
-                                                    <option value="{{ $account->id }}">
-                                                        {{ $account->code . ' - ' . $account->name }}
-                                                    </option>
+                                                    <option value="">Select Account</option>
+                                                    @foreach($accounts as $account)
+                                                    <option value="{{ $account->id }}">{{ $account->code . ' - ' .
+                                                        $account->name }}</option>
                                                     @endforeach
                                                 </select>
-                                                @error('journals.{{
-                                                $index
-                                                }}.accountCode')
-                                                <p class="text-xs italic text-red-500">
-                                                    {{ $message }}
-                                                </p>
-                                                @enderror
+                                                @error('journals.{{ $index }}.accountCode')<p
+                                                    class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <input type="number" step="any" name="journals[{{
-                                                        $index
-                                                    }}][debit]"
+                                                <input type="number" step="any" name="journals[{{ $index }}][debit]"
                                                     class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
-                                                    wire:model="journals.{{
-                                                        $index
-                                                    }}.debit" />
-                                                @error('journals.{{
-                                                $index
-                                                }}.debit')
-                                                <p class="text-xs italic text-red-500">
-                                                    {{ $message }}
-                                                </p>
-                                                @enderror
+                                                    wire:model="journals.{{ $index }}.debit" />
+                                                @error('journals.{{ $index }}.debit')<p
+                                                    class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <input type="number" step="any" name="subTasks[{{
-                                                        $index
-                                                    }}][credit]"
+                                                <input type="number" step="any" name="subTasks[{{ $index }}][credit]"
                                                     class="block w-full p-2 leading-tight text-right text-gray-700 bg-gray-200 border border-gray-200 rounded appearance-none focus:outline-none focus:bg-white focus:border-gray-500"
-                                                    wire:model="journals.{{
-                                                        $index
-                                                    }}.credit" />
-                                                @error('journals.{{
-                                                $index
-                                                }}.credit')
-                                                <p class="text-xs italic text-red-500">
-                                                    {{ $message }}
-                                                </p>
-                                                @enderror
+                                                    wire:model="journals.{{ $index }}.credit" />
+                                                @error('journals.{{ $index }}.credit')<p
+                                                    class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                                             </td>
                                             <td class="p-2 whitespace-nowrap">
-                                                <x-link-danger href="#" wire:click.prevent="removeJournal({{
-                                                        $index
-                                                    }})" class="btn btn-danger text-light">Delete</x-link-danger>
+                                                <x-link-danger href="#" wire:click.prevent="removeJournal({{ $index }})"
+                                                    class="btn btn-danger text-light">Delete</x-link-danger>
                                             </td>
                                         </tr>
                                         @endforeach
