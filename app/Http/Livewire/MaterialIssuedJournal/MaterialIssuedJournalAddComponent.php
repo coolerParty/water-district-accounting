@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Livewire\Component;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class MaterialIssuedJournalAddComponent extends Component
 {
@@ -98,6 +99,7 @@ class MaterialIssuedJournalAddComponent extends Component
                 $jev->type        = 3;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;
+                $jev->user_id     = Auth::user()->id;
                 $jev->save();
 
                 foreach ($this->journals as $journal) {
