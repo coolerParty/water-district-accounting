@@ -10,6 +10,7 @@ use App\Models\Transaction;
 use DB;
 use Livewire\Component;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class CheckDisbursementAddComponent extends Component
 {
@@ -173,6 +174,7 @@ class CheckDisbursementAddComponent extends Component
                 $jev->type        = 4;
                 $jev->jv_date     = $this->jev_date;
                 $jev->particulars = $this->particulars;
+                $jev->user_id     = Auth::user()->id;
                 $jev->save();
 
                 foreach ($this->journals as $journal) {
