@@ -93,8 +93,6 @@ class MaterialIssuedJournalAddComponent extends Component
 
         try {
             DB::transaction(function () {
-
-
                 $jev              = new JournalEntryVoucher();
                 $jev->jev_no      = JournalEntryVoucher::max('jev_no') + 1;
                 $jev->type        = 3;
@@ -120,17 +118,13 @@ class MaterialIssuedJournalAddComponent extends Component
                     ->with('create-success', 'Material Issued Journal "' . $mij->rsmi_no  . '" created successfully.');
             });
         } catch (\Exception $exception) {
-            session()->flash('delete-success', 'Error occured! Please try again.');
+            session()->flash('delete-success', 'Error occurred! Please try again.');
             return;
         }
     }
 
     public function confirmation()
     {
-        // if (!auth()->user()->can('material-journal-create')) {
-        //     abort(404);
-        // }
-
         $this->authorize('material-journal-create');
     }
 
