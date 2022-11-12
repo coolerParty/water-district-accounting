@@ -3,10 +3,7 @@
 namespace App\Http\Livewire\ReportGeneration;
 
 use App\Models\JournalEntryVoucher;
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
-use PhpParser\Node\Stmt\Foreach_;
 
 class JournalsReportComponent extends Component
 {
@@ -49,15 +46,6 @@ class JournalsReportComponent extends Component
         session()->flash('create-success', $journals->count() . ' Transactions Found.');
 
         $this->showPrint = true;
-
-        // if($this->option == 1){
-        //     return redirect()->route('journal.show',['journalType'=>$this->journalType,'date_start'=>$this->date_start,'date_end'=>$this->date_end,]);
-        // }
-        // elseif($this->option == 2){
-        //     return redirect()->route('journal.download',['journalType'=>$this->journalType,'date_start'=>$this->date_start,'date_end'=>$this->date_end,]);
-        // }
-
-
     }
 
     public function cancel()

@@ -82,6 +82,10 @@
             font-weight: bold;
         }
 
+        .text-uppercase{
+            text-transform: uppercase;
+        }
+
         .border-right-none {
             border-right: none;
         }
@@ -282,7 +286,7 @@
         </div>
 
         <div class="p-10 subtitle">
-            <h3>RECAPITULATION: AUGUST</h3>
+            <h3 class="text-uppercase">RECAPITULATION: {{ Carbon\Carbon::createFromFormat('Y-m-d', $date_start)->format('F') }}</h3>
             <table class="sub-report">
                 <tr>
                     <th class="text-center">Account Name</th>
