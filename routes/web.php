@@ -38,6 +38,7 @@ use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalAddComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalEditComponent;
 use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\ReportGeneration\GeneralLedgerComponent;
 use App\Http\Livewire\ReportGeneration\JournalsReportComponent;
 use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupAddComponent;
 use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupComponent;
@@ -130,6 +131,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/bank/create', BankAddComponent::class)->name('bank.create');
     Route::get('/bank/{id}/edit', BankEditComponent::class)->name('bank.edit');
 
+    Route::get('/journals-report', JournalsReportComponent::class)->name('journals.index');
+    Route::get('/general-ledger-report', GeneralLedgerComponent::class)->name('generalledger.index');
+
     // livewire End
     Route::get('/jev/{id}/view', [JEVReportController::class,'jevReport'])->name('jev.show');
     Route::get('/jev/{id}/download', [JEVReportController::class,'jevPdf'])->name('jev.download');
@@ -137,7 +141,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/report/{journalType}/{date_start}/{date_end}', [JournalReportController::class,'journalReport'])->name('journal.show');
     Route::get('/download/{journalType}/{date_start}/{date_end}', [JournalReportController::class,'journalPdf'])->name('journal.download');
 
-    Route::get('/journals-report', JournalsReportComponent::class)->name('journals.index');
+
 
 
 });
