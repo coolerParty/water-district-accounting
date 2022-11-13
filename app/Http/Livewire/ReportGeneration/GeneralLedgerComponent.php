@@ -10,7 +10,7 @@ class GeneralLedgerComponent extends Component
 {
     public $year;
     public $month;
-    public $accountSelected;
+    public $code;
     public $showPrint = false;
 
     public function mount()
@@ -24,7 +24,7 @@ class GeneralLedgerComponent extends Component
         $this->validateOnly($fields, [
             'year'            => ['required', 'integer', 'digits:4'],
             'month'           => ['required', 'integer', 'digits_between:1,2','min:1','max:12'],
-            'accountSelected' => ['required', 'integer'],
+            'code'            => ['required', 'string'],
         ]);
     }
 
@@ -33,7 +33,7 @@ class GeneralLedgerComponent extends Component
         $this->validate([
             'year'            => ['required', 'integer', 'digits:4'],
             'month'           => ['required', 'integer', 'digits_between:1,2','min:1','max:12'],
-            'accountSelected' => ['required', 'integer'],
+            'code'            => ['required', 'string'],
         ]);
 
         session()->flash('create-success', 'Report has been set. Please select to Print Preview or download pdf.');
