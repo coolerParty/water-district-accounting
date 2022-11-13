@@ -143,6 +143,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
     Route::get('/download/{journalType}/{date_start}/{date_end}', [JournalReportController::class,'journalPdf'])->name('journal.download');
 
     Route::get('/general-ledger-report/{code}/{year}/{month}', [GeneralLedgerReportController::class,'report'])->name('generalledger.show');
-    Route::get('/download/{code}/{year}/{month}', [GeneralLedgerReportController::class,'pdf'])->name('generalledger.download');
+    Route::get('/general-ledger-pdf/{code}/{year}/{month}', [GeneralLedgerReportController::class,'pdf'])->name('generalledger.download');
 
 });
