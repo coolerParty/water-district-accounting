@@ -45,23 +45,23 @@
                 <div class="flex flex-wrap mb-6 -mx-3">
                     <div class="w-full px-3">
                         <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
-                            for="accountSelected">
+                            for="code">
                             Journal Report
                         </label>
-                        <select id="accountSelected" wire:model="accountSelected" {{ ($showPrint) ? 'disabled' : '' }}
-                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('accountSelected') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
+                        <select id="code" wire:model="code" {{ ($showPrint) ? 'disabled' : '' }}
+                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('code') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
                             <option value="" selected>Select Account</option>
                             @foreach($accounts as $account)
-                            <option value="{{ $account->id }}">{{ $account->code . ' - ' . $account->name }}</option>
+                            <option value="{{ $account->code }}">{{ $account->code . ' - ' . $account->name }}</option>
                             @endforeach
                         </select>
-                        @error('accountSelected')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                        @error('code')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
                 @if($showPrint)
                 <div class="flex justify-end mt-6">
                     <x-link-secondary
-                        href="#"
+                        href="{{ route('generalledger.show',['code'=>$code,'year'=>$year,'month'=>$month]) }}"
                         target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
