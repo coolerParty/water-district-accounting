@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>General Ledger Report : Date : {{ $year}} - {{ $month}}</title>
+    <title>General Ledger Report : For the period ended : {{ $year}} - {{ DateTime::createFromFormat('!m', $month)->format('F') }}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
@@ -158,7 +158,7 @@
                     <th colspan="5" class="text-center text-bold">
                         <div>GENERAL LEDGER</div>
                         <div class="subtitle">Municipality of Tarangnan</div>
-                        <div class="subtitle">Date : {{ $year}} - {{ $month}}</div>
+                        <div class="subtitle">For the period ended : {{ DateTime::createFromFormat('!m', $month)->format('F') }}, {{ $year}}</div>
                         <div class="text-left subtitle">Year: {{ $year }}</div>
                         <div class="text-left subtitle">A/C # {{ $accounts->code }} {{ $accounts->name }}</div>
                     </th>
