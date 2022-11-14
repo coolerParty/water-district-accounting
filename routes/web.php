@@ -39,6 +39,7 @@ use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalAddComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalEditComponent;
 use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\ReportGeneration\FinancialStatementsComponent;
 use App\Http\Livewire\ReportGeneration\GeneralLedgerComponent;
 use App\Http\Livewire\ReportGeneration\JournalsReportComponent;
 use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupAddComponent;
@@ -134,6 +135,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
 
     Route::get('/journals-report', JournalsReportComponent::class)->name('journals.index');
     Route::get('/general-ledger-report', GeneralLedgerComponent::class)->name('generalledger.index');
+    Route::get('/financial-statements-report', FinancialStatementsComponent::class)->name('fs.index');
 
     // livewire End
     Route::get('/jev/{id}/view', [JEVReportController::class,'jevReport'])->name('jev.show');
