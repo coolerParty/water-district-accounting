@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\JournalEntryVoucher;
-use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PDF;

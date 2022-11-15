@@ -221,7 +221,7 @@
                 <a class="relative flex items-center w-full p-2 space-x-2 cursor-pointer hover:bg-gray-100
                     {{ (route('journals.index') == substr(url()->current(), 0, strlen(route('journals.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('generalledger.index') == substr(url()->current(), 0, strlen(route('generalledger.index')) )) ? 'bg-gray-100' : '' }}
-                    {{ (route('billingjournal.index') == substr(url()->current(), 0, strlen(route('billingjournal.index')) )) ? 'bg-gray-100' : '' }}
+                    {{ (route('fs.index') == substr(url()->current(), 0, strlen(route('fs.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('materialissuedjournal.index') == substr(url()->current(), 0, strlen(route('materialissuedjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('checkdisbursementjournal.index') == substr(url()->current(), 0, strlen(route('checkdisbursementjournal.index')) )) ? 'bg-gray-100' : '' }}
                     {{ (route('generaljournal.index') == substr(url()->current(), 0, strlen(route('generaljournal.index')) )) ? 'bg-gray-100' : '' }}
@@ -277,8 +277,8 @@
                     @can('billing-show')
                     <li title="Financial Statement">
                         <a class="flex items-center p-2 space-x-2 text-sm border-b hover:bg-gray-100
-                        {{ (route('billingjournal.index') == substr(url()->current(), 0, strlen(route('billingjournal.index')) )) ? 'bg-gray-100' : '' }}
-                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('billingjournal.index') }}">
+                        {{ (route('fs.index') == substr(url()->current(), 0, strlen(route('fs.index')) )) ? 'bg-gray-100' : '' }}
+                        " :class="{'justify-center': !isSidebarOpen}" href="{{ route('fs.index') }}">
                             <span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                     <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" />

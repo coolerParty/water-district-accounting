@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnnualBudgetController;
+use App\Http\Controllers\FinancialStatementReportController;
 use App\Http\Controllers\GeneralLedgerReportController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\JEVReportController;
@@ -39,6 +40,7 @@ use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalAddComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalComponent;
 use App\Http\Livewire\MaterialIssuedJournal\MaterialIssuedJournalEditComponent;
 use App\Http\Livewire\ProfileComponent;
+use App\Http\Livewire\ReportGeneration\FinancialStatementsComponent;
 use App\Http\Livewire\ReportGeneration\GeneralLedgerComponent;
 use App\Http\Livewire\ReportGeneration\JournalsReportComponent;
 use App\Http\Livewire\SubMajorAccountGroup\SubMajorAccountGroupAddComponent;
@@ -134,6 +136,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
 
     Route::get('/journals-report', JournalsReportComponent::class)->name('journals.index');
     Route::get('/general-ledger-report', GeneralLedgerComponent::class)->name('generalledger.index');
+    Route::get('/financial-statements-report', FinancialStatementsComponent::class)->name('fs.index');
 
     // livewire End
     Route::get('/jev/{id}/view', [JEVReportController::class,'jevReport'])->name('jev.show');
@@ -144,5 +147,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
 
     Route::get('/general-ledger-report/{code}/{year}/{month}', [GeneralLedgerReportController::class,'report'])->name('generalledger.show');
     Route::get('/general-ledger-pdf/{code}/{year}/{month}', [GeneralLedgerReportController::class,'pdf'])->name('generalledger.download');
+
+    Route::get('/financial-statements-report/{type}/{year}/{month}', [FinancialStatementReportController::class,'report'])->name('fs.show');
+    Route::get('/financial-statements-pdf/{type}/{year}/{month}', [FinancialStatementReportController::class,'pdf'])->name('fs.download');
+
 
 });
