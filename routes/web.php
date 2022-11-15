@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnnualBudgetController;
+use App\Http\Controllers\FinancialStatementReportController;
 use App\Http\Controllers\GeneralLedgerReportController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\JEVReportController;
@@ -146,5 +147,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'),'verified', 
 
     Route::get('/general-ledger-report/{code}/{year}/{month}', [GeneralLedgerReportController::class,'report'])->name('generalledger.show');
     Route::get('/general-ledger-pdf/{code}/{year}/{month}', [GeneralLedgerReportController::class,'pdf'])->name('generalledger.download');
+
+    Route::get('/financial-statements-report/{type}/{year}/{month}', [FinancialStatementReportController::class,'report'])->name('fs.show');
+    Route::get('/financial-statements-pdf/{type}/{year}/{month}', [FinancialStatementReportController::class,'pdf'])->name('fs.download');
+
 
 });

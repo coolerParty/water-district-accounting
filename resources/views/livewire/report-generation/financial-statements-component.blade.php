@@ -4,17 +4,6 @@
     <div
         class="flex flex-col items-start justify-between pb-6 mb-2 space-y-4 border-b lg:items-center lg:space-y-0 lg:flex-row">
         <h1 class="text-lg font-semibold whitespace-nowrap">Financial Statements Report</h1>
-        <!-- <a href="{{ route('materialissuedjournal.index') }}"
-            class="inline-flex items-center px-6 py-2 space-x-1 text-white bg-purple-600 rounded-md shadow hover:bg-opacity-95">
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M11 15l-3-3m0 0l3-3m-3 3h8M3 12a9 9 0 1118 0 9 9 0 01-18 0z" />
-                </svg>
-            </span>
-            <span>Back</span>
-        </a> -->
     </div>
     <div class="max-w-full md:p-4">
 
@@ -22,48 +11,59 @@
             <form class="w-full" wire:submit.prevent="printView">
                 <div class="flex flex-wrap mb-6 -mx-3">
                     <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
-                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
-                            for="date_start">
-                            Start
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="year">
+                            Year
                         </label>
-                        <input id="date_start" type="date" value="{{ old('date_start') }}" wire:model="date_start" {{
-                            ($showPrint) ? 'disabled' : '' }}
-                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('date_start') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
-                        @error('date_start')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                        <input id="year" type="text" value="{{ old('year') }}" wire:model="year" {{ ($showPrint)
+                            ? 'disabled' : '' }}
+                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('year') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
+                        @error('year')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                     <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
-                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
-                            for="date_end">
+                        <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase" for="month">
                             End
                         </label>
-                        <input id="date_end" type="date" value="{{ old('date_end') }}" wire:model="date_end" {{
-                            ($showPrint) ? 'disabled' : '' }}
-                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('date_end') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
-                        @error('date_end')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                        <select id="month" wire:model="month" wire:model="month" {{ ($showPrint) ? 'disabled' : '' }}
+                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('month') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
+                            <option value="" selected>Select Month</option>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                        @error('month')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
                 <div class="flex flex-wrap mb-6 -mx-3">
                     <div class="w-full px-3">
                         <label class="block mb-2 text-xs font-bold tracking-wide text-gray-700 uppercase"
-                            for="journalType">
+                            for="reportType">
                             Journal Report
                         </label>
-                        <select id="journalType" wire:model="journalType" wire:model="journalType" {{ ($showPrint)
+                        <select id="reportType" wire:model="reportType" wire:model="reportType" {{ ($showPrint)
                             ? 'disabled' : '' }}
-                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('journalType') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
+                            class="block w-full px-4 py-3 leading-tight text-gray-700 bg-gray-200 border @error('reportType') mb-3 border-red-500 @else border-gray-200 focus:border-gray-500 @enderror rounded appearance-none focus:outline-none focus:bg-white">
                             <option value="">Select Report</option>
                             <option value="1">Trial Balance</option>
                             <option value="2">Detailed Income Statement</option>
                             <option value="3">Detailed Statement of Financial Position</option>
                             <option value="4">Statement of Cashflow</option>
                         </select>
-                        @error('journalType')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
+                        @error('reportType')<p class="text-xs italic text-red-500">{{ $message }}</p>@enderror
                     </div>
                 </div>
                 @if($showPrint)
                 <div class="flex justify-end mt-6">
                     <x-link-secondary
-                        href="{{ route('journal.show',['journalType'=>$journalType,'date_start'=>$date_start,'date_end'=>$date_end]) }}"
+                        href="{{ route('fs.show',['type'=>$reportType,'year'=>$year,'month'=>$month]) }}"
                         target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -72,7 +72,7 @@
                         </svg> Print Preview
                     </x-link-secondary>
                     <x-link-secondary class="ml-2"
-                        href="{{ route('journal.download',['journalType'=>$journalType,'date_start'=>$date_start,'date_end'=>$date_end]) }}">
+                        href="{{ route('fs.download',['type'=>$reportType,'year'=>$year,'month'=>$month]) }}" >
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"

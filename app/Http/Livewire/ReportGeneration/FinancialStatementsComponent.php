@@ -3,47 +3,40 @@
 namespace App\Http\Livewire\ReportGeneration;
 
 use App\Models\JournalEntryVoucher;
+use Carbon\Carbon;
 use Livewire\Component;
 
 class FinancialStatementsComponent extends Component
 {
-    public $date_start;
-    public $date_end;
-    public $journalType;
+    public $year;
+    public $month;
+    public $reportType;
     public $showPrint = false;
+
+    public function mount()
+    {
+        $this->year  = Carbon::now()->format('Y');
+        $this->month = Carbon::now()->format('m');
+    }
 
     public function updated($fields)
     {
         $this->validateOnly($fields, [
-            'date_start' => ['required', 'date', 'before:date_end'],
-            'date_end' => ['required', 'date', 'after:date_start'],
-            'journalType' => ['required', 'numeric','min:0','max:5'],
+            'year'       => ['required', 'integer', 'digits:4'],
+            'month'      => ['required', 'integer', 'digits_between:1,2','min:1','max:12'],
+            'reportType' => ['required', 'integer', 'digits:1'],
         ]);
     }
 
     public function printView()
     {
         $this->validate([
-            'date_start' => ['required', 'date', 'before:date_end'],
-            'date_end' => ['required', 'date', 'after:date_start'],
-            'journalType' => ['required', 'numeric','min:0','max:5'],
+            'year'       => ['required', 'integer', 'digits:4'],
+            'month'      => ['required', 'integer', 'digits_between:1,2','min:1','max:12'],
+            'reportType' => ['required', 'integer', 'digits:1'],
         ]);
 
-        $journals = JournalEntryVoucher::select('id', 'jev_no', 'type', 'jv_date', 'particulars')
-        ->where('type', $this->journalType)
-        ->where('jv_date','>=',$this->date_start)
-        ->where('jv_date','<=',$this->date_end)
-        ->orderBy('jv_date','ASC')
-        ->orderBy('jev_no','ASC')
-        ->with('transactions')
-        ->get();
-
-        if($journals->count() == 0){
-            session()->flash('delete-success', 'No Transaction Found!');
-            return;
-        }
-
-        session()->flash('create-success', $journals->count() . ' Transactions Found.');
+        session()->flash('create-success', 'Report has been set. Please select to Print Preview or download pdf.');
 
         $this->showPrint = true;
     }

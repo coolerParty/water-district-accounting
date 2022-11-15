@@ -31,8 +31,8 @@ class GeneralLedgerReportController extends Controller
             ->join('transactions', 'journal_entry_vouchers.id', '=', 'transactions.journal_entry_voucher_id')
             ->where('accountchart_id', $accounts->id)
             ->whereBetween('jv_date', [
-                Carbon::parse($year . '-01-01'),
-                Carbon::parse($year . $monthFormatted . '-01'),
+                Carbon::parse($year . '-01-01')->startOfYear(),
+                Carbon::parse($year . '-' . $monthFormatted . '-01')->endOfMonth(),
             ])
             ->selectRaw('type, accountchart_id,sum(debit) as subtotal_debit, sum(credit) as subtotal_credit, month(jv_date) as jv_month')
             ->groupBy('type', 'accountchart_id', 'jv_month')
@@ -42,10 +42,10 @@ class GeneralLedgerReportController extends Controller
 
         $beginningBalance = BeginningBalance::select('accountchart_id', 'amount')
             ->whereBetween('start_date', [
-                Carbon::parse($year . '-01-01'),
+                Carbon::parse($year . '-01-01')->startOfYear(),
                 Carbon::parse($year . '-01-01')->endOfYear(),
             ])
-            ->where('accountchart_id')
+            ->where('accountchart_id', $accounts->id)
             ->first();
 
         return view('report-form.general-ledger.general-ledger-report', compact('journals', 'year', 'month', 'beginningBalance', 'accounts', 'jvAllMonths'));
