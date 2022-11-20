@@ -175,25 +175,29 @@
                     <th class="text-center">Credit</th>
                 </tr>
                 @php
-                $totalAmount = 0;
+                    $totalAmount = 0;
                 @endphp
+
                 @foreach($accounts as $account)
-                @php
-                $amount = 0;
-                foreach($journals as $journal){
-                if($journal->accountchart_id == $account->id){
-                $amount = $journal->subtotal_debit - $journal->subtotal_credit;
-                }
-                }
-                foreach($beginningBalances as $bal){
-                if($bal->accountchart_id == $account->id){
-                $amount = $amount + $bal->amount;
-                }
-                }
+                    @php
 
-                $totalAmount = $totalAmount + $amount;
+                        $amount = 0;
 
-                @endphp
+                        foreach($journals as $journal){
+                            if($journal->accountchart_id == $account->id){
+                                $amount = $journal->subtotal_debit - $journal->subtotal_credit;
+                            }
+                        }
+
+                        foreach($beginningBalances as $bal){
+                            if($bal->accountchart_id == $account->id){
+                                $amount = $amount + $bal->amount;
+                            }
+                        }
+
+                        $totalAmount = $totalAmount + $amount;
+
+                    @endphp
                 <tr class="font-xs">
                     <td class="text-left">{{ $account->name }}</td>
                     <td class="text-center w-code-110">{{ $account->code }}</td>
@@ -201,7 +205,6 @@
                     <td class="text-right x-5">{{ ($amount < 0)? number_format(-1 * $amount,2) : '' }}</td>
                 </tr>
                 @endforeach
-
 
                 <tr class="font-xs">
                     <th class="text-center">Total:</th>
