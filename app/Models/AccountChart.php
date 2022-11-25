@@ -11,7 +11,7 @@ class AccountChart extends Model
     protected $table = "account_charts";
 
     protected $fillable = [
-        'code', 'name','acctgrp_id','mjracctgrp_id','submjracctgrp_id'
+        'code', 'name','acctgrp_id','mjracctgrp_id','submjracctgrp_id', 'current_non'
     ];
 
     public function accountGroup()
