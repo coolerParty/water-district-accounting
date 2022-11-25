@@ -20,6 +20,7 @@ return new class extends Migration
             $table->BigInteger('acctgrp_id')->unsigned()->nullable();
             $table->BigInteger('mjracctgrp_id')->unsigned()->nullable();
             $table->BigInteger('submjracctgrp_id')->unsigned()->nullable();
+            $table->tinyInteger('current_non')->nullable(); // 1=Current, 2, Non-current,
             $table->timestamps();
             $table->foreign('acctgrp_id')->references('id')->on('account_groups');
             $table->foreign('mjracctgrp_id')->references('id')->on('major_account_groups');
