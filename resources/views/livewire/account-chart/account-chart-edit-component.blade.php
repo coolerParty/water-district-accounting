@@ -87,6 +87,19 @@
                     </div>
                 </div>
 
+                <div class="mt-4">
+                    <div>
+                        <label for="current_non" class="text-gray-700 dark:text-gray-200">Current / Non-current</label>
+                        <select id="current_non" name="current_non" autocomplete="current_non"
+                            wire:model="current_non"
+                            class="block w-full px-4 py-2 mt-2 bg-white border border-gray-200 rounded-md shadow-sm dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:outline-none focus:ring focus:border-blue-400 dark:focus:border-blue-300 sm:text-sm">
+                            <option value="1">Current</option>
+                            <option value="2">Non-Current</option>
+                            <option value="3">Not Current/Non-Current</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="flex justify-end mt-6">
                     <button type="submit"
                         class="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">Update</button>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\AccountChart;
 
+use App\Http\Requests\AccountChartEditRequest;
 use App\Models\AccountChart;
 use App\Models\AccountGroup;
 use App\Models\MajorAccountGroup;
@@ -20,40 +21,34 @@ class AccountChartEditComponent extends Component
     public $acctgrp_id;
     public $mjracctgrp_id;
     public $submjracctgrp_id;
+    public $current_non;
+
+    public function rules(): array
+    {
+        return (new AccountChartEditRequest())->rules($this->account_id);
+    }
 
     public function mount($id)
     {
-        $account = AccountChart::findOrFail($id);
+        $account                = AccountChart::findOrFail($id);
         $this->account_id       = $account->id;
         $this->code             = $account->code;
         $this->name             = $account->name;
         $this->acctgrp_id       = $account->acctgrp_id;
         $this->mjracctgrp_id    = $account->mjracctgrp_id;
         $this->submjracctgrp_id = $account->submjracctgrp_id;
+        $this->current_non      = $account->current_non;
     }
 
     public function updated($fields)
     {
-        $this->validateOnly($fields, [
-            'code'             => ['required', 'string'],
-            'name'             => ['required', 'min:3', 'string', Rule::unique('account_charts')->ignore($this->account_id)],
-            'acctgrp_id'       => ['required'],
-            'mjracctgrp_id'    => ['required'],
-            'submjracctgrp_id' => ['required'],
-        ]);
+        $this->validateOnly($fields);
     }
 
     public function update()
     {
         $this->confirmation();
-
-        $this->validate([
-            'code'             => ['required', 'string'],
-            'name'             => ['required', 'min:3', 'string', Rule::unique('account_charts')->ignore($this->account_id)],
-            'acctgrp_id'       => ['required'],
-            'mjracctgrp_id'    => ['required'],
-            'submjracctgrp_id' => ['required'],
-        ]);
+        $this->validate();
 
         $account                   = AccountChart::find($this->account_id);
         $account->code             = $this->code;
@@ -61,6 +56,7 @@ class AccountChartEditComponent extends Component
         $account->acctgrp_id       = $this->acctgrp_id;
         $account->mjracctgrp_id    = $this->mjracctgrp_id;
         $account->submjracctgrp_id = $this->submjracctgrp_id;
+        $account->current_non      = $this->current_non;
         $account->save();
 
         return redirect()->route('accountchart.index')
@@ -69,10 +65,6 @@ class AccountChartEditComponent extends Component
 
     public function confirmation()
     {
-        // if (!auth()->user()->can('account-chart-create')) {
-        //     abort(404);
-        // }
-
         $this->authorize('account-chart-create');
     }
 
