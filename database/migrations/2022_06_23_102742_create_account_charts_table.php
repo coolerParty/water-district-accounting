@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('account_charts', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
+            $table->string('code')->unique();
             $table->string('name')->unique();
             $table->BigInteger('acctgrp_id')->unsigned()->nullable();
             $table->BigInteger('mjracctgrp_id')->unsigned()->nullable();
             $table->BigInteger('submjracctgrp_id')->unsigned()->nullable();
-            $table->tinyInteger('current_non')->nullable(); // 1=Current, 2, Non-current,
+            $table->tinyInteger('current_non')->default(3); // 1=Current, 2, Non-current, 3, not yet set or Equity account group
             $table->timestamps();
             $table->foreign('acctgrp_id')->references('id')->on('account_groups');
             $table->foreign('mjracctgrp_id')->references('id')->on('major_account_groups');

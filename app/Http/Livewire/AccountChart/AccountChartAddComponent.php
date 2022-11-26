@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\AccountChart;
 
+use App\Http\Requests\AccountChartAddRequest;
 use App\Imports\AccountChartImport;
 use App\Models\AccountChart;
 use App\Models\AccountGroup;
@@ -21,6 +22,7 @@ class AccountChartAddComponent extends Component
     public $acctgrp_id;
     public $mjracctgrp_id;
     public $submjracctgrp_id;
+    public $current_non;
 
     use WithFileUploads;
     public $file;
@@ -39,33 +41,26 @@ class AccountChartAddComponent extends Component
             ->with('create-success', 'File Uploaded successfully.');
     }
 
+    public function rules(): array
+    {
+        return (new AccountChartAddRequest())->rules();
+    }
+
     public function mount()
     {
         $this->type = null;
+        $this->current_non = 3;
     }
 
     public function updated($fields)
     {
-        $this->validateOnly($fields, [
-            'code'             => ['required', 'string'],
-            'name'             => ['required', 'min:3', 'string', 'unique:account_charts'],
-            'acctgrp_id'       => ['required'],
-            'mjracctgrp_id'    => ['required'],
-            'submjracctgrp_id' => ['required'],
-        ]);
+        $this->validateOnly($fields);
     }
 
     public function store()
     {
         $this->confirmation();
-
-        $this->validate([
-            'code'             => ['required', 'string'],
-            'name'             => ['required', 'min:3', 'string', 'unique:account_charts'],
-            'acctgrp_id'       => ['required'],
-            'mjracctgrp_id'    => ['required'],
-            'submjracctgrp_id' => ['required'],
-        ]);
+        $this->validate();
 
         $account                   = new AccountChart();
         $account->code             = $this->code;
@@ -73,6 +68,7 @@ class AccountChartAddComponent extends Component
         $account->acctgrp_id       = $this->acctgrp_id;
         $account->mjracctgrp_id    = $this->mjracctgrp_id;
         $account->submjracctgrp_id = $this->submjracctgrp_id;
+        $account->current_non      = $this->current_non;
         $account->save();
 
         return redirect()->route('accountchart.index')
@@ -81,10 +77,6 @@ class AccountChartAddComponent extends Component
 
     public function confirmation()
     {
-        // if (!auth()->user()->can('account-chart-create')) {
-        //     abort(404);
-        // }
-
         $this->authorize('account-chart-create');
     }
 

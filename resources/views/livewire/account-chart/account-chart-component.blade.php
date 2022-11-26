@@ -50,6 +50,10 @@
                                     class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                                     Sub Major Account Group
                                 </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Current / Non-current
+                                </th>
                                 <th scope="col" class="relative px-6 py-3">
                                     Action
                                 </th>
@@ -153,7 +157,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->code }}</div>
                                 </td>
-                                <td class="px-6 py-4 whitespace-nowrap">
+                                <td class="px-6 py-4">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->name }}</div>
                                 </td>
                                 <td class="px-6 py-4">
@@ -164,6 +168,19 @@
                                 </td>
                                 <td class="px-6 py-4 ">
                                     <div class="text-sm font-medium text-gray-900">{{ $account->SubMajorAccountGroup->name }}</div>
+                                </td>
+                                <td class="px-6 py-4 ">
+                                    <div class="text-sm font-medium text-gray-900">
+                                        @if($account->current_non == 1)
+                                            Current
+                                        @elseif($account->current_non == 2)
+                                            Non Current
+                                        @elseif($account->accountgroup->code == 3)
+                                            Equity
+                                        @else
+                                            Not yet Selected
+                                        @endif
+                                    </div>
                                 </td>
                                 <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                                     @can('account-chart-edit')
