@@ -70,6 +70,12 @@ Terminal
     cd "directory file"
     git clone https://github.com/coolerParty/laravel-admin-panel-starter.git
     cd laravel-admin-panel-starter
+
+PHP.ini
+    extension=zip
+    extension=gd
+
+Terminal
     composer install
 
 Rename ".env.example" file to ".env" then Edit 
